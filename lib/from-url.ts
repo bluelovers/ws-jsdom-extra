@@ -143,6 +143,7 @@ export function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | strin
 
 	jsdom[SYMBOL_RAW] = jsdom[SYMBOL_RAW] || {};
 	jsdom[SYMBOL_RAW].options = jsdom[SYMBOL_RAW].options || {};
+	jsdom[SYMBOL_RAW].options.options = jsdom[SYMBOL_RAW].options.options || options;
 	jsdom[SYMBOL_RAW].options.ConstructorOptions = jsdom[SYMBOL_RAW].options.ConstructorOptions || opts;
 	if (requestOptions)
 	{
