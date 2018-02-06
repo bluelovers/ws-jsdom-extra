@@ -1,6 +1,6 @@
 import { CookieJar, FromUrlOptions } from 'jsdom';
 import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
-import { IJSDOM, IOptions, URL } from './pack';
+import { IJSDOM, IOptionsJSDOM, URL } from './pack';
 import { Promise } from './index';
 import * as parseContentType from 'content-type-parser';
 export { wrapCookieJarForRequest, parseContentType };
@@ -12,7 +12,7 @@ export interface ICookieJar extends CookieJar {
         idx?: {};
     };
 }
-export interface IFromUrlOptions extends Partial<IOptions & FromUrlOptions> {
+export interface IFromUrlOptions extends Partial<FromUrlOptions & IOptionsJSDOM> {
     requestOptions?: Partial<IRequestOptions>;
     cookieJar?: ICookieJar;
 }
@@ -25,11 +25,11 @@ export interface IRequestOptions extends Partial<IRequestOptionsJSDOM> {
 }
 export interface IRequestOptionsJSDOM {
     resolveWithFullResponse: boolean;
-    encoding: any;
+    encoding: null;
     gzip: boolean;
     headers: {
-        "User-Agent": any;
-        Referer: any;
+        "User-Agent": string;
+        Referer: string;
         Accept: string;
         "Accept-Language": string;
     };
@@ -40,7 +40,7 @@ export interface IRequestJar {
 }
 export declare function fromURL(url: string | URL, options?: Partial<IFromUrlOptions>): Promise<IJSDOM>;
 export declare function normalizeRequestOptions(options: IFromUrlOptions): Partial<IRequestOptions>;
-export declare function normalizeFromURLOptions(options: Partial<IFromUrlOptions>): Partial<IFromUrlOptions>;
+export declare function normalizeFromURLOptions<T>(options: Partial<T & IFromUrlOptions>): Partial<T & IFromUrlOptions>;
 export interface INormalizeHTML {
     html: string;
     encoding: string;

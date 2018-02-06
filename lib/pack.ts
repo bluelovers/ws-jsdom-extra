@@ -2,7 +2,18 @@
  * Created by user on 2018/2/6/006.
  */
 
-import { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, BinaryData, DOMWindow, FromFileOptions, FromUrlOptions } from 'jsdom';
+import {
+	JSDOM,
+	VirtualConsole,
+	CookieJar,
+	toughCookie,
+	ConstructorOptions,
+	BinaryData,
+	DOMWindow,
+	FromFileOptions,
+	FromUrlOptions,
+	Options as OptionsJSDOM
+} from 'jsdom';
 import * as jQuery from 'jquery';
 import { URL } from 'jsdom-url';
 import { IOptionsCreateQuery, createQuery } from './query';
@@ -19,13 +30,21 @@ export const SYMBOL_RAW = Symbol.for('raw_query');
 
 export const JSDOM_PROTOTYPE_COPY = Object.assign({}, JSDOM.prototype);
 
-export interface IOptions extends IOptionsCreateQuery
+export interface IOptions
 {
 	beforeParse?(window: DOMWindow, jsdom?: IJSDOM): void;
+
+	//runScripts?: 'dangerously' | 'outside-only',
+	//resources?: 'usable',
+
+	url?: string | URL;
+	referrer?: string | URL;
 }
 
-export type IConstructorOptions = Partial<IOptions & ConstructorOptions>;
-export type IFromFileOptions = Partial<IOptions & FromFileOptions>;
+export type IOptionsJSDOM = Partial<IOptionsCreateQuery & OptionsJSDOM & IOptions>;
+
+export type IConstructorOptions = Partial<ConstructorOptions & IOptionsJSDOM>;
+export type IFromFileOptions = Partial<IOptionsJSDOM & FromFileOptions>;
 export { IFromUrlOptions }
 export type IAllOptions = Partial<IConstructorOptions & IFromFileOptions & IFromUrlOptions>;
 
@@ -119,8 +138,20 @@ export function fromFile(url: string, options?: IFromFileOptions): Promise<IJSDO
 	});
 }
 
-export function packOptions<T>(options: Partial<T & IOptions> = {}, cb?: (opts: IOptions, window?, jsdom?) => void): Partial<T & IOptions>
+export function packOptions<T>(options: Partial<T & IOptionsJSDOM> = {},
+	cb?: (opts: Partial<T & IOptionsJSDOM>, window?, jsdom?) => void
+): Partial<T & IOptionsJSDOM>
 {
+	if (options.url !== undefined)
+	{
+		options.url = (new URL(options.url)).href;
+	}
+
+	if (options.referrer !== undefined)
+	{
+		options.referrer = (new URL(options.referrer)).href;
+	}
+
 	let old_beforeParse;
 
 	if (options.beforeParse)

@@ -5,7 +5,7 @@
 import { JSDOM, CookieJar, FromUrlOptions } from 'jsdom';
 import * as deepmerge from 'deepmerge-plus';
 import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
-import { IJSDOM, IOptions, isPacked, packJSDOM, packOptions, URL } from './pack';
+import { IConstructorOptions, IJSDOM, IOptions, IOptionsJSDOM, isPacked, packJSDOM, packOptions, URL } from './pack';
 import { Promise } from './index';
 import * as request from 'request';
 import * as parseContentType from 'content-type-parser';
@@ -30,7 +30,7 @@ export interface ICookieJar extends CookieJar
 	},
 }
 
-export interface IFromUrlOptions extends Partial<IOptions & FromUrlOptions>
+export interface IFromUrlOptions extends Partial<FromUrlOptions & IOptionsJSDOM>
 {
 	requestOptions?: Partial<IRequestOptions>,
 	cookieJar?: ICookieJar,
@@ -48,11 +48,11 @@ export interface IRequestOptions extends Partial<IRequestOptionsJSDOM>
 export interface IRequestOptionsJSDOM
 {
 	resolveWithFullResponse: boolean;
-	encoding: any;
+	encoding: null;
 	gzip: boolean;
 	headers: {
-		"User-Agent": any;
-		Referer: any;
+		"User-Agent": string;
+		Referer: string;
 		Accept: string;
 		"Accept-Language": string;
 	};
@@ -95,7 +95,7 @@ export function fromURL(url: string | URL, options?: Partial<IFromUrlOptions>): 
 
 				let body = normalizeHTML(res.body, transportLayerEncodingLabel).html;
 
-				return new JSDOM(body, options);
+				return new JSDOM(body, options as IConstructorOptions);
 			})
 			.then(function (jsdom: IJSDOM)
 			{
@@ -151,11 +151,11 @@ export function normalizeRequestOptions(options: IFromUrlOptions): Partial<IRequ
 	return requestOptions;
 }
 
-export function normalizeFromURLOptions(options: Partial<IFromUrlOptions>): Partial<IFromUrlOptions>
+export function normalizeFromURLOptions<T>(options: Partial<T & IFromUrlOptions>): Partial<T & IFromUrlOptions>
 {
 	// Normalization of options which must be done before the rest of the fromURL code can use them, because they are
 	// given to request()
-	const normalized: IFromUrlOptions = Object.assign({}, options);
+	const normalized: Partial<T & IFromUrlOptions> = Object.assign({}, options);
 	if (options.userAgent === undefined)
 	{
 		normalized.userAgent = DEFAULT_USER_AGENT;
