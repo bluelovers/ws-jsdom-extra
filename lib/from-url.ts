@@ -143,10 +143,10 @@ export function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | strin
 
 	jsdom[SYMBOL_RAW] = jsdom[SYMBOL_RAW] || {};
 	jsdom[SYMBOL_RAW].options = jsdom[SYMBOL_RAW].options || {};
-	jsdom[SYMBOL_RAW].options.ConstructorOptions = opts;
+	jsdom[SYMBOL_RAW].options.ConstructorOptions = jsdom[SYMBOL_RAW].options.ConstructorOptions || opts;
 	if (requestOptions)
 	{
-		jsdom[SYMBOL_RAW].options.requestOptions = requestOptions;
+		jsdom[SYMBOL_RAW].options.requestOptions = jsdom[SYMBOL_RAW].options.requestOptions || requestOptions;
 	}
 
 	// @ts-ignore
