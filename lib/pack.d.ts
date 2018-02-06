@@ -3,7 +3,7 @@
 import { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, BinaryData, DOMWindow, FromFileOptions, Options as OptionsJSDOM } from 'jsdom';
 import { URL } from 'jsdom-url';
 import { IOptionsCreateQuery } from './query';
-import { IFromUrlOptions } from './from-url';
+import { IFromUrlOptions, IRequestOptions } from './from-url';
 export { fromURL } from './from-url';
 import { Promise } from './index';
 export { Promise };
@@ -31,6 +31,7 @@ export interface IJSDOM_Symbol {
 export interface IJSDOM_Symbol_Options {
     ConstructorOptions?: Partial<ConstructorOptions>;
     options?: Partial<IOptions>;
+    requestOptions?: Partial<IRequestOptions>;
 }
 export interface IJSDOM extends JSDOM {
     $: JQueryStatic;

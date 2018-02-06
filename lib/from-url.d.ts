@@ -4,6 +4,7 @@ import { IJSDOM, IOptionsJSDOM, URL } from './pack';
 import { Promise } from './index';
 import * as parseContentType from 'content-type-parser';
 export { wrapCookieJarForRequest, parseContentType };
+export { URL };
 export { DEFAULT_USER_AGENT } from './const';
 export { CookieJar, toughCookie };
 export interface ICookieJar extends CookieJar {
@@ -49,7 +50,7 @@ export interface IResponse {
     };
     body: any;
 }
-export declare function requestToJSDOM(res: IResponse, parsedURL: URL | string, options: Partial<IFromUrlOptions>): JSDOM;
+export declare function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | string, options: Partial<IFromUrlOptions>, requestOptions?: Partial<IRequestOptions>): T;
 export declare function normalizeRequestOptions(options: IFromUrlOptions): Partial<IRequestOptions>;
 export declare function normalizeFromURLOptions<T>(options: Partial<T & IFromUrlOptions>): Partial<T & IFromUrlOptions>;
 export interface INormalizeHTML {

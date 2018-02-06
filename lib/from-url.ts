@@ -13,6 +13,7 @@ import * as sniffHTMLEncoding from 'html-encoding-sniffer';
 import * as whatwgEncoding from 'whatwg-encoding';
 
 export { wrapCookieJarForRequest, parseContentType }
+export { URL }
 
 export { DEFAULT_USER_AGENT } from './const';
 import { DEFAULT_USER_AGENT, SYMBOL_RAW } from './const';
@@ -80,7 +81,7 @@ export function fromURL(url: string | URL, options?: Partial<IFromUrlOptions>): 
 
 		return request(url, requestOptions).then(res =>
 			{
-				return requestToJSDOM(res, parsedURL, options);
+				return requestToJSDOM(res, parsedURL, options, requestOptions);
 			})
 			.then(function (jsdom: IJSDOM)
 			{
@@ -91,6 +92,7 @@ export function fromURL(url: string | URL, options?: Partial<IFromUrlOptions>): 
 
 				jsdom._options.ConstructorOptions = opts;
 				jsdom._options.options = options;
+				jsdom._options.requestOptions = requestOptions;
 
 				return jsdom;
 			})
@@ -110,7 +112,7 @@ export interface IResponse
 	body,
 }
 
-export function requestToJSDOM(res: IResponse, parsedURL: URL | string, options: Partial<IFromUrlOptions>)
+export function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | string, options: Partial<IFromUrlOptions>, requestOptions?: Partial<IRequestOptions>): T
 {
 	if (typeof parsedURL == 'string')
 	{
@@ -142,7 +144,12 @@ export function requestToJSDOM(res: IResponse, parsedURL: URL | string, options:
 	jsdom[SYMBOL_RAW] = jsdom[SYMBOL_RAW] || {};
 	jsdom[SYMBOL_RAW].options = jsdom[SYMBOL_RAW].options || {};
 	jsdom[SYMBOL_RAW].options.ConstructorOptions = opts;
+	if (requestOptions)
+	{
+		jsdom[SYMBOL_RAW].options.requestOptions = requestOptions;
+	}
 
+	// @ts-ignore
 	return jsdom;
 }
 
