@@ -20,6 +20,22 @@ or will throw Error
 
 `npm i jsdom-extra cheerio`
 
+## options
+
+### virtualConsole
+
+if virtualConsole === false
+
+> this is help if u didn't wanna see console output from jsdom
+
+```ts
+// old way
+options.virtualConsole = new VirtualConsole();
+
+// new way
+options.virtualConsole = false;
+```
+
 ## demo
 
 * [API](lib/pack.d.ts)

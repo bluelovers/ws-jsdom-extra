@@ -40,6 +40,8 @@ export interface IOptions
 
 	url?: string | URL;
 	referrer?: string | URL;
+
+	virtualConsole?: VirtualConsole | false,
 }
 
 export type IOptionsJSDOM = Partial<IOptionsCreateQuery & OptionsJSDOM & IOptions>;
@@ -203,6 +205,11 @@ export function packOptions<T>(options: Partial<T & IOptionsJSDOM> = {},
 		options.beforeParse[CONSTS.SYMBOL_PACKED_OPTIONS] = [] || options.beforeParse[CONSTS.SYMBOL_PACKED_OPTIONS];
 	}
 	cb && options.beforeParse[CONSTS.SYMBOL_PACKED_OPTIONS].push(cb);
+
+	if (options.virtualConsole === false)
+	{
+		options.virtualConsole = new VirtualConsole();
+	}
 
 	return options;
 }

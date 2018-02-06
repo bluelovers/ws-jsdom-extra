@@ -15,6 +15,7 @@ export interface IOptions {
     beforeParse?(window: DOMWindow, jsdom?: IJSDOM): void;
     url?: string | URL;
     referrer?: string | URL;
+    virtualConsole?: VirtualConsole | false;
 }
 export declare type IOptionsJSDOM = Partial<IOptionsCreateQuery & OptionsJSDOM & IOptions>;
 export declare type IConstructorOptions = Partial<ConstructorOptions & IOptionsJSDOM>;
