@@ -7,6 +7,8 @@ import * as KEYS from 'jsdom-global/keys';
 import { ConstructorOptions, DOMWindow } from 'jsdom';
 import { IConstructorOptions, IJSDOM, createJSDOM, JSDOM } from '../pack';
 
+export { KEYS }
+
 export declare interface Global extends NodeJS.Global
 {
 	navigator: {

@@ -1,5 +1,7 @@
+import * as KEYS from 'jsdom-global/keys';
 import { DOMWindow } from 'jsdom';
 import { IConstructorOptions, IJSDOM, JSDOM } from '../pack';
+export { KEYS };
 export interface Global extends NodeJS.Global {
     navigator: {
         userAgent: string;
