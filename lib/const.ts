@@ -4,7 +4,7 @@
 
 // @ts-ignore
 import { version as packageVersion } from '../package.json';
-
+// @ts-ignore
 export const DEFAULT_USER_AGENT = `Mozilla/5.0 (${process.platform}) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/${packageVersion}`;
 
 export const SYMBOL_RAW = Symbol.for('raw_query');
