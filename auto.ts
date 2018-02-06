@@ -7,7 +7,10 @@ import { BinaryData, DOMWindow, JSDOM as _JSDOM } from 'jsdom';
 import { URL } from 'jsdom-url';
 export { URL }
 
-import { createJSDOM, IJSDOM, IOptions, packJSDOM, SYMBOL_RAW, packOptions, IJSDOM_Symbol_Options } from './lib/pack';
+import {
+	createJSDOM, IJSDOM, IOptions, packJSDOM, SYMBOL_RAW, packOptions, IJSDOM_Symbol_Options,
+	IConstructorOptions
+} from './lib/pack';
 
 packJSDOM(_JSDOM.prototype);
 
@@ -18,7 +21,7 @@ export class JSDOM extends _JSDOM
 	document: Document;
 	_options: IJSDOM_Symbol_Options;
 
-	constructor(html?: string | Buffer | BinaryData, options: IOptions = {})
+	constructor(html?: string | Buffer | BinaryData, options: IConstructorOptions = {})
 	{
 		let opts = {};
 

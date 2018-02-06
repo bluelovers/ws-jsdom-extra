@@ -1,11 +1,11 @@
-import { CookieJar, FromUrlOptions } from 'jsdom';
+import { JSDOM, CookieJar, FromUrlOptions, toughCookie } from 'jsdom';
 import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
 import { IJSDOM, IOptionsJSDOM, URL } from './pack';
 import { Promise } from './index';
 import * as parseContentType from 'content-type-parser';
 export { wrapCookieJarForRequest, parseContentType };
 export { DEFAULT_USER_AGENT } from './const';
-export { CookieJar };
+export { CookieJar, toughCookie };
 export interface ICookieJar extends CookieJar {
     enableLooseMode?: boolean;
     store?: {
@@ -39,6 +39,17 @@ export interface IRequestJar {
     _jar: ICookieJar;
 }
 export declare function fromURL(url: string | URL, options?: Partial<IFromUrlOptions>): Promise<IJSDOM>;
+export interface IResponse {
+    headers: {
+        [key: string]: any;
+    };
+    request: {
+        href?;
+        [key: string]: any;
+    };
+    body: any;
+}
+export declare function requestToJSDOM(res: IResponse, parsedURL: URL | string, options: Partial<IFromUrlOptions>): JSDOM;
 export declare function normalizeRequestOptions(options: IFromUrlOptions): Partial<IRequestOptions>;
 export declare function normalizeFromURLOptions<T>(options: Partial<T & IFromUrlOptions>): Partial<T & IFromUrlOptions>;
 export interface INormalizeHTML {

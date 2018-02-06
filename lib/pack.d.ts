@@ -42,8 +42,11 @@ export declare function auto(): typeof JSDOM;
 export declare function createJSDOM(html?: string | Buffer | BinaryData, options?: IConstructorOptions): IJSDOM;
 export declare function asyncJSDOM(html?: string | Buffer | BinaryData, options?: IConstructorOptions): Promise<IJSDOM>;
 export declare function fromFile(url: string, options?: IFromFileOptions): Promise<IJSDOM>;
-export declare function packOptions<T>(options?: Partial<T & IOptionsJSDOM>, cb?: (opts: Partial<T & IOptionsJSDOM>, window?, jsdom?) => void): Partial<T & IOptionsJSDOM>;
-export declare function isPacked(jsdom: any): boolean;
+export interface IPackOptionsHookCallback<T> {
+    (opts: Partial<T & IOptionsJSDOM>, window?: DOMWindow, jsdom?: JSDOM): any;
+}
+export declare function packOptions<T>(options?: Partial<T & IOptionsJSDOM>, cb?: IPackOptionsHookCallback<T>): Partial<T & IOptionsJSDOM>;
+export declare function isPackedJSDOM(jsdom: any): boolean;
 export declare function packJSDOM(jsdom: JSDOM): IJSDOM;
 import * as self from './pack';
 export default self;

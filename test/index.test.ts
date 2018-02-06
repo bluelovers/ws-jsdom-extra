@@ -8,6 +8,7 @@ import { chai, relative, expect, path, assert, util } from './_local-dev';
 import { describe, before, beforeEach, it, ITest } from 'mocha';
 
 import { JSDOM, createJSDOM, isPacked, SYMBOL_RAW } from '..';
+import CONSTS from '../lib/const';
 
 // @ts-ignore
 describe(relative(__filename), () =>
@@ -26,7 +27,7 @@ describe(relative(__filename), () =>
 	describe(`suite`, () =>
 	{
 		// @ts-ignore
-		it(`test`, function (done)
+		it(`simple check`, function (done)
 		{
 			//console.log('it:inner', currentTest.title);
 			//console.log('it:inner', currentTest.fullTitle());
@@ -42,9 +43,14 @@ describe(relative(__filename), () =>
 			expect(jsdom.window).to.be.ok;
 			expect(jsdom.$).to.be.ok;
 			expect(jsdom[SYMBOL_RAW]).to.be.ok;
+			expect(jsdom[CONSTS.SYMBOL_PACKED]).to.be.deep.equal(true);
 
 			//expect(actual).to.be.deep.equal(expected);
 			//assert.isOk(actual.value, util.inspect(actual));
+
+			console.log(jsdom._options);
+
+			console.log(jsdom.cookieJar.serializeSync());
 
 			done();
 		});

@@ -2,3 +2,4 @@
 test/*.js
 test/*.d.ts
 package-lock.json
+/test/temp/

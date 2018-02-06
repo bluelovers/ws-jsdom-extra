@@ -2,12 +2,11 @@
  * Created by user on 2018/2/6/006.
  */
 
-import { JSDOM, CookieJar, FromUrlOptions } from 'jsdom';
+import { JSDOM, CookieJar, FromUrlOptions, toughCookie } from 'jsdom';
 import * as deepmerge from 'deepmerge-plus';
 import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
-import { IConstructorOptions, IJSDOM, IOptions, IOptionsJSDOM, isPacked, packJSDOM, packOptions, URL } from './pack';
-import { Promise } from './index';
-import * as request from 'request';
+import { IConstructorOptions, IJSDOM, IOptions, IOptionsJSDOM, isPackedJSDOM, packJSDOM, packOptions, URL } from './pack';
+import { Promise, request } from './index';
 import * as parseContentType from 'content-type-parser';
 import * as isPlainObject from 'is-plain-object';
 import * as sniffHTMLEncoding from 'html-encoding-sniffer';
@@ -16,9 +15,9 @@ import * as whatwgEncoding from 'whatwg-encoding';
 export { wrapCookieJarForRequest, parseContentType }
 
 export { DEFAULT_USER_AGENT } from './const';
-import { DEFAULT_USER_AGENT } from './const';
+import { DEFAULT_USER_AGENT, SYMBOL_RAW } from './const';
 
-export { CookieJar }
+export { CookieJar, toughCookie }
 
 export interface ICookieJar extends CookieJar
 {
@@ -81,23 +80,11 @@ export function fromURL(url: string | URL, options?: Partial<IFromUrlOptions>): 
 
 		return request(url, requestOptions).then(res =>
 			{
-				const parsedContentType = parseContentType(res.headers["content-type"]);
-				const transportLayerEncodingLabel = parsedContentType && parsedContentType.get("charset");
-
-				options = Object.assign(options, {
-					url: res.request.href + parsedURL.hash,
-					contentType: res.headers["content-type"],
-					referrer: res.request.getHeader("referer"),
-					//[transportLayerEncodingLabelHiddenOption]: transportLayerEncodingLabel
-				});
-
-				let body = normalizeHTML(res.body, transportLayerEncodingLabel).html;
-
-				return new JSDOM(body, options as IConstructorOptions);
+				return requestToJSDOM(res, parsedURL, options);
 			})
 			.then(function (jsdom: IJSDOM)
 			{
-				if (!isPacked(jsdom))
+				if (!isPackedJSDOM(jsdom))
 				{
 					packJSDOM(jsdom);
 				}
@@ -109,6 +96,54 @@ export function fromURL(url: string | URL, options?: Partial<IFromUrlOptions>): 
 			})
 			;
 	});
+}
+
+export interface IResponse
+{
+	headers: {
+		[key: string]: any,
+	},
+	request: {
+		href?
+		[key: string]: any,
+	}
+	body,
+}
+
+export function requestToJSDOM(res: IResponse, parsedURL: URL | string, options: Partial<IFromUrlOptions>)
+{
+	if (typeof parsedURL == 'string')
+	{
+		parsedURL = new URL(parsedURL);
+	}
+
+	let opts = {};
+
+	options = packOptions(options, function (options)
+	{
+		opts = options;
+	});
+	options = normalizeFromURLOptions(options);
+
+	const parsedContentType = parseContentType(res.headers["content-type"]);
+	const transportLayerEncodingLabel = parsedContentType && parsedContentType.get("charset");
+
+	options = Object.assign(options, {
+		url: res.request.href + parsedURL.hash,
+		contentType: res.headers["content-type"],
+		referrer: res.request.getHeader("referer"),
+		//[transportLayerEncodingLabelHiddenOption]: transportLayerEncodingLabel
+	});
+
+	let body = normalizeHTML(res.body, transportLayerEncodingLabel).html;
+
+	let jsdom = new JSDOM(body, options as IConstructorOptions);
+
+	jsdom[SYMBOL_RAW] = jsdom[SYMBOL_RAW] || {};
+	jsdom[SYMBOL_RAW].options = jsdom[SYMBOL_RAW].options || {};
+	jsdom[SYMBOL_RAW].options.ConstructorOptions = opts;
+
+	return jsdom;
 }
 
 export function normalizeRequestOptions(options: IFromUrlOptions): Partial<IRequestOptions>
@@ -128,9 +163,11 @@ export function normalizeRequestOptions(options: IFromUrlOptions): Partial<IRequ
 
 	if (options.requestOptions)
 	{
-		requestOptions = deepmerge.all([requestOptions, options.requestOptions, {
-			encoding: null,
-		}], {
+		requestOptions = deepmerge.all([
+			requestOptions, options.requestOptions, {
+				encoding: null,
+			}
+		], {
 			//keyValueOrMode: true,
 			isMergeableObject(value, isMergeable)
 			{

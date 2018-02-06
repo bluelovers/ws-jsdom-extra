@@ -20,14 +20,14 @@ import { IOptionsCreateQuery, createQuery } from './query';
 import { IFromUrlOptions } from './from-url';
 
 export { fromURL } from './from-url';
-import { Promise } from './index';
+import { Promise, array_unique } from './index';
 
 export { Promise }
 export { URL }
 export { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, DOMWindow }
 
 export * from './const';
-import { SYMBOL_RAW } from './const';
+import CONSTS, { SYMBOL_RAW } from './const';
 
 export const JSDOM_PROTOTYPE_COPY = Object.assign({}, JSDOM.prototype);
 
@@ -92,7 +92,7 @@ export function createJSDOM(html?: string | Buffer | BinaryData, options: IConst
 
 	let jsdom = new JSDOM(html, options) as IJSDOM;
 
-	if (!isPacked(jsdom))
+	if (!isPackedJSDOM(jsdom))
 	{
 		packJSDOM(jsdom);
 	}
@@ -125,7 +125,7 @@ export function fromFile(url: string, options?: IFromFileOptions): Promise<IJSDO
 		return JSDOM.fromFile(url, options)
 			.then(function (jsdom: IJSDOM)
 			{
-				if (!isPacked(jsdom))
+				if (!isPackedJSDOM(jsdom))
 				{
 					packJSDOM(jsdom);
 				}
@@ -139,8 +139,13 @@ export function fromFile(url: string, options?: IFromFileOptions): Promise<IJSDO
 	});
 }
 
+export interface IPackOptionsHookCallback<T>
+{
+	(opts: Partial<T & IOptionsJSDOM>, window?: DOMWindow, jsdom?: JSDOM)
+}
+
 export function packOptions<T>(options: Partial<T & IOptionsJSDOM> = {},
-	cb?: (opts: Partial<T & IOptionsJSDOM>, window?, jsdom?) => void
+	cb?: IPackOptionsHookCallback<T>
 ): Partial<T & IOptionsJSDOM>
 {
 	if (options.url !== undefined)
@@ -153,44 +158,64 @@ export function packOptions<T>(options: Partial<T & IOptionsJSDOM> = {},
 		options.referrer = (new URL(options.referrer)).href;
 	}
 
-	let old_beforeParse;
-
-	if (options.beforeParse)
+	if (!options.beforeParse || !options.beforeParse[CONSTS.SYMBOL_PACKED_OPTIONS])
 	{
-		old_beforeParse = options.beforeParse;
+		let old_beforeParse;
+
+		if (options.beforeParse)
+		{
+			old_beforeParse = options.beforeParse;
+		}
+
+		options.beforeParse = function (window: DOMWindow, jsdom?: IJSDOM)
+		{
+			let opts: Partial<T & IOptionsJSDOM> = {};
+
+			if (old_beforeParse)
+			{
+				old_beforeParse(window, jsdom);
+			}
+
+			//console.log(this);
+			opts = Object.assign({}, this);
+
+			if (jsdom)
+			{
+				jsdom[SYMBOL_RAW] = jsdom[SYMBOL_RAW] || {};
+				jsdom[SYMBOL_RAW].options = jsdom[SYMBOL_RAW].options || {};
+				jsdom[SYMBOL_RAW].options.ConstructorOptions = opts;
+			}
+
+			let cbs: IPackOptionsHookCallback<T>[];
+
+			cbs = (opts.beforeParse && opts.beforeParse[CONSTS.SYMBOL_PACKED_OPTIONS])
+				.concat(options.beforeParse[CONSTS.SYMBOL_PACKED_OPTIONS])
+			;
+
+			//cb && cb(opts, window, jsdom);
+			array_unique(cbs)
+				.forEach(function (cb: IPackOptionsHookCallback<T>)
+				{
+					cb(opts, window, jsdom);
+				})
+			;
+		};
+		options.beforeParse[CONSTS.SYMBOL_PACKED_OPTIONS] = [] || options.beforeParse[CONSTS.SYMBOL_PACKED_OPTIONS];
 	}
-
-	options.beforeParse = function (window: DOMWindow, jsdom?: IJSDOM)
-	{
-		let opts = {};
-
-		if (old_beforeParse)
-		{
-			old_beforeParse(window, jsdom);
-		}
-
-		//console.log(this);
-		opts = Object.assign({}, this);
-
-		if (jsdom)
-		{
-			jsdom[SYMBOL_RAW].options.ConstructorOptions = opts;
-		}
-
-		cb && cb(opts, window, jsdom);
-	};
+	cb && options.beforeParse[CONSTS.SYMBOL_PACKED_OPTIONS].push(cb);
 
 	return options;
 }
 
-export function isPacked(jsdom)
+export function isPackedJSDOM(jsdom)
 {
-	return (SYMBOL_RAW in jsdom);
+	//return (SYMBOL_RAW in jsdom);
+	return (CONSTS.SYMBOL_PACKED in jsdom);
 }
 
 export function packJSDOM(jsdom: JSDOM): IJSDOM
 {
-	if (isPacked(jsdom))
+	if (isPackedJSDOM(jsdom))
 	{
 		return jsdom as IJSDOM;
 	}
@@ -207,10 +232,17 @@ export function packJSDOM(jsdom: JSDOM): IJSDOM
 
 	Object.defineProperties(jsdom, {
 
+		[CONSTS.SYMBOL_PACKED]: {
+			get()
+			{
+				return true;
+			}
+		},
+
 		[SYMBOL_RAW]: {
-			value: {
+			value: Object.assign({
 				options: {},
-			} as IJSDOM_Symbol,
+			}, jsdom[SYMBOL_RAW]) as IJSDOM_Symbol,
 		},
 
 		_options: {
