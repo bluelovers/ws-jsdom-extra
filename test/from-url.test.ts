@@ -34,6 +34,7 @@ describe(relative(__filename), () =>
 			let options: IFromUrlOptions = {
 				// @ts-ignore
 				url: '123',
+				// @ts-ignore
 				contentType: '456',
 			};
 
@@ -62,6 +63,7 @@ describe(relative(__filename), () =>
 			let options: IFromUrlOptions = {
 				// @ts-ignore
 				url: '123',
+				// @ts-ignore
 				contentType: '456',
 
 				requestOptions: {
