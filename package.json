@@ -1,24 +1,54 @@
 {
   "name": "jsdom-extra",
   "version": "1.0.0",
-  "description": "jsdom extend",
+  "description": "JSDOM with extra prototype ( jquery / cheerio )",
+  "keywords": [
+    "agent",
+    "browser",
+    "cheerio",
+    "cookie",
+    "data",
+    "document",
+    "dom",
+    "form",
+    "get",
+    "html",
+    "htmlparser",
+    "http",
+    "javascript",
+    "jquery",
+    "jsdom",
+    "library",
+    "parser",
+    "post",
+    "query",
+    "request",
+    "scraper",
+    "selector",
+    "simple",
+    "url",
+    "util",
+    "utility",
+    "w3c",
+    "whatwg",
+    "window"
+  ],
+  "license": "ISC",
+  "author": "",
   "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "deepmerge-plus": "^2.1.0",
     "jsdom": "^11.6.2",
     "jsdom-url": "^1.0.0"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.7",
     "@types/jquery": "^3.3.0",
     "@types/jsdom": "^11.0.4"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "optionalDependencies": {
+  "peerDependencies": {
     "cheerio": "^1.0.0-rc.2",
     "jquery": "^3.3.1"
   }

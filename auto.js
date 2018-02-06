@@ -5,6 +5,8 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("jsdom"));
 const jsdom_1 = require("jsdom");
+const jsdom_url_1 = require("jsdom-url");
+exports.URL = jsdom_url_1.URL;
 const pack_1 = require("./lib/pack");
 pack_1.packJSDOM(jsdom_1.JSDOM.prototype);
 class JSDOM extends jsdom_1.JSDOM {

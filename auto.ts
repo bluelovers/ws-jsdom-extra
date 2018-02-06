@@ -5,7 +5,7 @@
 export * from 'jsdom';
 import { BinaryData, DOMWindow, JSDOM as _JSDOM } from 'jsdom';
 import { URL } from 'jsdom-url';
-import * as util from 'util';
+export { URL }
 
 import { createJSDOM, IJSDOM, IOptions, packJSDOM, SYMBOL_RAW, packOptions, IJSDOM_Symbol_Options } from './lib/pack';
 

@@ -1,10 +1,30 @@
 # jsdom-extra
 
-> JSDOM with extra prototype
+> JSDOM with extra prototype ( jquery / cheerio )
 
 `npm i jsdom-extra`
 
+## install
+
+### use with jquery
+
+`npm i jsdom-extra jquery`
+
+### use with cheerio
+
+`npm i jsdom-extra cheerio`
+
 ## demo
+
+* [API](lib/pack.d.ts)
+
+### jquery or cheerio
+
+```ts
+// return jquery or cheerio
+let $ = createJSDOM().$;
+$(':root').length;
+```
 
 ### createJSDOM
 
@@ -29,7 +49,7 @@ createJSDOM(html?: string | Buffer | BinaryData, options: IOptions = {})
 
 ```ts
 // fake .then, not realy Promise
-createJSDOM().then(function (jsdom)
+createJSDOM().fakeThen(function (jsdom)
 {
 	console.log(jsdom._options);
 });
@@ -47,6 +67,31 @@ let jsdom2 = new JSDOM();
 
 // will overwrite jsdom2 too
 packJSDOM(jsdom2) // => return jsdom2
+```
+
+### get the finally options that use on create JSDOM
+
+```ts
+createJSDOM()._options.ConstructorOptions
+```
+
+output
+
+```ts
+   { windowOptions: 
+      { url: 'about:blank',
+        referrer: '',
+        contentType: 'text/html',
+        parsingMode: 'html',
+        userAgent: 'Mozilla/5.0 (win32) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/11.6.2',
+        parseOptions: [Object],
+        runScripts: undefined,
+        encoding: 'UTF-8',
+        pretendToBeVisual: false,
+        virtualConsole: [VirtualConsole],
+        cookieJar: [CookieJar] },
+     resources: undefined,
+     beforeParse: [Function] }
 ```
 
 ### lazy overwrite / require

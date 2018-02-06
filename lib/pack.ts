@@ -2,21 +2,28 @@
  * Created by user on 2018/2/6/006.
  */
 
-import { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, BinaryData, DOMWindow } from 'jsdom';
+import { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, BinaryData, DOMWindow, FromFileOptions, FromUrlOptions } from 'jsdom';
 import * as jQuery from 'jquery';
 import { URL } from 'jsdom-url';
 import { IOptionsCreateQuery, createQuery } from './query';
 
+export { URL }
 export { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, DOMWindow }
 
 export const SYMBOL_RAW = Symbol.for('raw_query');
 
 export const JSDOM_PROTOTYPE_COPY = Object.assign({}, JSDOM.prototype);
 
-export interface IOptions extends ConstructorOptions, IOptionsCreateQuery
+export interface IOptions extends IOptionsCreateQuery
 {
 	beforeParse?(window: DOMWindow, jsdom?: IJSDOM): void;
 }
+
+export type IConstructorOptions = Partial<IOptions & ConstructorOptions>;
+export type IFromFileOptions = Partial<IOptions & FromFileOptions>;
+export type IFromUrlOptions = Partial<IOptions & FromUrlOptions>;
+
+export type IAllOptions = Partial<IConstructorOptions & IFromFileOptions & IFromUrlOptions>;
 
 export interface IJSDOM_Symbol
 {
@@ -41,7 +48,7 @@ export interface IJSDOM extends JSDOM
 
 	_options: IJSDOM_Symbol_Options,
 
-	then<T>(cb: (jsdom: IJSDOM) => T): T
+	fakeThen<T>(cb: (jsdom: IJSDOM) => T): T
 }
 
 export function auto()
@@ -50,11 +57,11 @@ export function auto()
 	return JSDOM;
 }
 
-export function createJSDOM(html?: string | Buffer | BinaryData, options: IOptions = {}): IJSDOM
+export function createJSDOM(html?: string | Buffer | BinaryData, options: IConstructorOptions = {}): IJSDOM
 {
 	let opts = {};
 
-	packOptions(options, function (options)
+	options = packOptions(options, function (options)
 	{
 		opts = options;
 	});
@@ -72,7 +79,61 @@ export function createJSDOM(html?: string | Buffer | BinaryData, options: IOptio
 	return jsdom;
 }
 
-export function packOptions(options: IOptions = {}, cb?: (opts: IOptions, window?, jsdom?) => void): IOptions
+export async function fromFile(url: string, options?: IFromFileOptions): Promise<IJSDOM>
+{
+	let opts = {};
+
+	options = packOptions(options, function (options)
+	{
+		opts = options;
+	});
+
+	let jsdom = JSDOM.fromFile(url, options)
+		.then(function (jsdom: IJSDOM)
+		{
+			if (!isPacked(jsdom))
+			{
+				packJSDOM(jsdom);
+			}
+
+			jsdom._options.ConstructorOptions = opts;
+			jsdom._options.options = options;
+
+			return jsdom;
+		})
+	;
+
+	return jsdom;
+}
+
+export function fromURL(url: string, options?: IFromUrlOptions): Promise<IJSDOM>
+{
+	let opts = {};
+
+	options = packOptions(options, function (options)
+	{
+		opts = options;
+	});
+
+	let jsdom = JSDOM.fromURL(url, options)
+		.then(function (jsdom: IJSDOM)
+		{
+			if (!isPacked(jsdom))
+			{
+				packJSDOM(jsdom);
+			}
+
+			jsdom._options.ConstructorOptions = opts;
+			jsdom._options.options = options;
+
+			return jsdom;
+		})
+	;
+
+	return jsdom;
+}
+
+export function packOptions<T>(options: Partial<T & IOptions> = {}, cb?: (opts: IOptions, window?, jsdom?) => void): Partial<T & IOptions>
 {
 	let old_beforeParse;
 
@@ -188,7 +249,7 @@ export function packJSDOM(jsdom: JSDOM): IJSDOM
 			},
 		},
 
-		then: {
+		fakeThen: {
 			get()
 			{
 				return function (cb: (jsdom: IJSDOM) => any)

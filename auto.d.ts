@@ -3,6 +3,7 @@
 export * from 'jsdom';
 import { BinaryData, JSDOM as _JSDOM } from 'jsdom';
 import { URL } from 'jsdom-url';
+export { URL };
 import { IOptions, IJSDOM_Symbol_Options } from './lib/pack';
 export declare class JSDOM extends _JSDOM {
     $: JQueryStatic;
