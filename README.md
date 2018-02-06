@@ -82,8 +82,41 @@ packJSDOM(jsdom2) // => return jsdom2
 
 * [API: fromURL](lib/from-url.d.ts)
 
+> allow use POST on fromURL
+
 ```ts
 function fromURL(url: string, options?: IFromUrlOptions): Promise<IJSDOM>
+```
+
+```ts
+export interface IFromUrlOptions extends Partial<FromUrlOptions & IOptionsJSDOM>
+{
+	requestOptions?: Partial<IRequestOptions>,
+	cookieJar?: ICookieJar,
+}
+
+export interface IRequestOptionsJSDOM
+{
+	resolveWithFullResponse: boolean;
+	encoding: null;
+	gzip: boolean;
+	headers: {
+		"User-Agent": string;
+		Referer: string;
+		Accept: string;
+		"Accept-Language": string;
+	};
+	jar: IRequestJar;
+}
+
+export interface IRequestOptions extends Partial<IRequestOptionsJSDOM>
+{
+	method?: 'POST' | 'GET' | string,
+	form?: {
+		[key: string]: any,
+		[key: number]: any,
+	},
+}
 ```
 
 ### fromFile

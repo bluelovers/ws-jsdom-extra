@@ -34,15 +34,6 @@ export interface IFromUrlOptions extends Partial<FromUrlOptions & IOptionsJSDOM>
 	cookieJar?: ICookieJar,
 }
 
-export interface IRequestOptions extends Partial<IRequestOptionsJSDOM>
-{
-	method?: 'POST' | 'GET' | string,
-	form?: {
-		[key: string]: any,
-		[key: number]: any,
-	},
-}
-
 export interface IRequestOptionsJSDOM
 {
 	resolveWithFullResponse: boolean;
@@ -55,6 +46,15 @@ export interface IRequestOptionsJSDOM
 		"Accept-Language": string;
 	};
 	jar: IRequestJar;
+}
+
+export interface IRequestOptions extends Partial<IRequestOptionsJSDOM>
+{
+	method?: 'POST' | 'GET' | string,
+	form?: {
+		[key: string]: any,
+		[key: number]: any,
+	},
 }
 
 export interface IRequestJar

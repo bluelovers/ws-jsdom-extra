@@ -71,7 +71,7 @@ describe(relative(__filename), () =>
 						compType: '',
 						Page: 1,
 					},
-				}
+				},
 			};
 
 			let actual = normalizeRequestOptions(normalizeFromURLOptions(options));
