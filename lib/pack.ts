@@ -75,7 +75,7 @@ export interface IJSDOM extends JSDOM
 	fakeThen<T>(cb: (jsdom: IJSDOM) => T): T
 }
 
-export function auto()
+export function auto(JSDOM)
 {
 	packJSDOM(JSDOM.prototype);
 	return JSDOM;

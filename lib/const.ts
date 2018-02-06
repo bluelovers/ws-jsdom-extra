@@ -11,6 +11,9 @@ export const SYMBOL_RAW = Symbol.for('SYMBOL_RAW');
 export const SYMBOL_PACKED_OPTIONS = Symbol.for('SYMBOL_PACKED_OPTIONS');
 export const SYMBOL_PACKED = Symbol.for('SYMBOL_PACKED');
 
+export const defaultHtml = '<html><head></head><body></body></html>';
+export const defaultHtml2 = '<!doctype html><html><head><meta charset="utf-8"></head><body></body></html>';
+
 import * as self from './const';
 export default self;
 //export default exports;

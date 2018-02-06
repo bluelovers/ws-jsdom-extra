@@ -3,16 +3,21 @@
  */
 
 export * from 'jsdom';
-import { BinaryData, DOMWindow, JSDOM as _JSDOM } from 'jsdom';
+import { BinaryData, JSDOM as _JSDOM } from 'jsdom';
 import { URL } from 'jsdom-url';
 export { URL }
 
-import {
-	createJSDOM, IJSDOM, IOptions, packJSDOM, SYMBOL_RAW, packOptions, IJSDOM_Symbol_Options,
-	IConstructorOptions
+import pack, {
+	IJSDOM, auto, packOptions, IJSDOM_Symbol_Options,
+	IConstructorOptions,
+
+	fromURL,
+	fromFile,
 } from './lib/pack';
 
-packJSDOM(_JSDOM.prototype);
+export { fromURL, fromFile }
+
+auto(_JSDOM);
 
 export class JSDOM extends _JSDOM
 {
@@ -41,6 +46,9 @@ export class JSDOM extends _JSDOM
 		jsdom._options.options = options;
 	}
 }
+
+JSDOM.fromFile = fromFile;
+JSDOM.fromURL = fromURL;
 
 export default JSDOM;
 

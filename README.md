@@ -158,3 +158,61 @@ will overwrite global JSDOM
 import JSDOM from 'jsdom-extra/auto';
 const JSDOM = require("jsdom-extra/auto").JSDOM;
 ```
+
+### globalJsdom
+
+same as `jsdom-global`, but with
+
+```ts
+function globalJsdom<T>(html?, options: Partial<T & IConstructorOptions & IOptions> = {})
+```
+
+#### create
+
+```ts
+require("jsdom-extra/global")()
+
+const globalJsdom = require("jsdom-extra/global");
+globalJsdom();
+```
+
+```ts
+let ret: {
+       jsdom: IGlobalJSDOM;
+       window: DOMWindow;
+       document: Document;
+       cleanup: () => void;
+   };
+
+ret = globalJsdom();
+```
+
+#### cleanup
+
+```ts
+ret.cleanup();
+ret.jsdom.cleanup();
+```
+
+#### Mocha
+
+__Simple:__ Use Mocha's `--require` option. Add this to the `test/mocha.opts` file (create it if it doesn't exist)
+
+```
+mocha --require jsdom-extra/lib/global/register
+```
+
+__Advanced:__ For finer control, you can instead add it via [mocha]'s `before` and `after` hooks.
+
+```ts
+before(function () {
+  this.globalJsdom = require('jsdom-extra/global')()
+})
+
+after(function () {
+  this.globalJsdom.cleanup()
+})
+```
+
+
+[mocha]: https://mochajs.org/

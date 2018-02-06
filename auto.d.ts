@@ -4,7 +4,8 @@ export * from 'jsdom';
 import { BinaryData, JSDOM as _JSDOM } from 'jsdom';
 import { URL } from 'jsdom-url';
 export { URL };
-import { IJSDOM_Symbol_Options, IConstructorOptions } from './lib/pack';
+import { IJSDOM_Symbol_Options, IConstructorOptions, fromURL, fromFile } from './lib/pack';
+export { fromURL, fromFile };
 export declare class JSDOM extends _JSDOM {
     $: JQueryStatic;
     url: URL;

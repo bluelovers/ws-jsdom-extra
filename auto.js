@@ -8,7 +8,9 @@ const jsdom_1 = require("jsdom");
 const jsdom_url_1 = require("jsdom-url");
 exports.URL = jsdom_url_1.URL;
 const pack_1 = require("./lib/pack");
-pack_1.packJSDOM(jsdom_1.JSDOM.prototype);
+exports.fromURL = pack_1.fromURL;
+exports.fromFile = pack_1.fromFile;
+pack_1.auto(jsdom_1.JSDOM);
 class JSDOM extends jsdom_1.JSDOM {
     constructor(html, options = {}) {
         let opts = {};
@@ -23,4 +25,6 @@ class JSDOM extends jsdom_1.JSDOM {
     }
 }
 exports.JSDOM = JSDOM;
+JSDOM.fromFile = pack_1.fromFile;
+JSDOM.fromURL = pack_1.fromURL;
 exports.default = JSDOM;

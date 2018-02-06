@@ -82,6 +82,8 @@ describe(relative(__filename), () =>
 
 			console.log(jsdom1);
 
+			console.log(jsdom1.serialize());
+
 			//expect(actual).to.be.ok;
 			//expect(actual).to.be.deep.equal(expected);
 			//assert.isOk(actual.value, util.inspect(actual));

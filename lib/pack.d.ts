@@ -38,7 +38,7 @@ export interface IJSDOM extends JSDOM {
     _options: IJSDOM_Symbol_Options;
     fakeThen<T>(cb: (jsdom: IJSDOM) => T): T;
 }
-export declare function auto(): typeof JSDOM;
+export declare function auto(JSDOM: any): any;
 export declare function createJSDOM(html?: string | Buffer | BinaryData, options?: IConstructorOptions): IJSDOM;
 export declare function asyncJSDOM(html?: string | Buffer | BinaryData, options?: IConstructorOptions): Promise<IJSDOM>;
 export declare function fromFile(url: string, options?: IFromFileOptions): Promise<IJSDOM>;
