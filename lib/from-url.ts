@@ -24,9 +24,7 @@ export interface ICookieJar extends CookieJar
 {
 	enableLooseMode?: boolean,
 	store?: {
-		idx?: {
-
-		},
+		idx?: {},
 	},
 }
 
@@ -52,50 +50,51 @@ export interface IRequestOptions
 
 export function fromURL(url: string, options?: IFromUrlOptions): Promise<IJSDOM>
 {
-	const parsedURL = new URL(url);
-	url = parsedURL.href;
-
-	let opts = {};
-
-	options = packOptions(options, function (options)
+	return Promise.resolve().then(function ()
 	{
-		opts = options;
-	});
+		const parsedURL = new URL(url);
+		url = parsedURL.href;
 
-	options = normalizeFromURLOptions(options);
-	let requestOptions = normalizeRequestOptions(options);
+		let opts = {};
 
-	let rp = request(url, requestOptions).then(res =>
-	{
-		const parsedContentType = parseContentType(res.headers["content-type"]);
-		const transportLayerEncodingLabel = parsedContentType && parsedContentType.get("charset");
-
-		options = Object.assign(options, {
-			url: res.request.href + parsedURL.hash,
-			contentType: res.headers["content-type"],
-			referrer: res.request.getHeader("referer"),
-			//[transportLayerEncodingLabelHiddenOption]: transportLayerEncodingLabel
+		options = packOptions(options, function (options)
+		{
+			opts = options;
 		});
 
-		let body = normalizeHTML(res.body, transportLayerEncodingLabel).html;
+		options = normalizeFromURLOptions(options);
+		let requestOptions = normalizeRequestOptions(options);
 
-		return new JSDOM(body, options);
-	})
-		.then(function (jsdom: IJSDOM)
-		{
-			if (!isPacked(jsdom))
+		return request(url, requestOptions).then(res =>
 			{
-				packJSDOM(jsdom);
-			}
+				const parsedContentType = parseContentType(res.headers["content-type"]);
+				const transportLayerEncodingLabel = parsedContentType && parsedContentType.get("charset");
 
-			jsdom._options.ConstructorOptions = opts;
-			jsdom._options.options = options;
+				options = Object.assign(options, {
+					url: res.request.href + parsedURL.hash,
+					contentType: res.headers["content-type"],
+					referrer: res.request.getHeader("referer"),
+					//[transportLayerEncodingLabelHiddenOption]: transportLayerEncodingLabel
+				});
 
-			return jsdom;
-		})
-	;
+				let body = normalizeHTML(res.body, transportLayerEncodingLabel).html;
 
-	return Promise.resolve(rp);
+				return new JSDOM(body, options);
+			})
+			.then(function (jsdom: IJSDOM)
+			{
+				if (!isPacked(jsdom))
+				{
+					packJSDOM(jsdom);
+				}
+
+				jsdom._options.ConstructorOptions = opts;
+				jsdom._options.options = options;
+
+				return jsdom;
+			})
+			;
+	});
 }
 
 export function normalizeRequestOptions(options: IFromUrlOptions): Partial<IRequestOptions>
