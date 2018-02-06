@@ -6,6 +6,9 @@ import { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, Bina
 import * as jQuery from 'jquery';
 import { URL } from 'jsdom-url';
 import { IOptionsCreateQuery, createQuery } from './query';
+import { IFromUrlOptions } from './from-url';
+
+export { fromURL } from './from-url';
 
 export { URL }
 export { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, DOMWindow }
@@ -21,8 +24,7 @@ export interface IOptions extends IOptionsCreateQuery
 
 export type IConstructorOptions = Partial<IOptions & ConstructorOptions>;
 export type IFromFileOptions = Partial<IOptions & FromFileOptions>;
-export type IFromUrlOptions = Partial<IOptions & FromUrlOptions>;
-
+export { IFromUrlOptions }
 export type IAllOptions = Partial<IConstructorOptions & IFromFileOptions & IFromUrlOptions>;
 
 export interface IJSDOM_Symbol
@@ -89,33 +91,6 @@ export async function fromFile(url: string, options?: IFromFileOptions): Promise
 	});
 
 	let jsdom = JSDOM.fromFile(url, options)
-		.then(function (jsdom: IJSDOM)
-		{
-			if (!isPacked(jsdom))
-			{
-				packJSDOM(jsdom);
-			}
-
-			jsdom._options.ConstructorOptions = opts;
-			jsdom._options.options = options;
-
-			return jsdom;
-		})
-	;
-
-	return jsdom;
-}
-
-export function fromURL(url: string, options?: IFromUrlOptions): Promise<IJSDOM>
-{
-	let opts = {};
-
-	options = packOptions(options, function (options)
-	{
-		opts = options;
-	});
-
-	let jsdom = JSDOM.fromURL(url, options)
 		.then(function (jsdom: IJSDOM)
 		{
 			if (!isPacked(jsdom))

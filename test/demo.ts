@@ -11,3 +11,9 @@ console.log(jsdom.url);
 console.log(jsdom.$(':root'));
 
 console.log(jsdom._options);
+
+// @ts-ignore
+console.log(jsdom.__proto__);
+
+// @ts-ignore
+console.log(typeof String(jsdom.__proto__));

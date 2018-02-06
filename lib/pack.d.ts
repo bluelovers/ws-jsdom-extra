@@ -1,8 +1,10 @@
 /// <reference types="jquery" />
 /// <reference types="node" />
-import { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, BinaryData, DOMWindow, FromFileOptions, FromUrlOptions } from 'jsdom';
+import { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, BinaryData, DOMWindow, FromFileOptions } from 'jsdom';
 import { URL } from 'jsdom-url';
 import { IOptionsCreateQuery } from './query';
+import { IFromUrlOptions } from './from-url';
+export { fromURL } from './from-url';
 export { URL };
 export { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, DOMWindow };
 export declare const SYMBOL_RAW: symbol;
@@ -12,7 +14,7 @@ export interface IOptions extends IOptionsCreateQuery {
 }
 export declare type IConstructorOptions = Partial<IOptions & ConstructorOptions>;
 export declare type IFromFileOptions = Partial<IOptions & FromFileOptions>;
-export declare type IFromUrlOptions = Partial<IOptions & FromUrlOptions>;
+export { IFromUrlOptions };
 export declare type IAllOptions = Partial<IConstructorOptions & IFromFileOptions & IFromUrlOptions>;
 export interface IJSDOM_Symbol {
     $: JQueryStatic;
@@ -34,7 +36,6 @@ export interface IJSDOM extends JSDOM {
 export declare function auto(): typeof JSDOM;
 export declare function createJSDOM(html?: string | Buffer | BinaryData, options?: IConstructorOptions): IJSDOM;
 export declare function fromFile(url: string, options?: IFromFileOptions): Promise<IJSDOM>;
-export declare function fromURL(url: string, options?: IFromUrlOptions): Promise<IJSDOM>;
 export declare function packOptions<T>(options?: Partial<T & IOptions>, cb?: (opts: IOptions, window?, jsdom?) => void): Partial<T & IOptions>;
 export declare function isPacked(jsdom: any): boolean;
 export declare function packJSDOM(jsdom: JSDOM): IJSDOM;
