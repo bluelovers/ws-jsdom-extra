@@ -4,7 +4,13 @@
 
 `npm i jsdom-extra`
 
-## install
+## optional install
+
+```
+if u didn't need jquery or cheerio, then no need install them.
+but never try set/get $ from jsdom
+or will throw Error
+```
 
 ### use with jquery
 

@@ -9,6 +9,7 @@ export interface Global extends NodeJS.Global {
     };
     window: DOMWindow;
 }
+export declare var global: Global;
 export interface IOptions {
     JSDOM: typeof JSDOM;
     createJSDOM(): IJSDOM;
@@ -26,6 +27,7 @@ export declare namespace globalJsdom {
         document: Document;
         cleanup: () => void;
         global?: Global;
+        XMLHttpRequest?: XMLHttpRequest;
     }
 }
 import * as self from './index';

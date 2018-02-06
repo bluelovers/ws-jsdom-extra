@@ -7,7 +7,7 @@ import { chai, relative, expect, path, assert, util } from './_local-dev';
 // @ts-ignore
 import { describe, before, beforeEach, it, ITest } from 'mocha';
 
-import { JSDOM, createJSDOM, isPacked, SYMBOL_RAW } from '..';
+import { JSDOM, createJSDOM, isPackedJSDOM, SYMBOL_RAW } from '..';
 import CONSTS from '../lib/const';
 
 // @ts-ignore
@@ -37,11 +37,13 @@ describe(relative(__filename), () =>
 
 			let jsdom = createJSDOM();
 
+			expect(isPackedJSDOM(jsdom)).to.be.ok;
+
 			expect(jsdom._options).to.be.ok;
 			expect(jsdom._options.ConstructorOptions).to.be.ok;
 			expect(jsdom.document).to.be.ok;
 			expect(jsdom.window).to.be.ok;
-			expect(jsdom.$).to.be.ok;
+			//expect(jsdom.$).to.be.ok;
 			expect(jsdom[SYMBOL_RAW]).to.be.ok;
 			expect(jsdom[CONSTS.SYMBOL_PACKED]).to.be.deep.equal(true);
 

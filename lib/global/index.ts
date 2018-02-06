@@ -19,7 +19,7 @@ export declare interface Global extends NodeJS.Global
 	window: DOMWindow,
 }
 
-declare var global: Global;
+export declare var global: Global;
 
 export interface IOptions
 {
@@ -55,6 +55,8 @@ export function globalJsdom<T>(html?, options: Partial<T & IConstructorOptions &
 			document: global.document,
 			cleanup: global.document.destroy,
 			global,
+			// @ts-ignore
+			XMLHttpRequest: global.window.XMLHttpRequest,
 		};
 	}
 
@@ -115,6 +117,8 @@ export function globalJsdom<T>(html?, options: Partial<T & IConstructorOptions &
 		document: document,
 		cleanup: destroy,
 		global,
+		// @ts-ignore
+		XMLHttpRequest: window.XMLHttpRequest,
 	};
 }
 
@@ -131,7 +135,8 @@ export namespace globalJsdom
 		window: DOMWindow;
 		document: Document;
 		cleanup: () => void;
-		global?: Global
+		global?: Global,
+		XMLHttpRequest?: XMLHttpRequest,
 	}
 }
 
