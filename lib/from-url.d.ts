@@ -1,5 +1,5 @@
 import { CookieJar, FromUrlOptions } from 'jsdom';
-import { IJSDOM, IOptions } from './pack';
+import { IJSDOM, IOptions, URL } from './pack';
 import { Promise } from './index';
 export declare const DEFAULT_USER_AGENT: string;
 export { CookieJar };
@@ -23,9 +23,12 @@ export interface IRequestOptions {
         Accept: string;
         "Accept-Language": string;
     };
-    jar: any;
+    jar: IRequestJar;
 }
-export declare function fromURL(url: string, options?: IFromUrlOptions): Promise<IJSDOM>;
+export interface IRequestJar {
+    _jar: ICookieJar;
+}
+export declare function fromURL(url: string | URL, options?: Partial<IFromUrlOptions>): Promise<IJSDOM>;
 export declare function normalizeRequestOptions(options: IFromUrlOptions): Partial<IRequestOptions>;
 export declare function normalizeFromURLOptions(options: Partial<IFromUrlOptions>): Partial<IFromUrlOptions>;
 export interface INormalizeHTML {

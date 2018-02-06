@@ -9,7 +9,9 @@ import { IOptionsCreateQuery, createQuery } from './query';
 import { IFromUrlOptions } from './from-url';
 
 export { fromURL } from './from-url';
+import { Promise } from './index';
 
+export { Promise }
 export { URL }
 export { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, DOMWindow }
 
@@ -81,31 +83,40 @@ export function createJSDOM(html?: string | Buffer | BinaryData, options: IConst
 	return jsdom;
 }
 
-export async function fromFile(url: string, options?: IFromFileOptions): Promise<IJSDOM>
+export function asyncJSDOM(html?: string | Buffer | BinaryData, options: IConstructorOptions = {}): Promise<IJSDOM>
 {
-	let opts = {};
-
-	options = packOptions(options, function (options)
+	return Promise.resolve().then(function ()
 	{
-		opts = options;
+		return createJSDOM(html, options);
 	});
+}
 
-	let jsdom = JSDOM.fromFile(url, options)
-		.then(function (jsdom: IJSDOM)
+export function fromFile(url: string, options?: IFromFileOptions): Promise<IJSDOM>
+{
+	return Promise.resolve().then(function ()
+	{
+		let opts = {};
+
+		options = packOptions(options, function (options)
 		{
-			if (!isPacked(jsdom))
+			opts = options;
+		});
+
+		return JSDOM.fromFile(url, options)
+			.then(function (jsdom: IJSDOM)
 			{
-				packJSDOM(jsdom);
-			}
+				if (!isPacked(jsdom))
+				{
+					packJSDOM(jsdom);
+				}
 
-			jsdom._options.ConstructorOptions = opts;
-			jsdom._options.options = options;
+				jsdom._options.ConstructorOptions = opts;
+				jsdom._options.options = options;
 
-			return jsdom;
-		})
-	;
-
-	return jsdom;
+				return jsdom;
+			})
+			;
+	});
 }
 
 export function packOptions<T>(options: Partial<T & IOptions> = {}, cb?: (opts: IOptions, window?, jsdom?) => void): Partial<T & IOptions>

@@ -7,7 +7,7 @@ import { chai, relative, expect, path, assert, util } from './_local-dev';
 // @ts-ignore
 import { describe, before, beforeEach, it, ITest } from 'mocha';
 
-import { IFromUrlOptions, normalizeFromURLOptions, CookieJar, DEFAULT_USER_AGENT } from '../lib/from-url';
+import { IFromUrlOptions, normalizeFromURLOptions, CookieJar, DEFAULT_USER_AGENT, normalizeRequestOptions } from '../lib/from-url';
 
 // @ts-ignore
 describe(relative(__filename), () =>
@@ -47,6 +47,8 @@ describe(relative(__filename), () =>
 			console.log(expected);
 
 			expect(actual).to.be.deep.equal(expected);
+
+			console.log(normalizeRequestOptions(actual));
 
 			//expect(actual).to.be.deep.equal(expected);
 			//assert.isOk(actual.value, util.inspect(actual));

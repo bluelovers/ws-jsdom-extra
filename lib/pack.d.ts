@@ -5,6 +5,8 @@ import { URL } from 'jsdom-url';
 import { IOptionsCreateQuery } from './query';
 import { IFromUrlOptions } from './from-url';
 export { fromURL } from './from-url';
+import { Promise } from './index';
+export { Promise };
 export { URL };
 export { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, DOMWindow };
 export declare const SYMBOL_RAW: symbol;
@@ -35,6 +37,7 @@ export interface IJSDOM extends JSDOM {
 }
 export declare function auto(): typeof JSDOM;
 export declare function createJSDOM(html?: string | Buffer | BinaryData, options?: IConstructorOptions): IJSDOM;
+export declare function asyncJSDOM(html?: string | Buffer | BinaryData, options?: IConstructorOptions): Promise<IJSDOM>;
 export declare function fromFile(url: string, options?: IFromFileOptions): Promise<IJSDOM>;
 export declare function packOptions<T>(options?: Partial<T & IOptions>, cb?: (opts: IOptions, window?, jsdom?) => void): Partial<T & IOptions>;
 export declare function isPacked(jsdom: any): boolean;

@@ -48,8 +48,17 @@ createJSDOM(html?: string | Buffer | BinaryData, options: IOptions = {})
 ### fake Promise then
 
 ```ts
-// fake .then, not realy Promise
+// fake .then, not realy Promise, still is sync
 createJSDOM().fakeThen(function (jsdom)
+{
+	console.log(jsdom._options);
+});
+```
+
+### asyncJSDOM / Promise
+
+```ts
+asyncJSDOM().then(function (jsdom)
 {
 	console.log(jsdom._options);
 });
@@ -67,6 +76,20 @@ let jsdom2 = new JSDOM();
 
 // will overwrite jsdom2 too
 packJSDOM(jsdom2) // => return jsdom2
+```
+
+### fromURL
+
+* [API: fromURL](lib/from-url.d.ts)
+
+```ts
+function fromURL(url: string, options?: IFromUrlOptions): Promise<IJSDOM>
+```
+
+### fromFile
+
+```ts
+function fromFile(url: string, options?: IFromFileOptions): Promise<IJSDOM>
 ```
 
 ### get the finally options that use on create JSDOM

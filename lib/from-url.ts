@@ -45,10 +45,15 @@ export interface IRequestOptions
 		Accept: string;
 		"Accept-Language": string;
 	};
-	jar: any;
+	jar: IRequestJar;
 }
 
-export function fromURL(url: string, options?: IFromUrlOptions): Promise<IJSDOM>
+export interface IRequestJar
+{
+	_jar: ICookieJar,
+}
+
+export function fromURL(url: string | URL, options?: Partial<IFromUrlOptions>): Promise<IJSDOM>
 {
 	return Promise.resolve().then(function ()
 	{
