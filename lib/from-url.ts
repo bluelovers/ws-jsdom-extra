@@ -18,9 +18,22 @@ import { version as packageVersion } from '../package.json';
 
 export const DEFAULT_USER_AGENT = `Mozilla/5.0 (${process.platform}) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/${packageVersion}`;
 
+export { CookieJar }
+
+export interface ICookieJar extends CookieJar
+{
+	enableLooseMode?: boolean,
+	store?: {
+		idx?: {
+
+		},
+	},
+}
+
 export interface IFromUrlOptions extends Partial<IOptions & FromUrlOptions>
 {
-	requestOptions?: Partial<IRequestOptions>
+	requestOptions?: Partial<IRequestOptions>,
+	cookieJar?: ICookieJar,
 }
 
 export interface IRequestOptions

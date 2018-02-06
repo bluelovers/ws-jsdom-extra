@@ -1,9 +1,17 @@
-import { FromUrlOptions } from 'jsdom';
+import { CookieJar, FromUrlOptions } from 'jsdom';
 import { IJSDOM, IOptions } from './pack';
 import { Promise } from './index';
 export declare const DEFAULT_USER_AGENT: string;
+export { CookieJar };
+export interface ICookieJar extends CookieJar {
+    enableLooseMode?: boolean;
+    store?: {
+        idx?: {};
+    };
+}
 export interface IFromUrlOptions extends Partial<IOptions & FromUrlOptions> {
     requestOptions?: Partial<IRequestOptions>;
+    cookieJar?: ICookieJar;
 }
 export interface IRequestOptions {
     resolveWithFullResponse: boolean;
