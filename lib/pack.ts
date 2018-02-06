@@ -26,7 +26,8 @@ export { Promise }
 export { URL }
 export { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, DOMWindow }
 
-export const SYMBOL_RAW = Symbol.for('raw_query');
+export * from './const';
+import { SYMBOL_RAW } from './const';
 
 export const JSDOM_PROTOTYPE_COPY = Object.assign({}, JSDOM.prototype);
 

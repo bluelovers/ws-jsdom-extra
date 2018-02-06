@@ -4,7 +4,7 @@ import { IJSDOM, IOptionsJSDOM, URL } from './pack';
 import { Promise } from './index';
 import * as parseContentType from 'content-type-parser';
 export { wrapCookieJarForRequest, parseContentType };
-export declare const DEFAULT_USER_AGENT: string;
+export { DEFAULT_USER_AGENT } from './const';
 export { CookieJar };
 export interface ICookieJar extends CookieJar {
     enableLooseMode?: boolean;

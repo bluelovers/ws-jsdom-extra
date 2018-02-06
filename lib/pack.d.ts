@@ -9,7 +9,7 @@ import { Promise } from './index';
 export { Promise };
 export { URL };
 export { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, DOMWindow };
-export declare const SYMBOL_RAW: symbol;
+export * from './const';
 export declare const JSDOM_PROTOTYPE_COPY: JSDOM;
 export interface IOptions {
     beforeParse?(window: DOMWindow, jsdom?: IJSDOM): void;
