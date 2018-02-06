@@ -204,7 +204,12 @@ export function packOptions<T>(options: Partial<T & IOptionsJSDOM> = {},
 		};
 		options.beforeParse[CONSTS.SYMBOL_PACKED_OPTIONS] = [] || options.beforeParse[CONSTS.SYMBOL_PACKED_OPTIONS];
 	}
-	cb && options.beforeParse[CONSTS.SYMBOL_PACKED_OPTIONS].push(cb);
+	if (cb)
+	{
+		options.beforeParse[CONSTS.SYMBOL_PACKED_OPTIONS].push(cb);
+
+		options.beforeParse[CONSTS.SYMBOL_PACKED_OPTIONS] = array_unique(options.beforeParse[CONSTS.SYMBOL_PACKED_OPTIONS]);
+	}
 
 	if (options.virtualConsole === false)
 	{

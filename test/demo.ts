@@ -8,7 +8,7 @@ let jsdom = createJSDOM();
 
 console.log(jsdom.url);
 
-console.log(jsdom.$(':root'));
+console.log(jsdom.$(':root').get(0));
 
 console.log(jsdom._options);
 
@@ -17,3 +17,5 @@ console.log(jsdom.__proto__);
 
 // @ts-ignore
 console.log(typeof String(jsdom.__proto__));
+
+console.log(jsdom.document.documentElement);
