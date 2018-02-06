@@ -1,6 +1,9 @@
 import { CookieJar, FromUrlOptions } from 'jsdom';
+import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
 import { IJSDOM, IOptions, URL } from './pack';
 import { Promise } from './index';
+import * as parseContentType from 'content-type-parser';
+export { wrapCookieJarForRequest, parseContentType };
 export declare const DEFAULT_USER_AGENT: string;
 export { CookieJar };
 export interface ICookieJar extends CookieJar {
@@ -13,7 +16,14 @@ export interface IFromUrlOptions extends Partial<IOptions & FromUrlOptions> {
     requestOptions?: Partial<IRequestOptions>;
     cookieJar?: ICookieJar;
 }
-export interface IRequestOptions {
+export interface IRequestOptions extends Partial<IRequestOptionsJSDOM> {
+    method?: 'POST' | 'GET' | string;
+    form?: {
+        [key: string]: any;
+        [key: number]: any;
+    };
+}
+export interface IRequestOptionsJSDOM {
     resolveWithFullResponse: boolean;
     encoding: any;
     gzip: boolean;

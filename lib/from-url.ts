@@ -13,6 +13,8 @@ import * as isPlainObject from 'is-plain-object';
 import * as sniffHTMLEncoding from 'html-encoding-sniffer';
 import * as whatwgEncoding from 'whatwg-encoding';
 
+export { wrapCookieJarForRequest, parseContentType }
+
 // @ts-ignore
 import { version as packageVersion } from '../package.json';
 
@@ -34,7 +36,16 @@ export interface IFromUrlOptions extends Partial<IOptions & FromUrlOptions>
 	cookieJar?: ICookieJar,
 }
 
-export interface IRequestOptions
+export interface IRequestOptions extends Partial<IRequestOptionsJSDOM>
+{
+	method?: 'POST' | 'GET' | string,
+	form?: {
+		[key: string]: any,
+		[key: number]: any,
+	},
+}
+
+export interface IRequestOptionsJSDOM
 {
 	resolveWithFullResponse: boolean;
 	encoding: any;
@@ -119,7 +130,9 @@ export function normalizeRequestOptions(options: IFromUrlOptions): Partial<IRequ
 
 	if (options.requestOptions)
 	{
-		requestOptions = deepmerge(requestOptions, options.requestOptions, {
+		requestOptions = deepmerge.all([requestOptions, options.requestOptions, {
+			encoding: null,
+		}], {
 			//keyValueOrMode: true,
 			isMergeableObject(value, isMergeable)
 			{
