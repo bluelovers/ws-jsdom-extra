@@ -53,18 +53,15 @@ $(':root').length;
 with create jsdom with extra prototype
 
 ```ts
-interface IJSDOM extends JSDOM
-{
-	$: JQueryStatic,
-	url: URL,
-	document: Document,
-
-	_options: IJSDOM_Symbol_Options,
-
-	then<T>(cb: (jsdom: IJSDOM) => T): T
+export interface IJSDOM extends JSDOM {
+    $: JQueryStatic;
+    url: URL;
+    document: Document;
+    _options: IJSDOM_Symbol_Options;
+    fakeThen<T>(cb: (jsdom: IJSDOM) => T): T;
 }
 
-createJSDOM(html?: string | Buffer | BinaryData, options: IOptions = {})
+export declare function createJSDOM(html?: string | Buffer | BinaryData, options?: IConstructorOptions): IJSDOM;
 ```
 
 ### fake Promise then
