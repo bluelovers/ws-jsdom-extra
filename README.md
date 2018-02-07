@@ -12,6 +12,8 @@ but never try set/get $ from jsdom
 or will throw Error
 ```
 
+[API options for jquery / cheerio](lib/query.d.ts)
+
 ### use with jquery
 
 `npm i jsdom-extra jquery`
