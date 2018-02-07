@@ -9,6 +9,7 @@ import { chai, relative, expect, path, assert, util } from './_local-dev';
 import { describe, before, beforeEach, it, ITest } from 'mocha';
 
 import { IFromUrlOptions, normalizeFromURLOptions, CookieJar, DEFAULT_USER_AGENT, normalizeRequestOptions, wrapCookieJarForRequest, requestToJSDOM, URL } from '../lib/from-url';
+import * as Consts from '../lib/const';
 
 // @ts-ignore
 describe(relative(__filename), () =>
@@ -90,7 +91,7 @@ describe(relative(__filename), () =>
 					"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 					"Accept-Language": "en",
 					"Referer": undefined,
-					"User-Agent": "Mozilla/5.0 (win32) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/1.0.0",
+					"User-Agent": Consts.DEFAULT_USER_AGENT,
 				},
 				"jar": wrapCookieJarForRequest(new CookieJar()),
 				"method": "POST",
@@ -144,7 +145,7 @@ describe(relative(__filename), () =>
 					"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 					"Accept-Language": "en",
 					"Referer": undefined,
-					"User-Agent": "Mozilla/5.0 (win32) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/1.0.0",
+					"User-Agent": Consts.DEFAULT_USER_AGENT,
 				},
 				"jar": wrapCookieJarForRequest(new CookieJar()),
 				"method": "POST",
