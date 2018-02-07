@@ -1,13 +1,19 @@
 /**
  * Created by user on 2018/2/7/007.
+ *
+ * jsdom-global
+ * global-jsdom
  */
 
+/*
 // @ts-ignore
 import * as KEYS from 'jsdom-global/keys';
+export { KEYS }
+*/
+export const KEYS: string[] = [];
+
 import { ConstructorOptions, DOMWindow } from 'jsdom';
 import { IConstructorOptions, IJSDOM, createJSDOM, JSDOM } from '../pack';
-
-export { KEYS }
 
 export declare interface Global extends NodeJS.Global
 {
@@ -15,11 +21,19 @@ export declare interface Global extends NodeJS.Global
 		userAgent: string
 	},
 
-	document: Document & {
-		destroy(),
-	},
-	window: DOMWindow,
+	document: IGlobalDocument,
+	window: IGlobalDOMWindow,
+
+	$jsdom: IGlobalJSDOM,
 }
+
+export type IGlobalDOMWindow = DOMWindow & {
+	XMLHttpRequest?: XMLHttpRequest,
+};
+
+export type IGlobalDocument = Document & {
+	destroy?(),
+};
 
 export declare var global: Global;
 
@@ -38,10 +52,7 @@ export interface IOptions
 	createJSDOM: IJSDOM,
 }
 
-export interface IGlobalJSDOM extends JSDOM
-{
-	destroy?(),
-}
+export type IGlobalJSDOM = IJSDOM;
 
 export function globalJsdom<T>(html?, options: Partial<T & IConstructorOptions & IOptions> = {}): globalJsdom.IReturn
 {
@@ -53,11 +64,11 @@ export function globalJsdom<T>(html?, options: Partial<T & IConstructorOptions &
 		typeof global.document.destroy === 'function')
 	{
 		return {
+			jsdom: global.$jsdom,
 			window: global.window,
 			document: global.document,
 			cleanup: global.document.destroy,
 			global,
-			// @ts-ignore
 			XMLHttpRequest: global.window.XMLHttpRequest,
 		};
 	}
@@ -92,21 +103,30 @@ export function globalJsdom<T>(html?, options: Partial<T & IConstructorOptions &
 		jsdom = createJSDOM(html, options);
 	}
 
-	const window = jsdom.window;
+	const window: IGlobalDOMWindow = jsdom.window;
+	const document: IGlobalDocument = window.document;
+
+	if (KEYS.length === 0)
+	{
+		KEYS.push(...Object.getOwnPropertyNames(window).filter(k => !k.startsWith('_')).filter(k => !global[k]));
+		// going to add our jsdom instance, see below
+		KEYS.push('$jsdom');
+	}
 
 	KEYS.forEach(function (key)
 	{
 		global[key] = window[key]
 	});
 
-	// @ts-ignore
-	global.document = window.document;
+	global.document = document;
 	global.window = window;
 
 	// @ts-ignore
 	window.console = global.console;
-	// @ts-ignore
-	jsdom.destroy = destroy;
+
+	document.destroy = destroy;
+
+	global.$jsdom = jsdom;
 
 	function destroy()
 	{
@@ -116,10 +136,9 @@ export function globalJsdom<T>(html?, options: Partial<T & IConstructorOptions &
 	return {
 		jsdom,
 		window,
-		document: document,
+		document,
 		cleanup: destroy,
 		global,
-		// @ts-ignore
 		XMLHttpRequest: window.XMLHttpRequest,
 	};
 }
@@ -134,8 +153,8 @@ export namespace globalJsdom
 	export interface IReturn
 	{
 		jsdom?: IGlobalJSDOM;
-		window: DOMWindow;
-		document: Document;
+		window: IGlobalDOMWindow;
+		document: IGlobalDocument;
 		cleanup: () => void;
 		global?: Global,
 		XMLHttpRequest?: XMLHttpRequest,
