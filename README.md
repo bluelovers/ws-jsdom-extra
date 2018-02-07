@@ -1,6 +1,6 @@
 # jsdom-extra
 
-> JSDOM with extra prototype ( jquery / cheerio )
+> JSDOM with extra tweak ( jquery / cheerio / request )
 
 `npm i jsdom-extra`
 
