@@ -24,7 +24,9 @@ export function createQuery(jsdom, options: IOptionsCreateQuery = {}): Partial<J
 		try
 		{
 			const jQuery = require("jquery");
-			return jQuery(jsdom.window).noConflict(true);
+			return jQuery(jsdom.window)
+				.noConflict(true)
+				;
 		}
 		catch (e)
 		{

@@ -305,7 +305,7 @@ export function packJSDOM(jsdom: JSDOM): IJSDOM
 					this[SYMBOL_RAW].window = this.window;
 					// @ts-ignore
 
-					this[SYMBOL_RAW].$ = createQuery(this, this[SYMBOL_RAW].options);
+					this[SYMBOL_RAW].$ = createQuery(this, this[SYMBOL_RAW].options.options);
 				}
 
 				return this[SYMBOL_RAW].$;

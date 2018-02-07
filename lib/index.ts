@@ -3,7 +3,7 @@
  */
 
 import * as Promise from 'bluebird';
-import * as request from 'request';
+import * as request from 'request-promise';
 
 export { Promise, request }
 
