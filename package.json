@@ -1,6 +1,6 @@
 {
   "name": "jsdom-extra",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "JSDOM with extra tweak ( jquery / cheerio / request )",
   "keywords": [
     "agent",
@@ -62,7 +62,8 @@
   },
   "devDependencies": {
     "@types/jquery": "^3.3.0",
-    "@types/jsdom": "^11.0.4"
+    "@types/jsdom": "^11.0.4",
+    "@types/request-promise": "^4.1.41"
   },
   "peerDependencies": {},
   "optionalDependencies": {

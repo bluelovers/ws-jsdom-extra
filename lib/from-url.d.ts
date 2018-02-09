@@ -1,7 +1,10 @@
+/// <reference types="request" />
+/// <reference types="bluebird" />
+/// <reference types="node" />
 import { JSDOM, CookieJar, FromUrlOptions, toughCookie } from 'jsdom';
 import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
 import { IJSDOM, IOptionsJSDOM, URL } from './pack';
-import { Promise } from './index';
+import { Promise, request, RequestCookieJar, ResponseRequest } from './index';
 import * as parseContentType from 'content-type-parser';
 export { wrapCookieJarForRequest, parseContentType };
 export { URL };
@@ -17,7 +20,7 @@ export interface IFromUrlOptions extends Partial<FromUrlOptions & IOptionsJSDOM>
     requestOptions?: Partial<IRequestOptions>;
     cookieJar?: ICookieJar;
 }
-export interface IRequestOptionsJSDOM {
+export interface IRequestOptionsJSDOM extends request.RequestPromiseOptions {
     resolveWithFullResponse: boolean;
     encoding: null;
     gzip: boolean;
@@ -36,22 +39,22 @@ export interface IRequestOptions extends Partial<IRequestOptionsJSDOM> {
         [key: number]: any;
     };
 }
-export interface IRequestJar {
-    _jar: ICookieJar;
+export interface IRequestJar extends RequestCookieJar {
+    _jar?: ICookieJar;
 }
 export declare function fromURL(url: string | URL, options?: Partial<IFromUrlOptions>): Promise<IJSDOM>;
-export interface IResponse {
+export interface IResponse extends ResponseRequest {
     headers: {
         [key: string]: any;
     };
     request: {
-        href?;
+        href?: string;
         [key: string]: any;
     };
-    body: any;
+    body: Buffer;
 }
 export declare function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | string, options: Partial<IFromUrlOptions>, requestOptions?: Partial<IRequestOptions>): T;
-export declare function normalizeRequestOptions(options: IFromUrlOptions): Partial<IRequestOptions>;
+export declare function normalizeRequestOptions(options: IFromUrlOptions, _requestOptions?: IRequestOptions): Partial<IRequestOptions>;
 export declare function normalizeFromURLOptions<T>(options: Partial<T & IFromUrlOptions>): Partial<T & IFromUrlOptions>;
 export interface INormalizeHTML {
     html: string;

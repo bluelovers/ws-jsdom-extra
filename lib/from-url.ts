@@ -6,7 +6,7 @@ import { JSDOM, CookieJar, FromUrlOptions, toughCookie } from 'jsdom';
 import * as deepmerge from 'deepmerge-plus';
 import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
 import { IConstructorOptions, IJSDOM, IOptions, IOptionsJSDOM, isPackedJSDOM, packJSDOM, packOptions, URL } from './pack';
-import { Promise, request } from './index';
+import { Promise, request, RequestCookieJar, ResponseRequest } from './index';
 import * as parseContentType from 'content-type-parser';
 import * as isPlainObject from 'is-plain-object';
 import * as sniffHTMLEncoding from 'html-encoding-sniffer';
@@ -34,7 +34,7 @@ export interface IFromUrlOptions extends Partial<FromUrlOptions & IOptionsJSDOM>
 	cookieJar?: ICookieJar,
 }
 
-export interface IRequestOptionsJSDOM
+export interface IRequestOptionsJSDOM extends request.RequestPromiseOptions
 {
 	resolveWithFullResponse: boolean;
 	encoding: null;
@@ -57,9 +57,9 @@ export interface IRequestOptions extends Partial<IRequestOptionsJSDOM>
 	},
 }
 
-export interface IRequestJar
+export interface IRequestJar extends RequestCookieJar
 {
-	_jar: ICookieJar,
+	_jar?: ICookieJar,
 }
 
 export function fromURL(url: string | URL, options?: Partial<IFromUrlOptions>): Promise<IJSDOM>
@@ -67,7 +67,7 @@ export function fromURL(url: string | URL, options?: Partial<IFromUrlOptions>): 
 	return Promise.resolve().then(function ()
 	{
 		const parsedURL = new URL(url);
-		url = parsedURL.href;
+		url = parsedURL.href as string;
 
 		let opts = {};
 
@@ -79,10 +79,12 @@ export function fromURL(url: string | URL, options?: Partial<IFromUrlOptions>): 
 		options = normalizeFromURLOptions(options);
 		let requestOptions = normalizeRequestOptions(options);
 
-		return request(url, requestOptions).then(res =>
+		return request(url, requestOptions)
+			.then((res: IResponse) =>
 			{
 				return requestToJSDOM(res, parsedURL, options, requestOptions);
 			})
+			// @ts-ignore
 			.then(function (jsdom: IJSDOM)
 			{
 				if (!isPackedJSDOM(jsdom))
@@ -100,16 +102,16 @@ export function fromURL(url: string | URL, options?: Partial<IFromUrlOptions>): 
 	});
 }
 
-export interface IResponse
+export interface IResponse extends ResponseRequest
 {
 	headers: {
 		[key: string]: any,
 	},
 	request: {
-		href?
+		href?: string;
 		[key: string]: any,
 	}
-	body,
+	body: Buffer,
 }
 
 export function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | string, options: Partial<IFromUrlOptions>, requestOptions?: Partial<IRequestOptions>): T
@@ -154,14 +156,14 @@ export function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | strin
 	return jsdom;
 }
 
-export function normalizeRequestOptions(options: IFromUrlOptions): Partial<IRequestOptions>
+export function normalizeRequestOptions(options: IFromUrlOptions, _requestOptions?: IRequestOptions): Partial<IRequestOptions>
 {
 	let requestOptions: Partial<IRequestOptions> = {
 		resolveWithFullResponse: true,
 		encoding: null, // i.e., give me the raw Buffer
 		gzip: true,
 		headers: {
-			"User-Agent": options.userAgent,
+			"User-Agent": options.userAgent || DEFAULT_USER_AGENT,
 			Referer: options.referrer,
 			Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 			"Accept-Language": "en"
@@ -169,12 +171,15 @@ export function normalizeRequestOptions(options: IFromUrlOptions): Partial<IRequ
 		jar: wrapCookieJarForRequest(options.cookieJar)
 	};
 
-	if (options.requestOptions)
+	if (options.requestOptions || _requestOptions)
 	{
 		requestOptions = deepmerge.all([
-			requestOptions, options.requestOptions, {
+			requestOptions,
+			options.requestOptions || {},
+			_requestOptions || {},
+			{
 				encoding: null,
-			}
+			},
 		], {
 			//keyValueOrMode: true,
 			isMergeableObject(value, isMergeable)
