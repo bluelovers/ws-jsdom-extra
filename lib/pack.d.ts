@@ -1,5 +1,6 @@
 /// <reference types="jquery" />
 /// <reference types="node" />
+/// <reference types="bluebird" />
 import { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, BinaryData, DOMWindow, FromFileOptions, Options as OptionsJSDOM } from 'jsdom';
 import { URL } from 'jsdom-url';
 import { IOptionsCreateQuery } from './query';

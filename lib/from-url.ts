@@ -6,11 +6,14 @@ import { JSDOM, CookieJar, FromUrlOptions, toughCookie } from 'jsdom';
 import * as deepmerge from 'deepmerge-plus';
 import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
 import { IConstructorOptions, IJSDOM, IOptions, IOptionsJSDOM, isPackedJSDOM, packJSDOM, packOptions, URL } from './pack';
-import { Promise, request, RequestCookieJar, ResponseRequest } from './index';
+import { Promise, request, ResponseRequest } from './index';
 import * as parseContentType from 'content-type-parser';
 import * as isPlainObject from 'is-plain-object';
 import * as sniffHTMLEncoding from 'html-encoding-sniffer';
 import * as whatwgEncoding from 'whatwg-encoding';
+
+import { LazyCookieJar, LazyCookie, RequestCookieJar } from './cookies';
+export { LazyCookieJar, LazyCookie }
 
 export { wrapCookieJarForRequest, parseContentType }
 export { URL }
@@ -20,18 +23,12 @@ import { DEFAULT_USER_AGENT, SYMBOL_RAW } from './const';
 
 export { CookieJar, toughCookie }
 
-export interface ICookieJar extends CookieJar
-{
-	enableLooseMode?: boolean,
-	store?: {
-		idx?: {},
-	},
-}
+export type ICookieJar = CookieJar | LazyCookieJar;
 
 export interface IFromUrlOptions extends Partial<FromUrlOptions & IOptionsJSDOM>
 {
 	requestOptions?: Partial<IRequestOptions>,
-	cookieJar?: ICookieJar,
+	cookieJar?: ICookieJar | LazyCookieJar,
 }
 
 export interface IRequestOptionsJSDOM extends request.RequestPromiseOptions
@@ -57,10 +54,7 @@ export interface IRequestOptions extends Partial<IRequestOptionsJSDOM>
 	},
 }
 
-export interface IRequestJar extends RequestCookieJar
-{
-	_jar?: ICookieJar,
-}
+export type IRequestJar = RequestCookieJar;
 
 export function fromURL(url: string | URL, options?: Partial<IFromUrlOptions>): Promise<IJSDOM>
 {
@@ -96,7 +90,7 @@ export function fromURL(url: string | URL, options?: Partial<IFromUrlOptions>): 
 				jsdom._options.options = options;
 				jsdom._options.requestOptions = requestOptions;
 
-				return jsdom;
+				return jsdom as IJSDOM;
 			})
 			;
 	});
@@ -147,6 +141,9 @@ export function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | strin
 	jsdom[SYMBOL_RAW].options = jsdom[SYMBOL_RAW].options || {};
 	jsdom[SYMBOL_RAW].options.options = jsdom[SYMBOL_RAW].options.options || options;
 	jsdom[SYMBOL_RAW].options.ConstructorOptions = jsdom[SYMBOL_RAW].options.ConstructorOptions || opts;
+
+	jsdom[SYMBOL_RAW].options.Response = res;
+
 	if (requestOptions)
 	{
 		jsdom[SYMBOL_RAW].options.requestOptions = jsdom[SYMBOL_RAW].options.requestOptions || requestOptions;
@@ -216,7 +213,7 @@ export function normalizeFromURLOptions<T>(options: Partial<T & IFromUrlOptions>
 
 	if (options.cookieJar === undefined)
 	{
-		normalized.cookieJar = new CookieJar();
+		normalized.cookieJar = new LazyCookieJar();
 	}
 
 	// @ts-ignore

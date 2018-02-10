@@ -1,24 +1,21 @@
-/// <reference types="request" />
 /// <reference types="bluebird" />
+/// <reference types="request" />
 /// <reference types="node" />
 import { JSDOM, CookieJar, FromUrlOptions, toughCookie } from 'jsdom';
 import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
 import { IJSDOM, IOptionsJSDOM, URL } from './pack';
-import { Promise, request, RequestCookieJar, ResponseRequest } from './index';
+import { Promise, request, ResponseRequest } from './index';
 import * as parseContentType from 'content-type-parser';
+import { LazyCookieJar, LazyCookie, RequestCookieJar } from './cookies';
+export { LazyCookieJar, LazyCookie };
 export { wrapCookieJarForRequest, parseContentType };
 export { URL };
 export { DEFAULT_USER_AGENT } from './const';
 export { CookieJar, toughCookie };
-export interface ICookieJar extends CookieJar {
-    enableLooseMode?: boolean;
-    store?: {
-        idx?: {};
-    };
-}
+export declare type ICookieJar = CookieJar | LazyCookieJar;
 export interface IFromUrlOptions extends Partial<FromUrlOptions & IOptionsJSDOM> {
     requestOptions?: Partial<IRequestOptions>;
-    cookieJar?: ICookieJar;
+    cookieJar?: ICookieJar | LazyCookieJar;
 }
 export interface IRequestOptionsJSDOM extends request.RequestPromiseOptions {
     resolveWithFullResponse: boolean;
@@ -39,9 +36,7 @@ export interface IRequestOptions extends Partial<IRequestOptionsJSDOM> {
         [key: number]: any;
     };
 }
-export interface IRequestJar extends RequestCookieJar {
-    _jar?: ICookieJar;
-}
+export declare type IRequestJar = RequestCookieJar;
 export declare function fromURL(url: string | URL, options?: Partial<IFromUrlOptions>): Promise<IJSDOM>;
 export interface IResponse extends ResponseRequest {
     headers: {
