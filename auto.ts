@@ -47,7 +47,9 @@ export class JSDOM extends _JSDOM
 	}
 }
 
+// @ts-ignore
 JSDOM.fromFile = fromFile;
+// @ts-ignore
 JSDOM.fromURL = fromURL;
 
 export default JSDOM;

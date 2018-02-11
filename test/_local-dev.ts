@@ -22,17 +22,19 @@ export function relative(filename: string): string
 
 export function mochaAsync(fn: Function)
 {
-	return async (done) =>
+	return async () =>
 	{
-		try
-		{
-			await fn();
-			done();
-		}
-		catch (err)
-		{
-			done(err);
-		}
+		return await fn();
+
+//		try
+//		{
+//			await fn();
+//			//done();
+//		}
+//		catch (err)
+//		{
+//			//done(err);
+//		}
 	};
 }
 
