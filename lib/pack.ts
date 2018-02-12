@@ -44,7 +44,7 @@ export interface IOptions
 	virtualConsole?: VirtualConsole | false,
 }
 
-export type IOptionsJSDOM = Partial<IOptionsCreateQuery & OptionsJSDOM & IOptions>;
+export type IOptionsJSDOM = Partial<IOptionsCreateQuery & OptionsJSDOM> & IOptions;
 
 export type IConstructorOptions = Partial<ConstructorOptions & IOptionsJSDOM>;
 export type IFromFileOptions = Partial<IOptionsJSDOM & FromFileOptions>;

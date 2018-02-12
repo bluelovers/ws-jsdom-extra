@@ -18,7 +18,7 @@ export interface IOptions {
     referrer?: string | URL;
     virtualConsole?: VirtualConsole | false;
 }
-export declare type IOptionsJSDOM = Partial<IOptionsCreateQuery & OptionsJSDOM & IOptions>;
+export declare type IOptionsJSDOM = Partial<IOptionsCreateQuery & OptionsJSDOM> & IOptions;
 export declare type IConstructorOptions = Partial<ConstructorOptions & IOptionsJSDOM>;
 export declare type IFromFileOptions = Partial<IOptionsJSDOM & FromFileOptions>;
 export { IFromUrlOptions };
