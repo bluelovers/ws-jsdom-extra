@@ -2,13 +2,13 @@
 /// <reference types="node" />
 /// <reference types="bluebird" />
 import { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, BinaryData, DOMWindow, FromFileOptions, Options as OptionsJSDOM } from 'jsdom';
-import { URL } from 'jsdom-url';
+import { URL, URLImpl } from 'jsdom-url';
 import { IOptionsCreateQuery } from './query';
 import { IFromUrlOptions, IRequestOptions } from './from-url';
 export { fromURL } from './from-url';
 import { Promise } from './index';
 export { Promise };
-export { URL };
+export { URL, URLImpl };
 export { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, DOMWindow };
 export * from './const';
 export declare const JSDOM_PROTOTYPE_COPY: JSDOM;

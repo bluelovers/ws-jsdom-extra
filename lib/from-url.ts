@@ -5,7 +5,7 @@
 import { JSDOM, CookieJar, FromUrlOptions, toughCookie } from 'jsdom';
 import * as deepmerge from 'deepmerge-plus';
 import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
-import { IConstructorOptions, IJSDOM, IOptions, IOptionsJSDOM, isPackedJSDOM, packJSDOM, packOptions, URL } from './pack';
+import { IConstructorOptions, IJSDOM, IOptions, IOptionsJSDOM, isPackedJSDOM, packJSDOM, packOptions, URL, URLImpl } from './pack';
 import { Promise, request, ResponseRequest } from './index';
 import * as parseContentType from 'content-type-parser';
 import * as isPlainObject from 'is-plain-object';
@@ -16,7 +16,7 @@ import { LazyCookieJar, LazyCookie, RequestCookieJar } from './cookies';
 export { LazyCookieJar, LazyCookie }
 
 export { wrapCookieJarForRequest, parseContentType }
-export { URL }
+export { URL, URLImpl }
 
 export { DEFAULT_USER_AGENT } from './const';
 import { DEFAULT_USER_AGENT, SYMBOL_RAW } from './const';

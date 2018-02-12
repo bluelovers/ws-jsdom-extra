@@ -15,7 +15,7 @@ import {
 	Options as OptionsJSDOM
 } from 'jsdom';
 import * as jQuery from 'jquery';
-import { URL } from 'jsdom-url';
+import { URL, URLImpl } from 'jsdom-url';
 import { IOptionsCreateQuery, createQuery } from './query';
 import { IFromUrlOptions, IRequestOptions } from './from-url';
 
@@ -23,7 +23,7 @@ export { fromURL } from './from-url';
 import { Promise, array_unique } from './index';
 
 export { Promise }
-export { URL }
+export { URL, URLImpl }
 export { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, DOMWindow }
 
 export * from './const';

@@ -3,13 +3,13 @@
 /// <reference types="node" />
 import { JSDOM, CookieJar, FromUrlOptions, toughCookie } from 'jsdom';
 import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
-import { IJSDOM, IOptionsJSDOM, URL } from './pack';
+import { IJSDOM, IOptionsJSDOM, URL, URLImpl } from './pack';
 import { Promise, request, ResponseRequest } from './index';
 import * as parseContentType from 'content-type-parser';
 import { LazyCookieJar, LazyCookie, RequestCookieJar } from './cookies';
 export { LazyCookieJar, LazyCookie };
 export { wrapCookieJarForRequest, parseContentType };
-export { URL };
+export { URL, URLImpl };
 export { DEFAULT_USER_AGENT } from './const';
 export { CookieJar, toughCookie };
 export declare type ICookieJar = CookieJar | LazyCookieJar;

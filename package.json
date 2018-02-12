@@ -53,10 +53,10 @@
   },
   "dependencies": {
     "bluebird": "^3.5.1",
-    "deepmerge-plus": "^2.1.0",
+    "deepmerge-plus": "latest",
     "is-plain-object": "^2.0.4",
     "jsdom": "^11.6.2",
-    "jsdom-url": "^2.1.0",
+    "jsdom-url": "latest",
     "moment": "^2.20.1",
     "request": "^2.83.0",
     "request-promise": "^4.2.2"

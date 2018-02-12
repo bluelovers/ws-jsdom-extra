@@ -7,5 +7,7 @@ __export(require("./lib/pack"));
 var cookies_1 = require("./lib/cookies");
 exports.LazyCookie = cookies_1.LazyCookie;
 exports.LazyCookieJar = cookies_1.LazyCookieJar;
+var from_url_1 = require("./lib/from-url");
+exports.wrapCookieJarForRequest = from_url_1.wrapCookieJarForRequest;
 const pack_1 = require("./lib/pack");
 exports.default = pack_1.JSDOM;
