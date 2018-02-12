@@ -23,7 +23,7 @@ export declare class LazyCookieJar extends CookieJar {
     wrapForRequest(): request.CookieJar & {
         _jar: LazyCookieJar;
     };
-    static unwrapFromRequest(jar: RequestCookieJar): self.LazyCookieJar | CookieJar;
+    static unwrapFromRequest(jar: RequestCookieJar): CookieJar | self.LazyCookieJar;
     getAllCookies(): toughCookie.Cookie[];
 }
 export declare namespace LazyCookie {

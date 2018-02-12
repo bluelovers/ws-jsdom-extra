@@ -12,12 +12,13 @@ import {
 	DOMWindow,
 	FromFileOptions,
 	FromUrlOptions,
-	Options as OptionsJSDOM
+//	Options as IOptionsJSDOMSource
 } from 'jsdom';
 import * as jQuery from 'jquery';
 import { URL, URLImpl } from 'jsdom-url';
+import { LazyCookieJar } from './cookies';
 import { IOptionsCreateQuery, createQuery } from './query';
-import { IFromUrlOptions, IRequestOptions } from './from-url';
+import { ICookieJar, IFromUrlOptions, IRequestOptions } from './from-url';
 
 export { fromURL } from './from-url';
 import { Promise, array_unique } from './index';
@@ -42,9 +43,32 @@ export interface IOptions
 	referrer?: string | URL;
 
 	virtualConsole?: VirtualConsole | false,
+
+	/**
+	 * userAgent affects the value read from navigator.userAgent, as well as the User-Agent header sent while fetching subresources.
+	 * It defaults to `Mozilla/5.0 (${process.platform}) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/${jsdomVersion}`.
+	 */
+	userAgent?: string;
+	/**
+	 * includeNodeLocations preserves the location info produced by the HTML parser,
+	 * allowing you to retrieve it with the nodeLocation() method (described below).
+	 * It defaults to false to give the best performance,
+	 * and cannot be used with an XML content type since our XML parser does not support location info.
+	 */
+	includeNodeLocations?: boolean;
+	runScripts?: 'dangerously' | 'outside-only';
+	resources?: 'usable';
+	cookieJar?: CookieJar | ICookieJar | LazyCookieJar;
 }
 
-export type IOptionsJSDOM = Partial<IOptionsCreateQuery & OptionsJSDOM> & IOptions;
+export { IOptionsCreateQuery }
+
+//export type IOptionsJSDOM = IOptionsCreateQuery & Partial<IOptionsJSDOMSource> & IOptions;
+
+export interface IOptionsJSDOM extends IOptionsCreateQuery, IOptions
+{
+
+}
 
 export type IConstructorOptions = Partial<ConstructorOptions & IOptionsJSDOM>;
 export type IFromFileOptions = Partial<IOptionsJSDOM & FromFileOptions>;

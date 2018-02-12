@@ -1,10 +1,11 @@
 /// <reference types="jquery" />
 /// <reference types="node" />
 /// <reference types="bluebird" />
-import { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, BinaryData, DOMWindow, FromFileOptions, Options as OptionsJSDOM } from 'jsdom';
+import { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, BinaryData, DOMWindow, FromFileOptions } from 'jsdom';
 import { URL, URLImpl } from 'jsdom-url';
+import { LazyCookieJar } from './cookies';
 import { IOptionsCreateQuery } from './query';
-import { IFromUrlOptions, IRequestOptions } from './from-url';
+import { ICookieJar, IFromUrlOptions, IRequestOptions } from './from-url';
 export { fromURL } from './from-url';
 import { Promise } from './index';
 export { Promise };
@@ -17,8 +18,15 @@ export interface IOptions {
     url?: string | URL;
     referrer?: string | URL;
     virtualConsole?: VirtualConsole | false;
+    userAgent?: string;
+    includeNodeLocations?: boolean;
+    runScripts?: 'dangerously' | 'outside-only';
+    resources?: 'usable';
+    cookieJar?: CookieJar | ICookieJar | LazyCookieJar;
 }
-export declare type IOptionsJSDOM = Partial<IOptionsCreateQuery & OptionsJSDOM> & IOptions;
+export { IOptionsCreateQuery };
+export interface IOptionsJSDOM extends IOptionsCreateQuery, IOptions {
+}
 export declare type IConstructorOptions = Partial<ConstructorOptions & IOptionsJSDOM>;
 export declare type IFromFileOptions = Partial<IOptionsJSDOM & FromFileOptions>;
 export { IFromUrlOptions };

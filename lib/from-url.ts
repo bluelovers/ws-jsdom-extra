@@ -2,6 +2,7 @@
  * Created by user on 2018/2/6/006.
  */
 
+import * as CoreRequest from 'request';
 import { JSDOM, CookieJar, FromUrlOptions, toughCookie } from 'jsdom';
 import * as deepmerge from 'deepmerge-plus';
 import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
@@ -25,27 +26,27 @@ export { CookieJar, toughCookie }
 
 export type ICookieJar = CookieJar | LazyCookieJar;
 
-export interface IFromUrlOptions extends Partial<FromUrlOptions & IOptionsJSDOM>
+export interface IFromUrlOptions extends IOptionsJSDOM
 {
-	requestOptions?: Partial<IRequestOptions>,
+	requestOptions?: IRequestOptions,
 	cookieJar?: ICookieJar | LazyCookieJar,
 }
 
-export interface IRequestOptionsJSDOM extends request.RequestPromiseOptions
+export interface IRequestOptionsJSDOM extends Partial<request.RequestPromiseOptions>
 {
-	resolveWithFullResponse: boolean;
-	encoding: null;
-	gzip: boolean;
-	headers: {
-		"User-Agent": string;
-		Referer: string;
-		Accept: string;
-		"Accept-Language": string;
+	resolveWithFullResponse?: boolean;
+	encoding?: null;
+	gzip?: boolean;
+	headers?: CoreRequest.Headers & {
+		"User-Agent"?: string;
+		Referer?: string;
+		Accept?: string;
+		"Accept-Language"?: string;
 	};
-	jar: IRequestJar;
+	jar?: IRequestJar;
 }
 
-export interface IRequestOptions extends Partial<IRequestOptionsJSDOM>
+export interface IRequestOptions extends IRequestOptionsJSDOM
 {
 	method?: 'POST' | 'GET' | string,
 	form?: {
@@ -56,7 +57,7 @@ export interface IRequestOptions extends Partial<IRequestOptionsJSDOM>
 
 export type IRequestJar = RequestCookieJar;
 
-export function fromURL(url: string | URL, options?: Partial<IFromUrlOptions>): Promise<IJSDOM>
+export function fromURL(url: string | URL, options?: IFromUrlOptions): Promise<IJSDOM>
 {
 	return Promise.resolve().then(function ()
 	{
@@ -108,7 +109,7 @@ export interface IResponse extends ResponseRequest
 	body: Buffer,
 }
 
-export function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | string, options: Partial<IFromUrlOptions>, requestOptions?: Partial<IRequestOptions>): T
+export function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | string, options: Partial<IFromUrlOptions>, requestOptions?: IRequestOptions): T
 {
 	if (typeof parsedURL == 'string')
 	{
@@ -155,6 +156,7 @@ export function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | strin
 
 export function normalizeRequestOptions(options: IFromUrlOptions, _requestOptions?: IRequestOptions): Partial<IRequestOptions>
 {
+	// @ts-ignore
 	let requestOptions: Partial<IRequestOptions> = {
 		resolveWithFullResponse: true,
 		encoding: null, // i.e., give me the raw Buffer
