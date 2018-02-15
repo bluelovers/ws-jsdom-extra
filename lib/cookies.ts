@@ -2,15 +2,12 @@
  * Created by user on 2018/2/7/007.
  */
 
-import { CookieJar } from 'jsdom';
 import * as toughCookie from 'tough-cookie';
 import * as request from 'request';
-export { CookieJar, toughCookie }
+export { toughCookie }
 
-import { RequestJar } from 'request/lib/cookies';
-
-import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
-export { wrapCookieJarForRequest }
+import { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar } from './cookies/request-jar';
+export { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar }
 
 import { URL } from './pack';
 
@@ -50,10 +47,7 @@ export class LazyCookie extends toughCookie.Cookie
 	}
 }
 
-export interface RequestCookieJar extends request.CookieJar
-{
-	_jar: CookieJar | LazyCookieJar,
-}
+export type RequestCookieJar = IRequestCookieJar<CookieJar | LazyCookieJar>
 
 export class LazyCookieJar extends CookieJar
 {
@@ -117,9 +111,7 @@ export class LazyCookieJar extends CookieJar
 		return new this(data, url);
 	}
 
-	wrapForRequest(): request.CookieJar & {
-		_jar: LazyCookieJar,
-	}
+	wrapForRequest()
 	{
 		return wrapCookieJarForRequest(this);
 	}

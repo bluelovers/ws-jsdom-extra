@@ -3,9 +3,9 @@
  */
 
 import * as CoreRequest from 'request';
-import { JSDOM, CookieJar, FromUrlOptions, toughCookie } from 'jsdom';
+import { JSDOM, FromUrlOptions, toughCookie } from 'jsdom';
 import * as deepmerge from 'deepmerge-plus';
-import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
+
 import { IConstructorOptions, IJSDOM, IOptions, IOptionsJSDOM, isPackedJSDOM, packJSDOM, packOptions, URL, URLImpl } from './pack';
 import { Promise, request, ResponseRequest } from './index';
 import * as parseContentType from 'content-type-parser';
@@ -16,13 +16,16 @@ import * as whatwgEncoding from 'whatwg-encoding';
 import { LazyCookieJar, LazyCookie, RequestCookieJar } from './cookies';
 export { LazyCookieJar, LazyCookie }
 
-export { wrapCookieJarForRequest, parseContentType }
+import { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar } from './cookies';
+export { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar }
+
+export { parseContentType }
 export { URL, URLImpl }
 
 export { DEFAULT_USER_AGENT } from './const';
 import { DEFAULT_USER_AGENT, SYMBOL_RAW } from './const';
 
-export { CookieJar, toughCookie }
+export { toughCookie }
 
 export type ICookieJar = CookieJar | LazyCookieJar;
 

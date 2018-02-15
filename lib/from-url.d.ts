@@ -3,17 +3,18 @@
 /// <reference types="bluebird" />
 /// <reference types="node" />
 import * as CoreRequest from 'request';
-import { JSDOM, CookieJar, toughCookie } from 'jsdom';
-import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
+import { JSDOM, toughCookie } from 'jsdom';
 import { IJSDOM, IOptionsJSDOM, URL, URLImpl } from './pack';
 import { Promise, request, ResponseRequest } from './index';
 import * as parseContentType from 'content-type-parser';
 import { LazyCookieJar, LazyCookie, RequestCookieJar } from './cookies';
 export { LazyCookieJar, LazyCookie };
-export { wrapCookieJarForRequest, parseContentType };
+import { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar } from './cookies';
+export { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar };
+export { parseContentType };
 export { URL, URLImpl };
 export { DEFAULT_USER_AGENT } from './const';
-export { CookieJar, toughCookie };
+export { toughCookie };
 export declare type ICookieJar = CookieJar | LazyCookieJar;
 export interface IFromUrlOptions extends IOptionsJSDOM {
     requestOptions?: IRequestOptions;

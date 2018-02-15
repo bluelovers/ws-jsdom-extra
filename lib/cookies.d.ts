@@ -1,28 +1,21 @@
-/// <reference types="request" />
-import { CookieJar } from 'jsdom';
 import * as toughCookie from 'tough-cookie';
-import * as request from 'request';
-export { CookieJar, toughCookie };
-import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
-export { wrapCookieJarForRequest };
+export { toughCookie };
+import { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar } from './cookies/request-jar';
+export { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar };
 import * as moment from 'moment';
 export { moment };
 export declare class LazyCookie extends toughCookie.Cookie {
     constructor(prop?: Partial<LazyCookie.Properties>);
     static create(prop?: Partial<LazyCookie.Properties>, ...argv: any[]): self.LazyCookie;
 }
-export interface RequestCookieJar extends request.CookieJar {
-    _jar: CookieJar | LazyCookieJar;
-}
+export declare type RequestCookieJar = IRequestCookieJar<CookieJar | LazyCookieJar>;
 export declare class LazyCookieJar extends CookieJar {
     enableLooseMode: boolean;
     store: toughCookie.Store;
     constructor(data?: {}, url?: string | URL);
     setCookieSync(cookieOrString: LazyCookie.Properties | toughCookie.Cookie | string, currentUrl?: string | URL, options?: toughCookie.CookieJar.SetCookieOptions, ...argv: any[]): void;
     static create(data?: {}, url?: string | URL): self.LazyCookieJar;
-    wrapForRequest(): request.CookieJar & {
-        _jar: LazyCookieJar;
-    };
+    wrapForRequest(): IRequestCookieJar<self.LazyCookieJar>;
     static unwrapFromRequest(jar: RequestCookieJar): CookieJar | self.LazyCookieJar;
     getAllCookies(): toughCookie.Cookie[];
 }
