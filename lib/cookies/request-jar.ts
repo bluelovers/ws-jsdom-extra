@@ -48,6 +48,8 @@ export function unwrapCookieJarFromRequest<T = CookieJar | LazyCookieJar>(reques
 	return requestJar._jar;
 }
 
+export { wrapCookieJarForRequest }
+
 import * as self from './request-jar';
 
 export default self;
