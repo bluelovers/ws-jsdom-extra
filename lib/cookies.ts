@@ -51,13 +51,19 @@ export type RequestCookieJar = IRequestCookieJar<CookieJar | LazyCookieJar>
 
 export class LazyCookieJar extends CookieJar
 {
-	public enableLooseMode: boolean;
+	enableLooseMode?: boolean;
+	rejectPublicSuffixes?: boolean;
 	public store: toughCookie.Store;
 
-	constructor(data = {}, url?: string | URL)
+	constructor(store?, options = {}, data = {}, url?: string | URL)
 	{
-		super();
+		super(store, options);
 
+		this.setData(data, url);
+	}
+
+	setData(data = {}, url?: string | URL)
+	{
 		url = (url || '').toString();
 
 		for (let key in data)
@@ -78,6 +84,8 @@ export class LazyCookieJar extends CookieJar
 				this.setCookieSync(new LazyCookie(data[key]), url);
 			}
 		}
+
+		return this;
 	}
 
 	setCookieSync(cookieOrString: LazyCookie.Properties | toughCookie.Cookie | string, currentUrl?: string | URL, options: toughCookie.CookieJar.SetCookieOptions = {}, ...argv)
@@ -106,9 +114,9 @@ export class LazyCookieJar extends CookieJar
 		return super.setCookieSync(cookieOrString as toughCookie.Cookie, currentUrl as string, options, ...argv)
 	}
 
-	static create(data = {}, url?: string | URL)
+	static create(store?, options = {}, data = {}, url?: string | URL)
 	{
-		return new this(data, url);
+		return new this(store, options, data, url);
 	}
 
 	wrapForRequest()

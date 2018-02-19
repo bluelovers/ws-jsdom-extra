@@ -10,11 +10,13 @@ export declare class LazyCookie extends toughCookie.Cookie {
 }
 export declare type RequestCookieJar = IRequestCookieJar<CookieJar | LazyCookieJar>;
 export declare class LazyCookieJar extends CookieJar {
-    enableLooseMode: boolean;
+    enableLooseMode?: boolean;
+    rejectPublicSuffixes?: boolean;
     store: toughCookie.Store;
-    constructor(data?: {}, url?: string | URL);
+    constructor(store?: any, options?: {}, data?: {}, url?: string | URL);
+    setData(data?: {}, url?: string | URL): this;
     setCookieSync(cookieOrString: LazyCookie.Properties | toughCookie.Cookie | string, currentUrl?: string | URL, options?: toughCookie.CookieJar.SetCookieOptions, ...argv: any[]): void;
-    static create(data?: {}, url?: string | URL): self.LazyCookieJar;
+    static create(store?: any, options?: {}, data?: {}, url?: string | URL): self.LazyCookieJar;
     wrapForRequest(): IRequestCookieJar<self.LazyCookieJar>;
     static unwrapFromRequest(jar: RequestCookieJar): CookieJar | self.LazyCookieJar;
     getAllCookies(): toughCookie.Cookie[];
