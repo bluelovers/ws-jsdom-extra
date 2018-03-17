@@ -10,8 +10,6 @@ import { IConstructorOptions, IJSDOM, IOptions, IOptionsJSDOM, isPackedJSDOM, pa
 import { Promise, request, ResponseRequest } from './index';
 import * as parseContentType from 'content-type-parser';
 import * as isPlainObject from 'is-plain-object';
-import * as sniffHTMLEncoding from 'html-encoding-sniffer';
-import * as whatwgEncoding from 'whatwg-encoding';
 
 import { LazyCookieJar, LazyCookie, RequestCookieJar } from './cookies';
 export { LazyCookieJar, LazyCookie }
@@ -24,6 +22,8 @@ export { URL, URLImpl }
 
 export { DEFAULT_USER_AGENT } from './const';
 import { DEFAULT_USER_AGENT, SYMBOL_RAW } from './const';
+
+import { minifyHTML, normalizeHTML } from './html';
 
 export { toughCookie }
 
@@ -139,6 +139,11 @@ export function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | strin
 
 	let body = normalizeHTML(res.body, transportLayerEncodingLabel).html;
 
+	if (options.minifyHTML)
+	{
+		body = minifyHTML(body);
+	}
+
 	let jsdom = new JSDOM(body, options as IConstructorOptions);
 
 	jsdom[SYMBOL_RAW] = jsdom[SYMBOL_RAW] || {};
@@ -232,41 +237,7 @@ export function normalizeFromURLOptions<T>(options: Partial<T & IFromUrlOptions>
 	// `fromURL` calls `new JSDOM(html, options)`.
 }
 
-export interface INormalizeHTML
-{
-	html: string,
-	encoding: string,
-}
 
-function normalizeHTML(html: string, transportLayerEncodingLabel: string): INormalizeHTML
-function normalizeHTML(html: Buffer, transportLayerEncodingLabel: string): INormalizeHTML
-function normalizeHTML(html: ArrayBuffer, transportLayerEncodingLabel: string): INormalizeHTML
-function normalizeHTML(html: any = '', transportLayerEncodingLabel: string): INormalizeHTML
-{
-	let encoding = "UTF-8";
-
-	if (ArrayBuffer.isView(html))
-	{
-		// @ts-ignore
-		html = Buffer.from(html.buffer, html.byteOffset, html.byteLength);
-	}
-	else if (html instanceof ArrayBuffer)
-	{
-		html = Buffer.from(html);
-	}
-
-	if (Buffer.isBuffer(html))
-	{
-		encoding = sniffHTMLEncoding(html, { defaultEncoding: "windows-1252", transportLayerEncodingLabel });
-		html = whatwgEncoding.decode(html, encoding);
-	}
-	else
-	{
-		html = String(html);
-	}
-
-	return { html, encoding };
-}
 
 import * as self from './from-url'
 

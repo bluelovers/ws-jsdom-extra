@@ -5,7 +5,7 @@ export { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar };
 import * as moment from 'moment';
 export { moment };
 export declare class LazyCookie extends toughCookie.Cookie {
-    constructor(prop?: Partial<LazyCookie.Properties>);
+    constructor(prop?: Partial<LazyCookie.Properties>, ...argv: any[]);
     static create(prop?: Partial<LazyCookie.Properties>, ...argv: any[]): self.LazyCookie;
 }
 export declare type RequestCookieJar = IRequestCookieJar<CookieJar | LazyCookieJar>;

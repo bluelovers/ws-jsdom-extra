@@ -25,8 +25,9 @@ export interface IOptions {
     cookieJar?: CookieJar | ICookieJar | LazyCookieJar;
 }
 export { IOptionsCreateQuery };
-export interface IOptionsJSDOM extends IOptionsCreateQuery, IOptions {
-}
+export declare type IOptionsJSDOM = IOptionsCreateQuery & IOptions & {
+    minifyHTML?: boolean;
+};
 export declare type IConstructorOptions = Partial<ConstructorOptions & IOptionsJSDOM>;
 export declare type IFromFileOptions = Partial<IOptionsJSDOM & FromFileOptions>;
 export { IFromUrlOptions };
@@ -42,13 +43,14 @@ export interface IJSDOM_Symbol_Options {
     options?: Partial<IOptions>;
     requestOptions?: Partial<IRequestOptions>;
 }
-export interface IJSDOM extends JSDOM {
+export interface IJSDOM_EXTEND extends JSDOM {
     $: JQueryStatic;
     url: URL;
     document: Document;
     _options: IJSDOM_Symbol_Options;
     fakeThen<T>(cb: (jsdom: IJSDOM) => T): T;
 }
+export declare type IJSDOM = JSDOM & IJSDOM_EXTEND;
 export declare function auto(JSDOM: any): any;
 export declare function createJSDOM(html?: string | Buffer | BinaryData, options?: IConstructorOptions): IJSDOM;
 export declare function asyncJSDOM(html?: string | Buffer | BinaryData, options?: IConstructorOptions): Promise<IJSDOM>;

@@ -17,7 +17,7 @@ export { moment }
 
 export class LazyCookie extends toughCookie.Cookie
 {
-	constructor(prop: Partial<LazyCookie.Properties> = {})
+	constructor(prop: Partial<LazyCookie.Properties> = {}, ...argv)
 	{
 		if (!prop.expires || prop.expires === -1)
 		{

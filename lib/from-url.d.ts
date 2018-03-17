@@ -54,9 +54,5 @@ export interface IResponse extends ResponseRequest {
 export declare function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | string, options: Partial<IFromUrlOptions>, requestOptions?: IRequestOptions): T;
 export declare function normalizeRequestOptions(options: IFromUrlOptions, _requestOptions?: IRequestOptions): Partial<IRequestOptions>;
 export declare function normalizeFromURLOptions<T>(options: Partial<T & IFromUrlOptions>): Partial<T & IFromUrlOptions>;
-export interface INormalizeHTML {
-    html: string;
-    encoding: string;
-}
 import * as self from './from-url';
 export default self;

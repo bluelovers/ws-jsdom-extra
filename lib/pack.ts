@@ -17,6 +17,7 @@ import {
 import * as jQuery from 'jquery';
 import { URL, URLImpl } from 'jsdom-url';
 import { LazyCookieJar } from './cookies';
+import { minifyHTML, normalizeHTML } from './html';
 import { IOptionsCreateQuery, createQuery } from './query';
 import { ICookieJar, IFromUrlOptions, IRequestOptions } from './from-url';
 
@@ -64,10 +65,15 @@ export interface IOptions
 export { IOptionsCreateQuery }
 
 //export type IOptionsJSDOM = IOptionsCreateQuery & Partial<IOptionsJSDOMSource> & IOptions;
-
+/*
 export interface IOptionsJSDOM extends IOptionsCreateQuery, IOptions
 {
 
+}
+*/
+
+export type IOptionsJSDOM = IOptionsCreateQuery & IOptions & {
+	minifyHTML?: boolean,
 }
 
 export type IConstructorOptions = Partial<ConstructorOptions & IOptionsJSDOM>;
@@ -91,7 +97,7 @@ export interface IJSDOM_Symbol_Options
 	requestOptions?: Partial<IRequestOptions>,
 }
 
-export interface IJSDOM extends JSDOM
+export interface IJSDOM_EXTEND extends JSDOM
 {
 	$: JQueryStatic,
 	url: URL,
@@ -101,6 +107,8 @@ export interface IJSDOM extends JSDOM
 
 	fakeThen<T>(cb: (jsdom: IJSDOM) => T): T
 }
+
+export type IJSDOM = JSDOM & IJSDOM_EXTEND;
 
 export function auto(JSDOM)
 {
@@ -116,6 +124,12 @@ export function createJSDOM(html?: string | Buffer | BinaryData, options: IConst
 	{
 		opts = options;
 	});
+
+	if (options.minifyHTML)
+	{
+		html = normalizeHTML(html as string).html;
+		html = minifyHTML(html);
+	}
 
 	let jsdom = new JSDOM(html, options) as IJSDOM;
 
