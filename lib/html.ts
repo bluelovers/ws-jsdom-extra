@@ -50,6 +50,7 @@ export function minifyHTML(html, options: IMinifyOptions = {}): string
 		collapseWhitespace: true,
 		preserveLineBreaks: true,
 		conservativeCollapse: true,
+		caseSensitive: true,
 	}, options));
 }
 
