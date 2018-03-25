@@ -152,6 +152,7 @@ export function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | strin
 	jsdom[SYMBOL_RAW].options.ConstructorOptions = jsdom[SYMBOL_RAW].options.ConstructorOptions || opts;
 
 	jsdom[SYMBOL_RAW].options.Response = res;
+	jsdom[SYMBOL_RAW].options.body = body;
 
 	if (requestOptions)
 	{

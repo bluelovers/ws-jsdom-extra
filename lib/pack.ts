@@ -95,6 +95,9 @@ export interface IJSDOM_Symbol_Options
 	ConstructorOptions?: Partial<ConstructorOptions>,
 	options?: Partial<IOptions>,
 	requestOptions?: Partial<IRequestOptions>,
+
+	Response?,
+	body?,
 }
 
 export interface IJSDOM_EXTEND extends JSDOM

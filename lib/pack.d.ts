@@ -42,6 +42,8 @@ export interface IJSDOM_Symbol_Options {
     ConstructorOptions?: Partial<ConstructorOptions>;
     options?: Partial<IOptions>;
     requestOptions?: Partial<IRequestOptions>;
+    Response?: any;
+    body?: any;
 }
 export interface IJSDOM_EXTEND extends JSDOM {
     $: JQueryStatic;
