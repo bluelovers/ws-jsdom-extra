@@ -27,12 +27,12 @@ import { minifyHTML, normalizeHTML } from './html';
 
 export { toughCookie }
 
-export type ICookieJar = CookieJar | LazyCookieJar;
+export type ICookieJar = Partial<CookieJar> | Partial<LazyCookieJar>;
 
 export interface IFromUrlOptions extends IOptionsJSDOM
 {
 	requestOptions?: IRequestOptions,
-	cookieJar?: ICookieJar | LazyCookieJar,
+	cookieJar?: ICookieJar | Partial<LazyCookieJar>,
 }
 
 export interface IRequestOptionsJSDOM extends Partial<request.RequestPromiseOptions>

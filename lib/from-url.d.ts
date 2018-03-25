@@ -15,10 +15,10 @@ export { parseContentType };
 export { URL, URLImpl };
 export { DEFAULT_USER_AGENT } from './const';
 export { toughCookie };
-export declare type ICookieJar = CookieJar | LazyCookieJar;
+export declare type ICookieJar = Partial<CookieJar> | Partial<LazyCookieJar>;
 export interface IFromUrlOptions extends IOptionsJSDOM {
     requestOptions?: IRequestOptions;
-    cookieJar?: ICookieJar | LazyCookieJar;
+    cookieJar?: ICookieJar | Partial<LazyCookieJar>;
 }
 export interface IRequestOptionsJSDOM extends Partial<request.RequestPromiseOptions> {
     resolveWithFullResponse?: boolean;

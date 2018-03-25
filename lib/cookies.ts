@@ -53,7 +53,7 @@ export class LazyCookieJar extends CookieJar
 {
 	enableLooseMode?: boolean;
 	rejectPublicSuffixes?: boolean;
-	public store: toughCookie.Store;
+	public store?: toughCookie.Store;
 
 	constructor(store?, options = {}, data = {}, url?: string | URL)
 	{
