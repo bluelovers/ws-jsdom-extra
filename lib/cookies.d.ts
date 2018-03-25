@@ -18,7 +18,7 @@ export declare class LazyCookieJar extends CookieJar {
     setCookieSync(cookieOrString: LazyCookie.Properties | toughCookie.Cookie | string, currentUrl?: string | URL, options?: toughCookie.CookieJar.SetCookieOptions, ...argv: any[]): void;
     static create(store?: any, options?: {}, data?: {}, url?: string | URL): self.LazyCookieJar;
     wrapForRequest(): IRequestCookieJar<self.LazyCookieJar>;
-    static unwrapFromRequest(jar: RequestCookieJar): self.LazyCookieJar | CookieJar;
+    static unwrapFromRequest(jar: RequestCookieJar): CookieJar | self.LazyCookieJar;
     getAllCookies(): toughCookie.Cookie[];
 }
 export declare namespace LazyCookie {

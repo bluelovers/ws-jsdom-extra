@@ -6,8 +6,6 @@ import * as sniffHTMLEncoding from 'html-encoding-sniffer';
 import * as whatwgEncoding from 'whatwg-encoding';
 import { minify, Options as IMinifyOptions } from 'html-minifier';
 
-export { IMinifyOptions }
-
 export interface INormalizeHTML
 {
 	html: string,
@@ -44,14 +42,37 @@ export function normalizeHTML(html: any = '', transportLayerEncodingLabel?: stri
 	return { html, encoding };
 }
 
-export function minifyHTML(html, options: IMinifyOptions = {}): string
+export function minifyHTML(html, options: IMinifyOptions = {}, logError: boolean | number = true): string
 {
-	return minify(html, Object.assign({
-		collapseWhitespace: true,
-		preserveLineBreaks: true,
-		conservativeCollapse: true,
-		caseSensitive: true,
-	}, options));
+	try
+	{
+		let ret = minify(html, Object.assign({
+			collapseWhitespace: true,
+			preserveLineBreaks: true,
+			conservativeCollapse: true,
+			caseSensitive: true,
+		}, options));
+
+		return ret;
+	}
+	catch (e)
+	{
+		//console.log(1);
+
+		if (logError)
+		{
+			if (logError < 0)
+			{
+				console.error('[minifyHTML]', e.toString());
+			}
+			else
+			{
+				console.error('[minifyHTML]', e.toString().split(/[\r\n]/)[0]);
+			}
+		}
+	}
+
+	return html;
 }
 
 import * as self from './html';

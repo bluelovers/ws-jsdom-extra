@@ -1,6 +1,6 @@
 {
   "name": "jsdom-extra",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "JSDOM with extra tweak ( jquery / cheerio / request )",
   "keywords": [
     "agent",
