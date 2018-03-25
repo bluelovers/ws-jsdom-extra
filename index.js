@@ -11,6 +11,7 @@ const from_url_1 = require("./lib/from-url");
 exports.CookieJar = from_url_1.CookieJar;
 exports.RequestJar = from_url_1.RequestJar;
 exports.wrapCookieJarForRequest = from_url_1.wrapCookieJarForRequest;
+exports.requestToJSDOM = from_url_1.requestToJSDOM;
 const pack_1 = require("./lib/pack");
 exports.JSDOM = pack_1.JSDOM;
 exports.default = pack_1.JSDOM;
