@@ -38,7 +38,7 @@ export class LazyCookie extends toughCookie.Cookie
 
 		super(prop as toughCookieProperties);
 
-		console.log(this);
+		//console.log(this);
 	}
 
 	static create(prop?: Partial<LazyCookie.Properties>, ...argv)
