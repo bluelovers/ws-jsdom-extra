@@ -19,6 +19,7 @@ export declare type ICookieJar = Partial<CookieJar> | Partial<LazyCookieJar>;
 export interface IFromUrlOptions extends IOptionsJSDOM {
     requestOptions?: IRequestOptions;
     cookieJar?: ICookieJar | Partial<LazyCookieJar>;
+    libRequestPromise?: any;
 }
 export interface IRequestOptionsJSDOM extends Partial<request.RequestPromiseOptions> {
     resolveWithFullResponse?: boolean;

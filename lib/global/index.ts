@@ -48,8 +48,10 @@ export interface IOptions
 	 * allow use exists jsdom or create function
 	 * @returns {IJSDOM}
 	 */
-	createJSDOM(): IJSDOM,
-	createJSDOM: IJSDOM,
+	//createJSDOM(): IJSDOM,
+	createJSDOM: IJSDOM | {
+		(...argv): IJSDOM
+	},
 }
 
 export type IGlobalJSDOM = IJSDOM;

@@ -16,6 +16,7 @@ import {
 } from 'jsdom';
 import * as jQuery from 'jquery';
 import { URL, URLImpl } from 'jsdom-url';
+import { IOptionsWithWindowOptionsWithResourceLoader } from './browser/resource-loader';
 import { LazyCookieJar } from './cookies';
 import { minifyHTML, normalizeHTML } from './html';
 import { IOptionsCreateQuery, createQuery } from './query';
@@ -74,7 +75,7 @@ export interface IOptionsJSDOM extends IOptionsCreateQuery, IOptions
 
 export type IOptionsJSDOM = IOptionsCreateQuery & IOptions & {
 	minifyHTML?: boolean,
-}
+} & IOptionsWithWindowOptionsWithResourceLoader;
 
 export type IConstructorOptions = Partial<ConstructorOptions & IOptionsJSDOM>;
 export type IFromFileOptions = Partial<IOptionsJSDOM & FromFileOptions>;

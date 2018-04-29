@@ -18,8 +18,9 @@ export declare type IGlobalDocument = Document & {
 export declare var global: Global;
 export interface IOptions {
     JSDOM: typeof JSDOM;
-    createJSDOM(): IJSDOM;
-    createJSDOM: IJSDOM;
+    createJSDOM: IJSDOM | {
+        (...argv): IJSDOM;
+    };
 }
 export declare type IGlobalJSDOM = IJSDOM;
 export declare function globalJsdom<T>(html?: any, options?: Partial<T & IConstructorOptions & IOptions>): globalJsdom.IReturn;

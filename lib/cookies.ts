@@ -11,6 +11,7 @@ export { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar }
 
 import { URL } from './pack';
 
+// @ts-ignore
 import * as moment from 'moment';
 
 export { moment }
@@ -111,6 +112,7 @@ export class LazyCookieJar extends CookieJar
 			currentUrl = currentUrl.toString();
 		}
 
+		// @ts-ignore
 		return super.setCookieSync(cookieOrString as toughCookie.Cookie, currentUrl as string, options, ...argv)
 	}
 

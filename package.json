@@ -1,6 +1,6 @@
 {
   "name": "jsdom-extra",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "description": "JSDOM with extra tweak ( jquery / cheerio / request )",
   "keywords": [
     "agent",
@@ -52,19 +52,20 @@
     "test": "npx mocha --require ts-node/register \"!(node_modules)/**/*.{test,spec}.{ts,tsx}\""
   },
   "dependencies": {
-    "@types/html-minifier": "^3.5.1",
     "bluebird": "^3.5.1",
     "class-proxy": "^1.1.1",
-    "deepmerge-plus": "^2.1.1",
-    "html-minifier": "^3.5.11",
+    "deepmerge-plus": "^2.1.2",
+    "html-minifier": "^3.5.15",
     "is-plain-object": "^2.0.4",
-    "jsdom": "^11.6.2",
+    "jsdom": "^11.9.0",
     "jsdom-url": "^2.2.0",
-    "moment": "^2.21.0",
+    "moment": "^2.22.1",
     "request": "^2.85.0",
+    "request-cached": "^1.0.1",
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
+    "@types/html-minifier": "^3.5.2",
     "@types/bluebird": "^3.5.20",
     "@types/jquery": "^3.3.1",
     "@types/jsdom": "^11.0.4",

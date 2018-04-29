@@ -3,6 +3,7 @@
  */
 
 export * from './lib/pack';
+import { IOptionsWithWindowOptionsWithResourceLoader, BaseResourceLoader } from './lib/browser/resource-loader';
 
 import { LazyCookie, LazyCookieJar } from './lib/cookies';
 export { LazyCookie, LazyCookieJar }

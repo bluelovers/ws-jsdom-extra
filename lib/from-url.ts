@@ -10,6 +10,7 @@ import { IConstructorOptions, IJSDOM, IOptions, IOptionsJSDOM, isPackedJSDOM, pa
 import { Promise, request, ResponseRequest } from './index';
 import * as parseContentType from 'content-type-parser';
 import * as isPlainObject from 'is-plain-object';
+import { IOptionsWithWindowOptionsWithResourceLoader } from './browser/resource-loader';
 
 import { LazyCookieJar, LazyCookie, RequestCookieJar } from './cookies';
 export { LazyCookieJar, LazyCookie }
@@ -33,6 +34,8 @@ export interface IFromUrlOptions extends IOptionsJSDOM
 {
 	requestOptions?: IRequestOptions,
 	cookieJar?: ICookieJar | Partial<LazyCookieJar>,
+
+	libRequestPromise?,
 }
 
 export interface IRequestOptionsJSDOM extends Partial<request.RequestPromiseOptions>
@@ -77,7 +80,9 @@ export function fromURL(url: string | URL, options?: IFromUrlOptions): Promise<I
 		options = normalizeFromURLOptions(options);
 		let requestOptions = normalizeRequestOptions(options);
 
-		return request(url, requestOptions)
+		let _request = options.libRequestPromise || request;
+
+		return _request(url, requestOptions)
 			.then((res: IResponse) =>
 			{
 				return requestToJSDOM(res, parsedURL, options, requestOptions);
