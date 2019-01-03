@@ -1,7 +1,8 @@
+/// <reference types="node" />
 export declare const KEYS: string[];
 import { DOMWindow } from 'jsdom';
 import { IConstructorOptions, IJSDOM, JSDOM } from '../pack';
-export interface Global extends NodeJS.Global {
+export declare interface Global extends NodeJS.Global {
     navigator: {
         userAgent: string;
     };
@@ -13,13 +14,13 @@ export declare type IGlobalDOMWindow = DOMWindow & {
     XMLHttpRequest?: XMLHttpRequest;
 };
 export declare type IGlobalDocument = Document & {
-    destroy?();
+    destroy?(): any;
 };
 export declare var global: Global;
 export interface IOptions {
     JSDOM: typeof JSDOM;
     createJSDOM: IJSDOM | {
-        (...argv): IJSDOM;
+        (...argv: any[]): IJSDOM;
     };
 }
 export declare type IGlobalJSDOM = IJSDOM;

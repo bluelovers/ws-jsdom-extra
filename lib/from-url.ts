@@ -181,6 +181,7 @@ export function normalizeRequestOptions(options: IFromUrlOptions, _requestOption
 			Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 			"Accept-Language": "en"
 		},
+		// @ts-ignore
 		jar: wrapCookieJarForRequest(options.cookieJar)
 	};
 
@@ -219,6 +220,7 @@ export function normalizeFromURLOptions<T>(options: Partial<T & IFromUrlOptions>
 	const normalized: Partial<T & IFromUrlOptions> = Object.assign({}, options);
 	if (options.userAgent === undefined)
 	{
+		// @ts-ignore
 		normalized.userAgent = DEFAULT_USER_AGENT;
 	}
 
@@ -229,6 +231,7 @@ export function normalizeFromURLOptions<T>(options: Partial<T & IFromUrlOptions>
 
 	if (options.cookieJar === undefined)
 	{
+		// @ts-ignore
 		normalized.cookieJar = new LazyCookieJar();
 	}
 

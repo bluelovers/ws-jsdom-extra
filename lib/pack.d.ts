@@ -3,6 +3,7 @@
 /// <reference types="bluebird" />
 import { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, BinaryData, DOMWindow, FromFileOptions } from 'jsdom';
 import { URL, URLImpl } from 'jsdom-url';
+import { IOptionsWithWindowOptionsWithResourceLoader } from './browser/resource-loader';
 import { LazyCookieJar } from './cookies';
 import { IOptionsCreateQuery } from './query';
 import { ICookieJar, IFromUrlOptions, IRequestOptions } from './from-url';
@@ -27,7 +28,7 @@ export interface IOptions {
 export { IOptionsCreateQuery };
 export declare type IOptionsJSDOM = IOptionsCreateQuery & IOptions & {
     minifyHTML?: boolean;
-};
+} & IOptionsWithWindowOptionsWithResourceLoader;
 export declare type IConstructorOptions = Partial<ConstructorOptions & IOptionsJSDOM>;
 export declare type IFromFileOptions = Partial<IOptionsJSDOM & FromFileOptions>;
 export { IFromUrlOptions };

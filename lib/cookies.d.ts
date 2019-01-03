@@ -6,7 +6,7 @@ import * as moment from 'moment';
 export { moment };
 export declare class LazyCookie extends toughCookie.Cookie {
     constructor(prop?: Partial<LazyCookie.Properties>, ...argv: any[]);
-    static create(prop?: Partial<LazyCookie.Properties>, ...argv: any[]): self.LazyCookie;
+    static create(prop?: Partial<LazyCookie.Properties>, ...argv: any[]): LazyCookie;
 }
 export declare type RequestCookieJar = IRequestCookieJar<CookieJar | LazyCookieJar>;
 export declare class LazyCookieJar extends CookieJar {
@@ -16,9 +16,9 @@ export declare class LazyCookieJar extends CookieJar {
     constructor(store?: any, options?: {}, data?: {}, url?: string | URL);
     setData(data?: {}, url?: string | URL): this;
     setCookieSync(cookieOrString: LazyCookie.Properties | toughCookie.Cookie | string, currentUrl?: string | URL, options?: toughCookie.CookieJar.SetCookieOptions, ...argv: any[]): any;
-    static create(store?: any, options?: {}, data?: {}, url?: string | URL): self.LazyCookieJar;
-    wrapForRequest(): IRequestCookieJar<self.LazyCookieJar>;
-    static unwrapFromRequest(jar: RequestCookieJar): CookieJar | self.LazyCookieJar;
+    static create(store?: any, options?: {}, data?: {}, url?: string | URL): LazyCookieJar;
+    wrapForRequest(): IRequestCookieJar<LazyCookieJar>;
+    static unwrapFromRequest(jar: RequestCookieJar): CookieJar | LazyCookieJar;
     getAllCookies(): toughCookie.Cookie[];
 }
 export declare namespace LazyCookie {

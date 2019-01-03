@@ -6,8 +6,8 @@ export declare type IOptionsWithWindowOptionsWithResourceLoader = {
 };
 export declare abstract class abstractResourceLoader {
     abstract readFile(filePath: any, options?: {
-        defaultEncoding?;
-        detectMetaCharset?;
+        defaultEncoding?: any;
+        detectMetaCharset?: any;
     }, callback?: any): any;
     abstract wrapCookieJarForRequest(cookieJar: any): any;
     abstract enqueue(element: any, resourceUrl?: any, callback?: any): any;
@@ -21,8 +21,8 @@ export declare class BaseResourceLoader extends abstractResourceLoader {
     options?: IOptionsResourceLoader;
     constructor(options?: IOptionsResourceLoader);
     readFile(filePath: any, options?: {
-        defaultEncoding?;
-        detectMetaCharset?;
+        defaultEncoding?: any;
+        detectMetaCharset?: any;
     }, callback?: any): any;
     wrapCookieJarForRequest(cookieJar: any): any;
     enqueue(element: any, resourceUrl?: any, callback?: any): any;
@@ -31,8 +31,8 @@ export declare class BaseResourceLoader extends abstractResourceLoader {
 }
 export interface IResourceLoader {
     readFile(filePath: any, options?: {
-        defaultEncoding?;
-        detectMetaCharset?;
+        defaultEncoding?: any;
+        detectMetaCharset?: any;
     }, callback?: any): any;
     wrapCookieJarForRequest(cookieJar: any): any;
     enqueue(element: any, resourceUrl?: any, callback?: any): any;

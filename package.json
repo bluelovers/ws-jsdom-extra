@@ -1,6 +1,6 @@
 {
   "name": "jsdom-extra",
-  "version": "1.2.11",
+  "version": "1.3.0",
   "description": "JSDOM with extra tweak ( jquery / cheerio / request )",
   "keywords": [
     "agent",
@@ -52,24 +52,25 @@
     "test": "npx mocha --require ts-node/register \"!(node_modules)/**/*.{test,spec}.{ts,tsx}\""
   },
   "dependencies": {
-    "bluebird": "^3.5.1",
+    "bluebird": "^3.5.3",
     "class-proxy": "^1.1.1",
+    "content-type-parser": "^1.0.2",
     "deepmerge-plus": "^2.1.2",
-    "html-minifier": "^3.5.15",
+    "html-minifier": "^3.5.21",
     "is-plain-object": "^2.0.4",
-    "jsdom": "^11.9.0",
+    "jsdom": "^13.1.0",
     "jsdom-url": "^2.2.0",
-    "moment": "^2.22.1",
-    "request": "^2.85.0",
+    "moment": "^2.23.0",
+    "request": "^2.88.0",
     "request-cached": "^1.0.1",
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
+    "@types/bluebird": "^3.5.25",
     "@types/html-minifier": "^3.5.2",
-    "@types/bluebird": "^3.5.20",
-    "@types/jquery": "^3.3.1",
-    "@types/jsdom": "^11.0.4",
-    "@types/request-promise": "^4.1.41"
+    "@types/jquery": "^3.3.29",
+    "@types/jsdom": "^12.2.1",
+    "@types/request-promise": "^4.1.42"
   },
   "peerDependencies": {},
   "optionalDependencies": {

@@ -1,5 +1,4 @@
 /// <reference types="request-promise" />
-/// <reference types="request" />
 /// <reference types="bluebird" />
 /// <reference types="node" />
 import * as CoreRequest from 'request';
