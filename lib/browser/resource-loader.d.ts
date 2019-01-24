@@ -1,7 +1,8 @@
-import * as JSDOM_ResourceLoader from 'jsdom/lib/jsdom/browser/resource-loader';
+import IJSDOM_ResourceLoader = require('jsdom/lib/jsdom/browser/resources/resource-loader');
+declare let JSDOM_ResourceLoader: any;
 export declare type IOptionsWithWindowOptionsWithResourceLoader = {
     windowOptions?: {
-        resourceLoader?: typeof JSDOM_ResourceLoader | BaseResourceLoader | any;
+        resourceLoader?: typeof IJSDOM_ResourceLoader | BaseResourceLoader | any;
     };
 };
 export declare abstract class abstractResourceLoader {
@@ -39,6 +40,6 @@ export interface IResourceLoader {
     download(url: any, options?: any, callback?: any): any;
     load(element: any, urlString?: any, options?: any, callback?: any): any;
 }
-export declare type ITypeResourceLoader<T> = T extends abstractResourceLoader ? abstractResourceLoader : T extends typeof JSDOM_ResourceLoader ? typeof JSDOM_ResourceLoader : any;
+export declare type ITypeResourceLoader<T> = T extends abstractResourceLoader ? abstractResourceLoader : T extends typeof IJSDOM_ResourceLoader ? typeof IJSDOM_ResourceLoader : any;
 export { JSDOM_ResourceLoader };
 export default BaseResourceLoader;

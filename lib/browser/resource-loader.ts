@@ -2,11 +2,28 @@
  * Created by user on 2018/4/29/029.
  */
 
-import * as JSDOM_ResourceLoader from 'jsdom/lib/jsdom/browser/resource-loader';
+import IJSDOM_ResourceLoader = require('jsdom/lib/jsdom/browser/resources/resource-loader');
+
+let JSDOM_ResourceLoader = getJSDOMResourceLoader();
+
+function getJSDOMResourceLoader()
+{
+	let _mod: typeof IJSDOM_ResourceLoader;
+	try
+	{
+		_mod = require('jsdom/lib/jsdom/browser/resource-loader');
+	}
+	catch (e)
+	{
+		_mod = require('jsdom/lib/jsdom/browser/resources/resource-loader');
+	}
+
+	return _mod;
+}
 
 export type IOptionsWithWindowOptionsWithResourceLoader = {
 	windowOptions?: {
-		resourceLoader?: typeof JSDOM_ResourceLoader | BaseResourceLoader | any,
+		resourceLoader?: typeof IJSDOM_ResourceLoader | BaseResourceLoader | any,
 	},
 }
 
@@ -87,7 +104,7 @@ export interface IResourceLoader
 
 export type ITypeResourceLoader<T> =
 	T extends abstractResourceLoader ? abstractResourceLoader :
-		T extends typeof JSDOM_ResourceLoader ? typeof JSDOM_ResourceLoader :
+		T extends typeof IJSDOM_ResourceLoader ? typeof IJSDOM_ResourceLoader :
 			any
 	;
 

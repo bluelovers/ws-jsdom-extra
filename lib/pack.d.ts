@@ -1,4 +1,3 @@
-/// <reference types="jquery" />
 /// <reference types="node" />
 /// <reference types="bluebird" />
 import { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, BinaryData, DOMWindow, FromFileOptions } from 'jsdom';
@@ -64,5 +63,5 @@ export interface IPackOptionsHookCallback<T> {
 export declare function packOptions<T>(options?: Partial<T & IOptionsJSDOM>, cb?: IPackOptionsHookCallback<T>): Partial<T & IOptionsJSDOM>;
 export declare function isPackedJSDOM(jsdom: any): boolean;
 export declare function packJSDOM(jsdom: JSDOM): IJSDOM;
-import * as self from './pack';
-export default self;
+declare const _default: typeof import("./pack");
+export default _default;

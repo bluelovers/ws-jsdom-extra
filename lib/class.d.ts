@@ -1,5 +1,4 @@
 /// <reference types="bluebird" />
-/// <reference types="jquery" />
 export * from '../index';
 import { ClassProxyStatic } from 'class-proxy';
 import { Promise } from './index';

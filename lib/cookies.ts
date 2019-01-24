@@ -2,8 +2,8 @@
  * Created by user on 2018/2/7/007.
  */
 
-import * as toughCookie from 'tough-cookie';
-import * as request from 'request';
+import toughCookie = require('tough-cookie');
+import request = require('request');
 export { toughCookie }
 
 import { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar } from './cookies/request-jar';
@@ -11,8 +11,7 @@ export { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar }
 
 import { URL } from './pack';
 
-// @ts-ignore
-import * as moment from 'moment';
+import moment = require('moment');
 
 export { moment }
 
@@ -205,5 +204,4 @@ export interface toughCookieProperties
 	lastAccessed?: Date;
 }
 
-import * as self from './cookies';
-export default self;
+export default exports as typeof import('./cookies');

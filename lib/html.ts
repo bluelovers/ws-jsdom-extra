@@ -2,8 +2,8 @@
  * Created by user on 2018/3/18/018.
  */
 
-import * as sniffHTMLEncoding from 'html-encoding-sniffer';
-import * as whatwgEncoding from 'whatwg-encoding';
+import sniffHTMLEncoding = require('html-encoding-sniffer');
+import whatwgEncoding = require('whatwg-encoding');
 import { minify, Options as IMinifyOptions } from 'html-minifier';
 
 import { JSDOM } from 'jsdom';
@@ -81,6 +81,4 @@ export function minifyHTML(html, options: IMinifyOptions = {}, logError: boolean
 	return html;
 }
 
-import * as self from './html';
-
-export default self;
+export default exports as typeof import('./html');

@@ -93,10 +93,12 @@ export function globalJsdom<T>(html?, options: Partial<T & IConstructorOptions &
 
 		if (typeof create == 'function')
 		{
+			// @ts-ignore
 			jsdom = create(html, options);
 		}
 		else
 		{
+			// @ts-ignore
 			jsdom = create;
 		}
 	}
@@ -163,6 +165,4 @@ export namespace globalJsdom
 	}
 }
 
-import * as self from './index';
-export default self;
-//export default exports;
+export default exports as typeof import('./index');

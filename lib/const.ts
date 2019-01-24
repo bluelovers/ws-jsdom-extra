@@ -17,6 +17,4 @@ export const DEFAULT_HTML2 = '<!doctype html><html><head><meta charset="utf-8"><
 export const RUN_SCRIPTS_DANGEROUSLY = 'dangerously';
 export const RUN_SCRIPTS_OUTSIDE_ONLY = 'outside-only';
 
-import * as self from './const';
-export default self;
-//export default exports;
+export default exports as typeof import('./const');

@@ -1,4 +1,3 @@
-/// <reference types="jquery" />
 /// <reference types="node" />
 export * from 'jsdom';
 import { BinaryData, JSDOM as _JSDOM } from 'jsdom';

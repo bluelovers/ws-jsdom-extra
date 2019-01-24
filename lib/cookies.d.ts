@@ -1,8 +1,8 @@
-import * as toughCookie from 'tough-cookie';
+import toughCookie = require('tough-cookie');
 export { toughCookie };
 import { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar } from './cookies/request-jar';
 export { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar };
-import * as moment from 'moment';
+import moment = require('moment');
 export { moment };
 export declare class LazyCookie extends toughCookie.Cookie {
     constructor(prop?: Partial<LazyCookie.Properties>, ...argv: any[]);
@@ -55,5 +55,5 @@ export interface toughCookieProperties {
     pathIsDefault?: boolean;
     lastAccessed?: Date;
 }
-import * as self from './cookies';
-export default self;
+declare const _default: typeof import("./cookies");
+export default _default;

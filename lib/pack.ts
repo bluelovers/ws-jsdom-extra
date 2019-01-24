@@ -195,11 +195,13 @@ export function packOptions<T>(options: Partial<T & IOptionsJSDOM> = {},
 {
 	if (options.url !== undefined)
 	{
+		// @ts-ignore
 		options.url = (new URL(options.url)).href;
 	}
 
 	if (options.referrer !== undefined)
 	{
+		// @ts-ignore
 		options.referrer = (new URL(options.referrer)).href;
 	}
 
@@ -212,6 +214,7 @@ export function packOptions<T>(options: Partial<T & IOptionsJSDOM> = {},
 			old_beforeParse = options.beforeParse;
 		}
 
+		// @ts-ignore
 		options.beforeParse = function (window: DOMWindow, jsdom?: IJSDOM)
 		{
 			let opts: Partial<T & IOptionsJSDOM> = {};
@@ -256,6 +259,7 @@ export function packOptions<T>(options: Partial<T & IOptionsJSDOM> = {},
 
 	if (options.virtualConsole === false)
 	{
+		// @ts-ignore
 		options.virtualConsole = new VirtualConsole();
 	}
 
@@ -368,6 +372,4 @@ export function packJSDOM(jsdom: JSDOM): IJSDOM
 	return jsdom as IJSDOM;
 }
 
-import * as self from './pack';
-
-export default self;
+export default exports as typeof import('./pack');

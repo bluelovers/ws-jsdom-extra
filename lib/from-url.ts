@@ -2,14 +2,14 @@
  * Created by user on 2018/2/6/006.
  */
 
-import * as CoreRequest from 'request';
+import CoreRequest = require('request');
 import { JSDOM, FromUrlOptions, toughCookie } from 'jsdom';
-import * as deepmerge from 'deepmerge-plus';
+import deepmerge = require('deepmerge-plus');
 
 import { IConstructorOptions, IJSDOM, IOptions, IOptionsJSDOM, isPackedJSDOM, packJSDOM, packOptions, URL, URLImpl } from './pack';
 import { Promise, request, ResponseRequest } from './index';
-import * as parseContentType from 'content-type-parser';
-import * as isPlainObject from 'is-plain-object';
+import parseContentType = require('content-type-parser');
+import isPlainObject = require('is-plain-object');
 import { IOptionsWithWindowOptionsWithResourceLoader } from './browser/resource-loader';
 
 import { LazyCookieJar, LazyCookie, RequestCookieJar } from './cookies';
@@ -85,6 +85,7 @@ export function fromURL(url: string | URL, options?: IFromUrlOptions): Promise<I
 		return _request(url, requestOptions)
 			.then((res: IResponse) =>
 			{
+				// @ts-ignore
 				return requestToJSDOM(res, parsedURL, options, requestOptions);
 			})
 			// @ts-ignore
@@ -121,6 +122,7 @@ export function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | strin
 {
 	if (typeof parsedURL == 'string')
 	{
+		// @ts-ignore
 		parsedURL = new URL(parsedURL);
 	}
 
@@ -136,6 +138,7 @@ export function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | strin
 	const transportLayerEncodingLabel = parsedContentType && parsedContentType.get("charset");
 
 	options = Object.assign(options, {
+		// @ts-ignore
 		url: res.request.href + parsedURL.hash,
 		contentType: res.headers["content-type"],
 		referrer: res.request.getHeader("referer"),
@@ -177,6 +180,7 @@ export function normalizeRequestOptions(options: IFromUrlOptions, _requestOption
 		gzip: true,
 		headers: {
 			"User-Agent": options.userAgent || DEFAULT_USER_AGENT,
+			// @ts-ignore
 			Referer: options.referrer,
 			Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 			"Accept-Language": "en"
@@ -226,6 +230,7 @@ export function normalizeFromURLOptions<T>(options: Partial<T & IFromUrlOptions>
 
 	if (options.referrer !== undefined)
 	{
+		// @ts-ignore
 		normalized.referrer = (new URL(options.referrer)).href;
 	}
 
@@ -246,8 +251,4 @@ export function normalizeFromURLOptions<T>(options: Partial<T & IFromUrlOptions>
 	// `fromURL` calls `new JSDOM(html, options)`.
 }
 
-
-
-import * as self from './from-url'
-
-export default self;
+export default exports as typeof import('./from-url');

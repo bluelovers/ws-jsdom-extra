@@ -2,7 +2,7 @@
  * Created by user on 2018/2/19/019.
  */
 
-import * as jQuery from 'jquery';
+import jQuery = require('jquery');
 export * from '../index';
 import { ClassProxyStatic, IClassProxyHandler } from 'class-proxy';
 // @ts-ignore
@@ -22,6 +22,7 @@ export interface IFromURLApi<T = IJSDOMC>
 }
 
 const __JSDOM = createClassProxy2(_JSDOM, {
+	// @ts-ignore
 	construct(target, args)
 	{
 		return createJSDOM(...args);

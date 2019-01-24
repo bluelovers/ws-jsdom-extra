@@ -2,8 +2,8 @@
  * Created by user on 2018/2/6/006.
  */
 
-import * as Promise from 'bluebird';
-import * as request from 'request-promise';
+import Promise = require('bluebird');
+import request = require('request-promise');
 import { ResponseRequest } from 'request';
 
 export { Promise, request }
@@ -17,6 +17,4 @@ export function array_unique(array: any[])
 	});
 }
 
-import * as self from './index';
-export default self;
-//export default exports;
+export default exports as typeof import('./index');

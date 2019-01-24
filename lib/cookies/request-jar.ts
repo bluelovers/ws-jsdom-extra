@@ -2,7 +2,7 @@
  * Created by user on 2018/2/15/015.
  */
 
-import * as toughCookie from 'tough-cookie';
+import toughCookie = require('tough-cookie');
 
 export { toughCookie }
 
@@ -37,11 +37,16 @@ export const RequestJar = _RequestJar as {
 
 import { LazyCookieJar } from '../cookies';
 
-import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
+// @ts-ignore
+//import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
 
-export declare function wrapCookieJarForRequest(cookieJar: LazyCookieJar): IRequestCookieJar<LazyCookieJar>;
-export declare function wrapCookieJarForRequest(cookieJar: CookieJar): IRequestCookieJar<CookieJar>;
-export declare function wrapCookieJarForRequest<T>(cookieJar: T): IRequestCookieJar<T>;
+const wrapCookieJarForRequest = _wrapCookieJarForRequest();
+
+import { JSDOM_ResourceLoader } from '../browser/resource-loader';
+
+//export declare function wrapCookieJarForRequest(cookieJar: LazyCookieJar): IRequestCookieJar<LazyCookieJar>;
+//export declare function wrapCookieJarForRequest(cookieJar: CookieJar): IRequestCookieJar<CookieJar>;
+//export declare function wrapCookieJarForRequest<T>(cookieJar: T): IRequestCookieJar<T>;
 
 export function unwrapCookieJarFromRequest<T = CookieJar | LazyCookieJar>(requestJar: IRequestCookieJar<T>)
 {
@@ -50,7 +55,16 @@ export function unwrapCookieJarFromRequest<T = CookieJar | LazyCookieJar>(reques
 
 export { wrapCookieJarForRequest }
 
-import * as self from './request-jar';
+export default exports as typeof import('./request-jar');
 
-export default self;
-//export default exports;
+function _wrapCookieJarForRequest(): typeof import("jsdom/lib/jsdom/living/helpers/wrap-cookie-jar-for-request")
+{
+	try
+	{
+		return require("jsdom/lib/jsdom/living/helpers/wrap-cookie-jar-for-request")
+	}
+	catch (e)
+	{
+		return require("jsdom/jsdom/living/helpers/wrap-cookie-jar-for-request")
+	}
+}

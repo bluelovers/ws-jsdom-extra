@@ -1,11 +1,11 @@
 /// <reference types="request-promise" />
 /// <reference types="bluebird" />
 /// <reference types="node" />
-import * as CoreRequest from 'request';
+import CoreRequest = require('request');
 import { JSDOM, toughCookie } from 'jsdom';
 import { IJSDOM, IOptionsJSDOM, URL, URLImpl } from './pack';
 import { Promise, request, ResponseRequest } from './index';
-import * as parseContentType from 'content-type-parser';
+import parseContentType = require('content-type-parser');
 import { LazyCookieJar, LazyCookie, RequestCookieJar } from './cookies';
 export { LazyCookieJar, LazyCookie };
 import { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar } from './cookies';
@@ -54,5 +54,5 @@ export interface IResponse extends ResponseRequest {
 export declare function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | string, options: Partial<IFromUrlOptions>, requestOptions?: IRequestOptions): T;
 export declare function normalizeRequestOptions(options: IFromUrlOptions, _requestOptions?: IRequestOptions): Partial<IRequestOptions>;
 export declare function normalizeFromURLOptions<T>(options: Partial<T & IFromUrlOptions>): Partial<T & IFromUrlOptions>;
-import * as self from './from-url';
-export default self;
+declare const _default: typeof import("./from-url");
+export default _default;
