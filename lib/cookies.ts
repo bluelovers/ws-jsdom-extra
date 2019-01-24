@@ -120,7 +120,7 @@ export class LazyCookieJar extends CookieJar
 		return new this(store, options, data, url);
 	}
 
-	wrapForRequest()
+	wrapForRequest(): IRequestCookieJar<LazyCookieJar>
 	{
 		return wrapCookieJarForRequest(this);
 	}
