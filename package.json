@@ -1,6 +1,6 @@
 {
   "name": "jsdom-extra",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "JSDOM with extra tweak ( jquery / cheerio / request )",
   "keywords": [
     "agent",
@@ -59,13 +59,13 @@
     "html-encoding-sniffer": "^1.0.2",
     "html-minifier": "^3.5.21",
     "is-plain-object": "^2.0.4",
-    "jsdom": "^13.2.0",
+    "jsdom": "13.2.0",
     "jsdom-url": "^2.2.0",
     "moment": "^2.24.0",
     "request": "^2.88.0",
     "request-cached": "^1.0.1",
     "request-promise": "^4.2.2",
-    "tough-cookie": "^3.0.0",
+    "tough-cookie": "^2.5.0",
     "whatwg-encoding": "^1.0.5"
   },
   "devDependencies": {
