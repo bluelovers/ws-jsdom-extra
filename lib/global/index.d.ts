@@ -1,4 +1,11 @@
+/**
+ * Created by user on 2018/2/7/007.
+ *
+ * jsdom-global
+ * global-jsdom
+ */
 /// <reference types="node" />
+/// <reference types="mocha" />
 export declare const KEYS: string[];
 import { DOMWindow } from 'jsdom';
 import { IConstructorOptions, IJSDOM, JSDOM } from '../pack';
@@ -18,7 +25,14 @@ export declare type IGlobalDocument = Document & {
 };
 export declare var global: Global;
 export interface IOptions {
+    /**
+     * jsdom class that can call with new JSDOM
+     */
     JSDOM: typeof JSDOM;
+    /**
+     * allow use exists jsdom or create function
+     * @returns {IJSDOM}
+     */
     createJSDOM: IJSDOM | {
         (...argv: any[]): IJSDOM;
     };

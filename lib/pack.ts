@@ -361,7 +361,7 @@ export function packJSDOM(jsdom: JSDOM): IJSDOM
 		fakeThen: {
 			get()
 			{
-				return function (cb: <T>(jsdom: IJSDOM) => T)
+				return function (this: IJSDOM, cb: <T>(jsdom: IJSDOM) => T)
 				{
 					return cb(this);
 				}

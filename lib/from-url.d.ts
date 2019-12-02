@@ -1,9 +1,13 @@
+/**
+ * Created by user on 2018/2/6/006.
+ */
 /// <reference types="request-promise" />
 /// <reference types="bluebird" />
 /// <reference types="node" />
 import CoreRequest = require('request');
 import { JSDOM, toughCookie } from 'jsdom';
-import { IJSDOM, IOptionsJSDOM, URL, URLImpl } from './pack';
+import { IJSDOM, IOptionsJSDOM } from './pack';
+import { URL, URLImpl } from 'jsdom-url';
 import { Promise, request, ResponseRequest } from './index';
 import parseContentType = require('content-type-parser');
 import { LazyCookieJar, LazyCookie, RequestCookieJar } from './cookies';
@@ -41,7 +45,7 @@ export interface IRequestOptions extends IRequestOptionsJSDOM {
 }
 export declare type IRequestJar = RequestCookieJar;
 export declare function fromURL(url: string | URL, options?: IFromUrlOptions): Promise<IJSDOM>;
-export interface IResponse extends ResponseRequest {
+export interface IResponse extends Omit<ResponseRequest, 'body'> {
     headers: {
         [key: string]: any;
     };
@@ -49,7 +53,7 @@ export interface IResponse extends ResponseRequest {
         href?: string;
         [key: string]: any;
     };
-    body: Buffer;
+    body: Buffer | string;
 }
 export declare function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | string, options: Partial<IFromUrlOptions>, requestOptions?: IRequestOptions): T;
 export declare function normalizeRequestOptions(options: IFromUrlOptions, _requestOptions?: IRequestOptions): Partial<IRequestOptions>;

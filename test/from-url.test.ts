@@ -159,11 +159,13 @@ describe(relative(__filename), () =>
 				"resolveWithFullResponse": true,
 			};
 
+			// @ts-ignore
 			let url =  new URL(options.url);
 
 			// @ts-ignore
 			let jsdom: IJSDOM = requestToJSDOM({
 				headers: {},
+				// @ts-ignore
 				body: '',
 				request: {
 					href: url.href,

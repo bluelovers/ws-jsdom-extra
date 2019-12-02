@@ -1,3 +1,6 @@
+/**
+ * Created by user on 2018/4/29/029.
+ */
 import IJSDOM_ResourceLoader = require('jsdom/lib/jsdom/browser/resources/resource-loader');
 declare let JSDOM_ResourceLoader: any;
 export declare type IOptionsWithWindowOptionsWithResourceLoader = {

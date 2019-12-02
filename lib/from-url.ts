@@ -6,7 +6,8 @@ import CoreRequest = require('request');
 import { JSDOM, FromUrlOptions, toughCookie } from 'jsdom';
 import deepmerge = require('deepmerge-plus');
 
-import { IConstructorOptions, IJSDOM, IOptions, IOptionsJSDOM, isPackedJSDOM, packJSDOM, packOptions, URL, URLImpl } from './pack';
+import { IConstructorOptions, IJSDOM, IOptions, IOptionsJSDOM, isPackedJSDOM, packJSDOM, packOptions } from './pack';
+import { URL, URLImpl } from 'jsdom-url';
 import { Promise, request, ResponseRequest } from './index';
 import parseContentType = require('content-type-parser');
 import isPlainObject = require('is-plain-object');
@@ -106,7 +107,7 @@ export function fromURL(url: string | URL, options?: IFromUrlOptions): Promise<I
 	});
 }
 
-export interface IResponse extends ResponseRequest
+export interface IResponse extends Omit<ResponseRequest, 'body'>
 {
 	headers: {
 		[key: string]: any,
@@ -115,7 +116,7 @@ export interface IResponse extends ResponseRequest
 		href?: string;
 		[key: string]: any,
 	}
-	body: Buffer,
+	body: Buffer | string,
 }
 
 export function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | string, options: Partial<IFromUrlOptions>, requestOptions?: IRequestOptions): T
@@ -145,7 +146,7 @@ export function requestToJSDOM<T = JSDOM>(res: IResponse, parsedURL: URL | strin
 		//[transportLayerEncodingLabelHiddenOption]: transportLayerEncodingLabel
 	});
 
-	let body = normalizeHTML(res.body, transportLayerEncodingLabel).html;
+	let body = normalizeHTML(res.body as any, transportLayerEncodingLabel).html;
 
 	if (options.minifyHTML)
 	{
@@ -206,6 +207,7 @@ export function normalizeRequestOptions(options: IFromUrlOptions, _requestOption
 
 				if (bool && typeof value == 'object' && !Array.isArray(value))
 				{
+					// @ts-ignore
 					bool = isPlainObject(value);
 				}
 

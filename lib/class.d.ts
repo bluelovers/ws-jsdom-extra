@@ -1,4 +1,8 @@
+/**
+ * Created by user on 2018/2/19/019.
+ */
 /// <reference types="bluebird" />
+/// <reference types="jquery" />
 export * from '../index';
 import { ClassProxyStatic } from 'class-proxy';
 import { Promise } from './index';

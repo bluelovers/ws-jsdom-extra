@@ -1,3 +1,6 @@
+/**
+ * Created by user on 2018/2/7/007.
+ */
 import toughCookie = require('tough-cookie');
 export { toughCookie };
 import { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar } from './cookies/request-jar';

@@ -17,6 +17,7 @@ describe(relative(__filename), () =>
 
 	beforeEach(function ()
 	{
+		// @ts-ignore
 		currentTest = this.currentTest as ITest;
 
 		//console.log('it:before', currentTest.title);

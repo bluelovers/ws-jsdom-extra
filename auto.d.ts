@@ -1,3 +1,7 @@
+/**
+ * Created by user on 2018/2/6/006.
+ */
+/// <reference types="jquery" />
 /// <reference types="node" />
 export * from 'jsdom';
 import { BinaryData, JSDOM as _JSDOM } from 'jsdom';

@@ -1,3 +1,7 @@
+/**
+ * Created by user on 2018/2/6/006.
+ */
+/// <reference types="jquery" />
 /// <reference types="node" />
 /// <reference types="bluebird" />
 import { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, BinaryData, DOMWindow, FromFileOptions } from 'jsdom';
@@ -18,7 +22,17 @@ export interface IOptions {
     url?: string | URL;
     referrer?: string | URL;
     virtualConsole?: VirtualConsole | false;
+    /**
+     * userAgent affects the value read from navigator.userAgent, as well as the User-Agent header sent while fetching subresources.
+     * It defaults to `Mozilla/5.0 (${process.platform}) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/${jsdomVersion}`.
+     */
     userAgent?: string;
+    /**
+     * includeNodeLocations preserves the location info produced by the HTML parser,
+     * allowing you to retrieve it with the nodeLocation() method (described below).
+     * It defaults to false to give the best performance,
+     * and cannot be used with an XML content type since our XML parser does not support location info.
+     */
     includeNodeLocations?: boolean;
     runScripts?: 'dangerously' | 'outside-only';
     resources?: 'usable';
