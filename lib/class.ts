@@ -7,9 +7,9 @@ export * from '../index';
 import { ClassProxyStatic, IClassProxyHandler } from 'class-proxy';
 // @ts-ignore
 import { createClassProxy2 } from 'class-proxy';
-import { Promise } from './index';
-import PACK, { createJSDOM, URL, IJSDOM, packJSDOM, fromFile, fromURL, IFromUrlOptions, IJSDOM_Symbol_Options } from './pack';
+import { createJSDOM, URL, IJSDOM, packJSDOM, fromFile, fromURL, IFromUrlOptions, IJSDOM_Symbol_Options } from './pack';
 import { JSDOM as _JSDOM } from 'jsdom';
+import { Bluebird } from './util/bluebird';
 
 export type IJSDOM_STATIC = ClassProxyStatic<IJSDOM> & typeof _JSDOM & {
 	fromFile: typeof fromFile;
@@ -18,7 +18,7 @@ export type IJSDOM_STATIC = ClassProxyStatic<IJSDOM> & typeof _JSDOM & {
 
 export interface IFromURLApi<T = IJSDOMC>
 {
-	(url: string | URL, options?: IFromUrlOptions): Promise<T>
+	(url: string | URL, options?: IFromUrlOptions): Bluebird<T>
 }
 
 const __JSDOM = createClassProxy2(_JSDOM, {

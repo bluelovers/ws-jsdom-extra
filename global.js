@@ -4,4 +4,4 @@
  */
 const global_1 = require("./lib/global");
 module.exports = global_1.globalJsdom;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2xvYmFsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZ2xvYmFsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTs7R0FFRztBQUVILHlDQUEyQztBQUMzQyxpQkFBUyxvQkFBVyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBDcmVhdGVkIGJ5IHVzZXIgb24gMjAxOC8yLzcvMDA3LlxuICovXG5cbmltcG9ydCB7IGdsb2JhbEpzZG9tIH0gZnJvbSAnLi9saWIvZ2xvYmFsJztcbmV4cG9ydCA9IGdsb2JhbEpzZG9tO1xuIl19
+//# sourceMappingURL=global.js.map

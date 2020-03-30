@@ -9,5 +9,3 @@ export declare const DEFAULT_HTML = "<html><head></head><body></body></html>";
 export declare const DEFAULT_HTML2 = "<!doctype html><html><head><meta charset=\"utf-8\"></head><body></body></html>";
 export declare const RUN_SCRIPTS_DANGEROUSLY = "dangerously";
 export declare const RUN_SCRIPTS_OUTSIDE_ONLY = "outside-only";
-declare const _default: typeof import("./const");
-export default _default;

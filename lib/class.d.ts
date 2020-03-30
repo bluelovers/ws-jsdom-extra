@@ -5,15 +5,15 @@
 /// <reference types="jquery" />
 export * from '../index';
 import { ClassProxyStatic } from 'class-proxy';
-import { Promise } from './index';
 import { IJSDOM, fromFile, IFromUrlOptions, IJSDOM_Symbol_Options } from './pack';
 import { JSDOM as _JSDOM } from 'jsdom';
+import { Bluebird } from './util/bluebird';
 export declare type IJSDOM_STATIC = ClassProxyStatic<IJSDOM> & typeof _JSDOM & {
     fromFile: typeof fromFile;
     fromURL: IFromURLApi;
 };
 export interface IFromURLApi<T = IJSDOMC> {
-    (url: string | URL, options?: IFromUrlOptions): Promise<T>;
+    (url: string | URL, options?: IFromUrlOptions): Bluebird<T>;
 }
 export declare const JSDOM: typeof IJSDOMC;
 export declare class IJSDOMC extends _JSDOM {

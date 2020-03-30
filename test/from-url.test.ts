@@ -10,7 +10,7 @@ import { chai, relative, expect, path, assert, util, mochaAsync } from './_local
 import { describe, before, beforeEach, it, ITest } from 'mocha';
 
 import { IFromUrlOptions, normalizeFromURLOptions, CookieJar, DEFAULT_USER_AGENT, normalizeRequestOptions, wrapCookieJarForRequest, requestToJSDOM, URL, LazyCookieJar } from '../lib/from-url';
-import * as Consts from '../lib/const';
+import * as CONSTS from '../lib/const';
 
 // @ts-ignore
 describe(relative(__filename), () =>
@@ -97,7 +97,7 @@ describe(relative(__filename), () =>
 					"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 					"Accept-Language": "en",
 					"Referer": undefined,
-					"User-Agent": Consts.DEFAULT_USER_AGENT,
+					"User-Agent": CONSTS.DEFAULT_USER_AGENT,
 				},
 				"jar": wrapCookieJarForRequest(new LazyCookieJar()),
 				"method": "POST",
@@ -152,7 +152,7 @@ describe(relative(__filename), () =>
 					"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 					"Accept-Language": "en",
 					"Referer": undefined,
-					"User-Agent": Consts.DEFAULT_USER_AGENT,
+					"User-Agent": CONSTS.DEFAULT_USER_AGENT,
 				},
 				"jar": wrapCookieJarForRequest(new LazyCookieJar()),
 				"method": "POST",

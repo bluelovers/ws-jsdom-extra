@@ -23,14 +23,15 @@ import { IOptionsCreateQuery, createQuery } from './query';
 import { ICookieJar, IFromUrlOptions, IRequestOptions } from './from-url';
 
 export { fromURL } from './from-url';
-import { Promise, array_unique } from './index';
+import { array_unique } from 'array-hyper-unique';
 
-export { Promise }
 export { URL, URLImpl }
 export { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, DOMWindow }
 
 export * from './const';
-import CONSTS, { SYMBOL_RAW } from './const';
+import { SYMBOL_RAW } from './const';
+import * as CONSTS from './const';
+import { Bluebird } from './util/bluebird';
 
 export const JSDOM_PROTOTYPE_COPY = Object.assign({}, JSDOM.prototype);
 
@@ -148,17 +149,17 @@ export function createJSDOM(html?: string | Buffer | BinaryData, options: IConst
 	return jsdom;
 }
 
-export function asyncJSDOM(html?: string | Buffer | BinaryData, options: IConstructorOptions = {}): Promise<IJSDOM>
+export function asyncJSDOM(html?: string | Buffer | BinaryData, options: IConstructorOptions = {}): Bluebird<IJSDOM>
 {
-	return Promise.resolve().then(function ()
+	return Bluebird.resolve().then(function ()
 	{
 		return createJSDOM(html, options);
 	});
 }
 
-export function fromFile(url: string, options?: IFromFileOptions): Promise<IJSDOM>
+export function fromFile(url: string, options?: IFromFileOptions): Bluebird<IJSDOM>
 {
-	return Promise.resolve().then(function ()
+	return Bluebird.resolve().then(function ()
 	{
 		let opts = {};
 
@@ -168,6 +169,7 @@ export function fromFile(url: string, options?: IFromFileOptions): Promise<IJSDO
 		});
 
 		return JSDOM.fromFile(url, options)
+			// @ts-ignore
 			.then(function (jsdom: IJSDOM)
 			{
 				if (!isPackedJSDOM(jsdom))
@@ -372,4 +374,4 @@ export function packJSDOM(jsdom: JSDOM): IJSDOM
 	return jsdom as IJSDOM;
 }
 
-export default exports as typeof import('./pack');
+//export default exports as typeof import('./pack');

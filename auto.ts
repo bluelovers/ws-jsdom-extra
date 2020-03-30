@@ -7,7 +7,7 @@ import { BinaryData, JSDOM as _JSDOM } from 'jsdom';
 import { URL } from 'jsdom-url';
 export { URL }
 
-import pack, {
+import {
 	IJSDOM, auto, packOptions, IJSDOM_Symbol_Options,
 	IConstructorOptions,
 

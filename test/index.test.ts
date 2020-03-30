@@ -8,7 +8,7 @@ import { chai, relative, expect, path, assert, util } from './_local-dev';
 import { describe, before, beforeEach, it, ITest } from 'mocha';
 
 import { JSDOM, createJSDOM, isPackedJSDOM, SYMBOL_RAW } from '..';
-import CONSTS from '../lib/const';
+import * as CONSTS from '../lib/const';
 
 // @ts-ignore
 describe(relative(__filename), () =>

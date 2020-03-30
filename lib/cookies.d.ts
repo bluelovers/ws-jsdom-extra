@@ -4,9 +4,8 @@
 import toughCookie = require('tough-cookie');
 export { toughCookie };
 import { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar } from './cookies/request-jar';
+import moment from './util/moment';
 export { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar };
-import moment = require('moment');
-export { moment };
 export declare class LazyCookie extends toughCookie.Cookie {
     constructor(prop?: Partial<LazyCookie.Properties>, ...argv: any[]);
     static create(prop?: Partial<LazyCookie.Properties>, ...argv: any[]): LazyCookie;
@@ -18,7 +17,7 @@ export declare class LazyCookieJar extends CookieJar {
     store?: toughCookie.Store;
     constructor(store?: any, options?: {}, data?: {}, url?: string | URL);
     setData(data?: {}, url?: string | URL): this;
-    setCookieSync(cookieOrString: LazyCookie.Properties | toughCookie.Cookie | string, currentUrl?: string | URL, options?: toughCookie.CookieJar.SetCookieOptions, ...argv: any[]): any;
+    setCookieSync(cookieOrString: LazyCookie.Properties | toughCookie.Cookie | string, currentUrl?: string | URL, options?: toughCookie.CookieJar.SetCookieOptions, ...argv: any[]): void;
     static create(store?: any, options?: {}, data?: {}, url?: string | URL): LazyCookieJar;
     wrapForRequest(): IRequestCookieJar<LazyCookieJar>;
     static unwrapFromRequest(jar: RequestCookieJar): CookieJar | LazyCookieJar;

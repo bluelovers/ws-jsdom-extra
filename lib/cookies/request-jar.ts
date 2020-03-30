@@ -55,7 +55,7 @@ export function unwrapCookieJarFromRequest<T = CookieJar | LazyCookieJar>(reques
 
 export { wrapCookieJarForRequest }
 
-export default exports as typeof import('./request-jar');
+//export default exports as typeof import('./request-jar');
 
 function _wrapCookieJarForRequest(): typeof import("jsdom/lib/jsdom/living/helpers/wrap-cookie-jar-for-request")
 {

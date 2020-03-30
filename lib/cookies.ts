@@ -3,17 +3,15 @@
  */
 
 import toughCookie = require('tough-cookie');
-import request = require('request');
+
 export { toughCookie }
 
 import { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar } from './cookies/request-jar';
-export { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar }
-
 import { URL } from './pack';
 
-import moment = require('moment');
+import moment from './util/moment';
 
-export { moment }
+export { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar }
 
 export class LazyCookie extends toughCookie.Cookie
 {

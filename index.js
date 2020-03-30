@@ -2,20 +2,28 @@
 /**
  * Created by user on 2018/2/6/006.
  */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) __createBinding(exports, m, p);
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("./lib/pack"));
+exports.JSDOM = exports.requestToJSDOM = exports.wrapCookieJarForRequest = exports.RequestJar = exports.CookieJar = exports.LazyCookieJar = exports.LazyCookie = void 0;
+__exportStar(require("./lib/pack"), exports);
 const cookies_1 = require("./lib/cookies");
-exports.LazyCookie = cookies_1.LazyCookie;
-exports.LazyCookieJar = cookies_1.LazyCookieJar;
+Object.defineProperty(exports, "LazyCookie", { enumerable: true, get: function () { return cookies_1.LazyCookie; } });
+Object.defineProperty(exports, "LazyCookieJar", { enumerable: true, get: function () { return cookies_1.LazyCookieJar; } });
 const from_url_1 = require("./lib/from-url");
-exports.CookieJar = from_url_1.CookieJar;
-exports.RequestJar = from_url_1.RequestJar;
-exports.wrapCookieJarForRequest = from_url_1.wrapCookieJarForRequest;
-exports.requestToJSDOM = from_url_1.requestToJSDOM;
+Object.defineProperty(exports, "CookieJar", { enumerable: true, get: function () { return from_url_1.CookieJar; } });
+Object.defineProperty(exports, "RequestJar", { enumerable: true, get: function () { return from_url_1.RequestJar; } });
+Object.defineProperty(exports, "wrapCookieJarForRequest", { enumerable: true, get: function () { return from_url_1.wrapCookieJarForRequest; } });
+Object.defineProperty(exports, "requestToJSDOM", { enumerable: true, get: function () { return from_url_1.requestToJSDOM; } });
 const pack_1 = require("./lib/pack");
-exports.JSDOM = pack_1.JSDOM;
+Object.defineProperty(exports, "JSDOM", { enumerable: true, get: function () { return pack_1.JSDOM; } });
 exports.default = pack_1.JSDOM;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUE7O0dBRUc7Ozs7O0FBRUgsZ0NBQTJCO0FBRzNCLDJDQUEwRDtBQUNqRCxxQkFEQSxvQkFBVSxDQUNBO0FBQUUsd0JBREEsdUJBQWEsQ0FDQTtBQUVsQyw2Q0FBbUg7QUFDMUcsb0JBREEsb0JBQVMsQ0FDQTtBQUFFLHFCQURBLHFCQUFVLENBQ0E7QUFBRSxrQ0FEQSxrQ0FBdUIsQ0FDQTtBQUFxQix5QkFEQSx5QkFBYyxDQUNBO0FBRTFGLHFDQUFtQztBQUMxQixnQkFEQSxZQUFLLENBQ0E7QUFDZCxrQkFBZSxZQUFLLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENyZWF0ZWQgYnkgdXNlciBvbiAyMDE4LzIvNi8wMDYuXG4gKi9cblxuZXhwb3J0ICogZnJvbSAnLi9saWIvcGFjayc7XG5pbXBvcnQgeyBJT3B0aW9uc1dpdGhXaW5kb3dPcHRpb25zV2l0aFJlc291cmNlTG9hZGVyLCBCYXNlUmVzb3VyY2VMb2FkZXIgfSBmcm9tICcuL2xpYi9icm93c2VyL3Jlc291cmNlLWxvYWRlcic7XG5cbmltcG9ydCB7IExhenlDb29raWUsIExhenlDb29raWVKYXIgfSBmcm9tICcuL2xpYi9jb29raWVzJztcbmV4cG9ydCB7IExhenlDb29raWUsIExhenlDb29raWVKYXIgfVxuXG5pbXBvcnQgeyBDb29raWVKYXIsIFJlcXVlc3RKYXIsIHdyYXBDb29raWVKYXJGb3JSZXF1ZXN0LCBJUmVxdWVzdENvb2tpZUphciwgcmVxdWVzdFRvSlNET00gfSBmcm9tICcuL2xpYi9mcm9tLXVybCc7XG5leHBvcnQgeyBDb29raWVKYXIsIFJlcXVlc3RKYXIsIHdyYXBDb29raWVKYXJGb3JSZXF1ZXN0LCBJUmVxdWVzdENvb2tpZUphciwgcmVxdWVzdFRvSlNET00gfVxuXG5pbXBvcnQgeyBKU0RPTSB9IGZyb20gJy4vbGliL3BhY2snO1xuZXhwb3J0IHsgSlNET00gfVxuZXhwb3J0IGRlZmF1bHQgSlNET007XG4iXX0=
+//# sourceMappingURL=index.js.map

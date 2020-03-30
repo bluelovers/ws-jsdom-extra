@@ -1,14 +1,13 @@
 /**
  * Created by user on 2018/2/6/006.
  */
-/// <reference types="request-promise" />
 /// <reference types="bluebird" />
 /// <reference types="node" />
 import CoreRequest = require('request');
 import { JSDOM, toughCookie } from 'jsdom';
 import { IJSDOM, IOptionsJSDOM } from './pack';
 import { URL, URLImpl } from 'jsdom-url';
-import { Promise, request, ResponseRequest } from './index';
+import request, { ResponseRequest } from './util/request';
 import parseContentType = require('content-type-parser');
 import { LazyCookieJar, LazyCookie, RequestCookieJar } from './cookies';
 export { LazyCookieJar, LazyCookie };
@@ -17,6 +16,7 @@ export { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar };
 export { parseContentType };
 export { URL, URLImpl };
 export { DEFAULT_USER_AGENT } from './const';
+import { Bluebird } from './util/bluebird';
 export { toughCookie };
 export declare type ICookieJar = Partial<CookieJar> | Partial<LazyCookieJar>;
 export interface IFromUrlOptions extends IOptionsJSDOM {
@@ -44,7 +44,7 @@ export interface IRequestOptions extends IRequestOptionsJSDOM {
     };
 }
 export declare type IRequestJar = RequestCookieJar;
-export declare function fromURL(url: string | URL, options?: IFromUrlOptions): Promise<IJSDOM>;
+export declare function fromURL(url: string | URL, options?: IFromUrlOptions): Bluebird<IJSDOM>;
 export interface IResponse extends Omit<ResponseRequest, 'body'> {
     headers: {
         [key: string]: any;

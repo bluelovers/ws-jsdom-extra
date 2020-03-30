@@ -48,4 +48,4 @@ export function createQuery(jsdom, options: IOptionsCreateQuery = {}): Partial<J
 	throw new ReferenceError(`can't found module "jquery" or "cheerio"`)
 }
 
-export default exports as typeof import('./query');
+//export default exports as typeof import('./query');

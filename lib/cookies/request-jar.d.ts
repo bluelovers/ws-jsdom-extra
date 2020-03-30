@@ -16,5 +16,3 @@ import { LazyCookieJar } from '../cookies';
 declare const wrapCookieJarForRequest: any;
 export declare function unwrapCookieJarFromRequest<T = CookieJar | LazyCookieJar>(requestJar: IRequestCookieJar<T>): T;
 export { wrapCookieJarForRequest };
-declare const _default: typeof import("./request-jar");
-export default _default;

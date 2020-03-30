@@ -8,7 +8,7 @@ import deepmerge = require('deepmerge-plus');
 
 import { IConstructorOptions, IJSDOM, IOptions, IOptionsJSDOM, isPackedJSDOM, packJSDOM, packOptions } from './pack';
 import { URL, URLImpl } from 'jsdom-url';
-import { Promise, request, ResponseRequest } from './index';
+import request, { ResponseRequest } from './util/request';
 import parseContentType = require('content-type-parser');
 import isPlainObject = require('is-plain-object');
 import { IOptionsWithWindowOptionsWithResourceLoader } from './browser/resource-loader';
@@ -26,6 +26,7 @@ export { DEFAULT_USER_AGENT } from './const';
 import { DEFAULT_USER_AGENT, SYMBOL_RAW } from './const';
 
 import { minifyHTML, normalizeHTML } from './html';
+import { Bluebird } from './util/bluebird';
 
 export { toughCookie }
 
@@ -64,9 +65,9 @@ export interface IRequestOptions extends IRequestOptionsJSDOM
 
 export type IRequestJar = RequestCookieJar;
 
-export function fromURL(url: string | URL, options?: IFromUrlOptions): Promise<IJSDOM>
+export function fromURL(url: string | URL, options?: IFromUrlOptions): Bluebird<IJSDOM>
 {
-	return Promise.resolve().then(function ()
+	return Bluebird.resolve().then(function ()
 	{
 		const parsedURL = new URL(url);
 		url = parsedURL.href as string;

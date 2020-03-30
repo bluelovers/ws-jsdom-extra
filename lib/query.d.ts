@@ -9,5 +9,3 @@ export interface IOptionsCreateQuery {
     disableCheerio?: boolean;
 }
 export declare function createQuery(jsdom: any, options?: IOptionsCreateQuery): Partial<JQueryStatic>;
-declare const _default: typeof import("./query");
-export default _default;

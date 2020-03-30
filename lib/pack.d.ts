@@ -11,11 +11,10 @@ import { LazyCookieJar } from './cookies';
 import { IOptionsCreateQuery } from './query';
 import { ICookieJar, IFromUrlOptions, IRequestOptions } from './from-url';
 export { fromURL } from './from-url';
-import { Promise } from './index';
-export { Promise };
 export { URL, URLImpl };
 export { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, DOMWindow };
 export * from './const';
+import { Bluebird } from './util/bluebird';
 export declare const JSDOM_PROTOTYPE_COPY: JSDOM;
 export interface IOptions {
     beforeParse?(window: DOMWindow, jsdom?: IJSDOM): void;
@@ -69,13 +68,11 @@ export interface IJSDOM_EXTEND extends JSDOM {
 export declare type IJSDOM = JSDOM & IJSDOM_EXTEND;
 export declare function auto(JSDOM: any): any;
 export declare function createJSDOM(html?: string | Buffer | BinaryData, options?: IConstructorOptions): IJSDOM;
-export declare function asyncJSDOM(html?: string | Buffer | BinaryData, options?: IConstructorOptions): Promise<IJSDOM>;
-export declare function fromFile(url: string, options?: IFromFileOptions): Promise<IJSDOM>;
+export declare function asyncJSDOM(html?: string | Buffer | BinaryData, options?: IConstructorOptions): Bluebird<IJSDOM>;
+export declare function fromFile(url: string, options?: IFromFileOptions): Bluebird<IJSDOM>;
 export interface IPackOptionsHookCallback<T> {
     (opts: Partial<T & IOptionsJSDOM>, window?: DOMWindow, jsdom?: JSDOM): any;
 }
 export declare function packOptions<T>(options?: Partial<T & IOptionsJSDOM>, cb?: IPackOptionsHookCallback<T>): Partial<T & IOptionsJSDOM>;
 export declare function isPackedJSDOM(jsdom: any): boolean;
 export declare function packJSDOM(jsdom: JSDOM): IJSDOM;
-declare const _default: typeof import("./pack");
-export default _default;
