@@ -1,27 +1,19 @@
 /**
  * Created by user on 2018/2/7/007.
  */
+/// <reference types="moment" />
 import toughCookie = require('tough-cookie');
+import { LazyCookieJar as LazyCookieJar2, LazyCookie } from 'lazy-cookies';
 export { toughCookie };
 import { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar } from './cookies/request-jar';
 import moment from './util/moment';
 export { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar };
-export declare class LazyCookie extends toughCookie.Cookie {
-    constructor(prop?: Partial<LazyCookie.Properties>, ...argv: any[]);
-    static create(prop?: Partial<LazyCookie.Properties>, ...argv: any[]): LazyCookie;
-}
+export { LazyCookie };
 export declare type RequestCookieJar = IRequestCookieJar<CookieJar | LazyCookieJar>;
-export declare class LazyCookieJar extends CookieJar {
-    enableLooseMode?: boolean;
-    rejectPublicSuffixes?: boolean;
-    store?: toughCookie.Store;
-    constructor(store?: any, options?: {}, data?: {}, url?: string | URL);
-    setData(data?: {}, url?: string | URL): this;
-    setCookieSync(cookieOrString: LazyCookie.Properties | toughCookie.Cookie | string, currentUrl?: string | URL, options?: toughCookie.CookieJar.SetCookieOptions, ...argv: any[]): void;
+export declare class LazyCookieJar extends LazyCookieJar2 {
     static create(store?: any, options?: {}, data?: {}, url?: string | URL): LazyCookieJar;
     wrapForRequest(): IRequestCookieJar<LazyCookieJar>;
     static unwrapFromRequest(jar: RequestCookieJar): CookieJar | LazyCookieJar;
-    getAllCookies(): toughCookie.Cookie[];
 }
 export declare namespace LazyCookie {
     interface Properties {

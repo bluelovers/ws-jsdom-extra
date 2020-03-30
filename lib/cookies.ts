@@ -3,6 +3,7 @@
  */
 
 import toughCookie = require('tough-cookie');
+import { LazyCookieJar as LazyCookieJar2, LazyCookie } from 'lazy-cookies';
 
 export { toughCookie }
 
@@ -13,6 +14,9 @@ import moment from './util/moment';
 
 export { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar }
 
+export { LazyCookie }
+
+/*
 export class LazyCookie extends toughCookie.Cookie
 {
 	constructor(prop: Partial<LazyCookie.Properties> = {}, ...argv)
@@ -45,73 +49,12 @@ export class LazyCookie extends toughCookie.Cookie
 	}
 }
 
+ */
+
 export type RequestCookieJar = IRequestCookieJar<CookieJar | LazyCookieJar>
 
-export class LazyCookieJar extends CookieJar
+export class LazyCookieJar extends LazyCookieJar2
 {
-	enableLooseMode?: boolean;
-	rejectPublicSuffixes?: boolean;
-	public store?: toughCookie.Store;
-
-	constructor(store?, options = {}, data = {}, url?: string | URL)
-	{
-		super(store, options);
-
-		this.setData(data, url);
-	}
-
-	setData(data = {}, url?: string | URL)
-	{
-		url = (url || '').toString();
-
-		for (let key in data)
-		{
-			if (data[key] === null || typeof data[key] != 'object')
-			{
-				this.setCookieSync(new LazyCookie({
-					key,
-					value: data[key],
-				}), url);
-			}
-			else if (data[key] instanceof toughCookie.Cookie)
-			{
-				this.setCookieSync(data[key], url);
-			}
-			else if (data[key])
-			{
-				this.setCookieSync(new LazyCookie(data[key]), url);
-			}
-		}
-
-		return this;
-	}
-
-	setCookieSync(cookieOrString: LazyCookie.Properties | toughCookie.Cookie | string, currentUrl?: string | URL, options: toughCookie.CookieJar.SetCookieOptions = {}, ...argv)
-	{
-		if (typeof cookieOrString == 'string')
-		{
-			cookieOrString = toughCookie.Cookie.parse(cookieOrString);
-		}
-		else if (!(cookieOrString instanceof toughCookie.Cookie))
-		{
-			cookieOrString = new LazyCookie(cookieOrString);
-		}
-
-		if (!currentUrl)
-		{
-			if (cookieOrString instanceof toughCookie.Cookie)
-			{
-				currentUrl = `http://` + cookieOrString.canonicalizedDomain();
-			}
-		}
-		else if (typeof currentUrl != 'string')
-		{
-			currentUrl = currentUrl.toString();
-		}
-
-		// @ts-ignore
-		return super.setCookieSync(cookieOrString as toughCookie.Cookie, currentUrl as string, options, ...argv)
-	}
 
 	static create(store?, options = {}, data = {}, url?: string | URL)
 	{
@@ -128,17 +71,6 @@ export class LazyCookieJar extends CookieJar
 		return jar._jar;
 	}
 
-	getAllCookies()
-	{
-		let cookies: toughCookie.Cookie[];
-
-		this.store.getAllCookies(function (err, cookie)
-		{
-			cookies = cookie;
-		});
-
-		return cookies;
-	}
 }
 
 /*
