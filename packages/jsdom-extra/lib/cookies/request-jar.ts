@@ -42,8 +42,6 @@ import { LazyCookieJar } from '../cookies';
 
 const wrapCookieJarForRequest = _wrapCookieJarForRequest();
 
-import { JSDOM_ResourceLoader } from '@jsdom-extra/resource-loader';
-
 //export declare function wrapCookieJarForRequest(cookieJar: LazyCookieJar): IRequestCookieJar<LazyCookieJar>;
 //export declare function wrapCookieJarForRequest(cookieJar: CookieJar): IRequestCookieJar<CookieJar>;
 //export declare function wrapCookieJarForRequest<T>(cookieJar: T): IRequestCookieJar<T>;

@@ -7,6 +7,7 @@ exports.JSDOM_ResourceLoader = exports.abstractResourceLoader = exports.BaseReso
 const resource_loader_1 = require("@jsdom-extra/resource-loader");
 Object.defineProperty(exports, "BaseResourceLoader", { enumerable: true, get: function () { return resource_loader_1.BaseResourceLoader; } });
 Object.defineProperty(exports, "abstractResourceLoader", { enumerable: true, get: function () { return resource_loader_1.abstractResourceLoader; } });
-Object.defineProperty(exports, "JSDOM_ResourceLoader", { enumerable: true, get: function () { return resource_loader_1.JSDOM_ResourceLoader; } });
+const resource_loader_2 = require("@jsdom-extra/resource-loader/resource-loader");
+Object.defineProperty(exports, "JSDOM_ResourceLoader", { enumerable: true, get: function () { return resource_loader_2.JSDOM_ResourceLoader; } });
 exports.default = resource_loader_1.BaseResourceLoader;
 //# sourceMappingURL=resource-loader.js.map

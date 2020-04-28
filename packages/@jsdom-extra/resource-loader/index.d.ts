@@ -1,12 +1,10 @@
 /**
  * Created by user on 2020/4/29.
  */
-import IJSDOM_ResourceLoader from 'jsdom/lib/jsdom/browser/resources/resource-loader';
-export declare function getJSDOMResourceLoader(): typeof import('jsdom/lib/jsdom/browser/resources/resource-loader');
-declare let JSDOM_ResourceLoader: any;
+import { IJSDOM_ResourceLoader } from './resource-loader';
 export declare type IOptionsWithWindowOptionsWithResourceLoader = {
     windowOptions?: {
-        resourceLoader?: typeof IJSDOM_ResourceLoader | BaseResourceLoader | any;
+        resourceLoader?: IJSDOM_ResourceLoader | BaseResourceLoader | any;
     };
 };
 export declare abstract class abstractResourceLoader {
@@ -44,6 +42,5 @@ export interface IResourceLoader {
     download(url: any, options?: any, callback?: any): any;
     load(element: any, urlString?: any, options?: any, callback?: any): any;
 }
-export declare type ITypeResourceLoader<T> = T extends abstractResourceLoader ? abstractResourceLoader : T extends typeof IJSDOM_ResourceLoader ? typeof IJSDOM_ResourceLoader : any;
-export { JSDOM_ResourceLoader };
+export declare type ITypeResourceLoader<T> = T extends abstractResourceLoader ? abstractResourceLoader : T extends IJSDOM_ResourceLoader ? IJSDOM_ResourceLoader : any;
 export default BaseResourceLoader;

@@ -5,8 +5,9 @@
 import {
 	BaseResourceLoader, IOptionsWithWindowOptionsWithResourceLoader,
 	abstractResourceLoader,
-	IOptionsResourceLoader, IResourceLoader, ITypeResourceLoader, JSDOM_ResourceLoader,
+	IOptionsResourceLoader, IResourceLoader, ITypeResourceLoader,
 } from '@jsdom-extra/resource-loader';
+import { JSDOM_ResourceLoader } from '@jsdom-extra/resource-loader/resource-loader';
 
 export {
 	BaseResourceLoader, IOptionsWithWindowOptionsWithResourceLoader,
