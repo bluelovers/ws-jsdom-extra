@@ -30,7 +30,7 @@ export { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, DOMW
 export * from './const';
 import { SYMBOL_RAW } from './const';
 import * as CONSTS from './const';
-import { Bluebird } from './util/bluebird';
+import Bluebird from 'bluebird';
 import { minifyHTML } from '@jsdom-extra/html-util/minify';
 import { normalizeHTML } from '@jsdom-extra/html-util/normalize';
 import { IOptionsWithWindowOptionsWithResourceLoader } from '@jsdom-extra/resource-loader';

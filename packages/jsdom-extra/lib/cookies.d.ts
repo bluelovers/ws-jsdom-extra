@@ -2,12 +2,11 @@
  * Created by user on 2018/2/7/007.
  */
 /// <reference types="jsdom" />
-/// <reference types="moment" />
 import toughCookie from 'tough-cookie';
 import { LazyCookie, LazyCookieJar as LazyCookieJar2 } from 'lazy-cookies';
 export { toughCookie };
 import { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar } from './cookies/request-jar';
-import moment from './util/moment';
+import moment from 'moment';
 export { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar };
 export { LazyCookie };
 export declare type RequestCookieJar = IRequestCookieJar<CookieJar | LazyCookieJar>;

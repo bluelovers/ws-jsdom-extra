@@ -3,7 +3,6 @@
  */
 /// <reference types="jquery" />
 /// <reference types="node" />
-/// <reference types="bluebird" />
 import { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, BinaryData, DOMWindow, FileOptions as FromFileOptions } from 'jsdom';
 import { URL, URLImpl } from 'jsdom-url';
 import { LazyCookieJar } from './cookies';
@@ -13,7 +12,7 @@ export { fromURL } from './from-url';
 export { URL, URLImpl };
 export { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, DOMWindow };
 export * from './const';
-import { Bluebird } from './util/bluebird';
+import Bluebird from 'bluebird';
 import { IOptionsWithWindowOptionsWithResourceLoader } from '@jsdom-extra/resource-loader';
 export declare const JSDOM_PROTOTYPE_COPY: JSDOM;
 export interface IOptions {

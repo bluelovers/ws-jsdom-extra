@@ -29,11 +29,11 @@ Object.defineProperty(exports, "wrapCookieJarForRequest", { enumerable: true, ge
 var const_1 = require("./const");
 Object.defineProperty(exports, "DEFAULT_USER_AGENT", { enumerable: true, get: function () { return const_1.DEFAULT_USER_AGENT; } });
 const const_2 = require("./const");
-const bluebird_1 = require("./util/bluebird");
+const bluebird_1 = __importDefault(require("bluebird"));
 const minify_1 = require("@jsdom-extra/html-util/minify");
 const normalize_1 = require("@jsdom-extra/html-util/normalize");
 function fromURL(url, options) {
-    return bluebird_1.Bluebird.resolve().then(function () {
+    return bluebird_1.default.resolve().then(function () {
         const parsedURL = new jsdom_url_1.URL(url);
         url = parsedURL.href;
         let opts = {};

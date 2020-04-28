@@ -24,6 +24,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.packJSDOM = exports.isPackedJSDOM = exports.packOptions = exports.fromFile = exports.asyncJSDOM = exports.createJSDOM = exports.auto = exports.JSDOM_PROTOTYPE_COPY = exports.toughCookie = exports.CookieJar = exports.VirtualConsole = exports.JSDOM = exports.URLImpl = exports.URL = void 0;
 /// <reference types="jquery" />
@@ -42,7 +45,7 @@ const array_hyper_unique_1 = require("array-hyper-unique");
 __exportStar(require("./const"), exports);
 const const_1 = require("./const");
 const CONSTS = __importStar(require("./const"));
-const bluebird_1 = require("./util/bluebird");
+const bluebird_1 = __importDefault(require("bluebird"));
 const minify_1 = require("@jsdom-extra/html-util/minify");
 const normalize_1 = require("@jsdom-extra/html-util/normalize");
 exports.JSDOM_PROTOTYPE_COPY = Object.assign({}, jsdom_1.JSDOM.prototype);
@@ -70,13 +73,13 @@ function createJSDOM(html, options = {}) {
 }
 exports.createJSDOM = createJSDOM;
 function asyncJSDOM(html, options = {}) {
-    return bluebird_1.Bluebird.resolve().then(function () {
+    return bluebird_1.default.resolve().then(function () {
         return createJSDOM(html, options);
     });
 }
 exports.asyncJSDOM = asyncJSDOM;
 function fromFile(url, options) {
-    return bluebird_1.Bluebird.resolve().then(function () {
+    return bluebird_1.default.resolve().then(function () {
         let opts = {};
         options = packOptions(options, function (options) {
             opts = options;

@@ -9,8 +9,7 @@ export { toughCookie }
 
 import { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar } from './cookies/request-jar';
 import { URL } from './pack';
-
-import moment from './util/moment';
+import moment from 'moment';
 
 export { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar }
 

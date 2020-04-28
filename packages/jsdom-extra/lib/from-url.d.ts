@@ -1,7 +1,6 @@
 /**
  * Created by user on 2018/2/6/006.
  */
-/// <reference types="bluebird" />
 /// <reference types="node" />
 import CoreRequest from 'request';
 import { JSDOM, toughCookie } from 'jsdom';
@@ -17,7 +16,7 @@ export { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar };
 export { parseContentType };
 export { URL, URLImpl };
 export { DEFAULT_USER_AGENT } from './const';
-import { Bluebird } from './util/bluebird';
+import Bluebird from 'bluebird';
 export { toughCookie };
 export declare type ICookieJar = Partial<CookieJar> | Partial<LazyCookieJar>;
 export interface IFromUrlOptions extends IOptionsJSDOM {

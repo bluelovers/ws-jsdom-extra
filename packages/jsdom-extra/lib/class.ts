@@ -9,7 +9,7 @@ import { ClassProxyStatic, IClassProxyHandler } from 'class-proxy';
 import { createClassProxy2 } from 'class-proxy';
 import { createJSDOM, URL, IJSDOM, packJSDOM, fromFile, fromURL, IFromUrlOptions, IJSDOM_Symbol_Options } from './pack';
 import { JSDOM as _JSDOM } from 'jsdom';
-import { Bluebird } from './util/bluebird';
+import Bluebird from 'bluebird';
 
 export type IJSDOM_STATIC = ClassProxyStatic<IJSDOM> & typeof _JSDOM & {
 	fromFile: typeof fromFile;
