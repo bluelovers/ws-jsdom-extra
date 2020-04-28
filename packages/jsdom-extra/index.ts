@@ -2,8 +2,9 @@
  * Created by user on 2018/2/6/006.
  */
 
+import BaseResourceLoader, { IOptionsWithWindowOptionsWithResourceLoader } from '@jsdom-extra/resource-loader';
+
 export * from './lib/pack';
-import { IOptionsWithWindowOptionsWithResourceLoader, BaseResourceLoader } from './lib/browser/resource-loader';
 
 import { LazyCookie } from 'lazy-cookies';
 import { LazyCookieJar } from './lib/cookies';

@@ -6,7 +6,6 @@
 /// <reference types="bluebird" />
 import { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, BinaryData, DOMWindow, FileOptions as FromFileOptions } from 'jsdom';
 import { URL, URLImpl } from 'jsdom-url';
-import { IOptionsWithWindowOptionsWithResourceLoader } from './browser/resource-loader';
 import { LazyCookieJar } from './cookies';
 import { IOptionsCreateQuery } from './query';
 import { ICookieJar, IFromUrlOptions, IRequestOptions } from './from-url';
@@ -15,6 +14,7 @@ export { URL, URLImpl };
 export { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, DOMWindow };
 export * from './const';
 import { Bluebird } from './util/bluebird';
+import { IOptionsWithWindowOptionsWithResourceLoader } from '@jsdom-extra/resource-loader';
 export declare const JSDOM_PROTOTYPE_COPY: JSDOM;
 export interface IOptions {
     beforeParse?(window: DOMWindow, jsdom?: IJSDOM): void;

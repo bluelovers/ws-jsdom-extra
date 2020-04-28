@@ -11,7 +11,6 @@ import { URL, URLImpl } from 'jsdom-url';
 import request, { ResponseRequest } from './util/request';
 import parseContentType from 'content-type-parser';
 import isPlainObject from 'is-plain-object';
-import { IOptionsWithWindowOptionsWithResourceLoader } from './browser/resource-loader';
 
 import { LazyCookie } from 'lazy-cookies';
 import { LazyCookieJar, RequestCookieJar } from './cookies';
@@ -29,6 +28,7 @@ import { DEFAULT_USER_AGENT, SYMBOL_RAW } from './const';
 import { Bluebird } from './util/bluebird';
 import { minifyHTML } from '@jsdom-extra/html-util/minify';
 import { normalizeHTML } from '@jsdom-extra/html-util/normalize';
+import { IOptionsWithWindowOptionsWithResourceLoader } from '@jsdom-extra/resource-loader';
 
 export { toughCookie }
 
