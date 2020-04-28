@@ -29,8 +29,9 @@ Object.defineProperty(exports, "wrapCookieJarForRequest", { enumerable: true, ge
 var const_1 = require("./const");
 Object.defineProperty(exports, "DEFAULT_USER_AGENT", { enumerable: true, get: function () { return const_1.DEFAULT_USER_AGENT; } });
 const const_2 = require("./const");
-const html_1 = require("./html");
 const bluebird_1 = require("./util/bluebird");
+const minify_1 = require("@jsdom-extra/html-util/minify");
+const normalize_1 = require("@jsdom-extra/html-util/normalize");
 function fromURL(url, options) {
     return bluebird_1.Bluebird.resolve().then(function () {
         const parsedURL = new jsdom_url_1.URL(url);
@@ -78,9 +79,9 @@ function requestToJSDOM(res, parsedURL, options, requestOptions) {
         contentType: res.headers["content-type"],
         referrer: res.request.getHeader("referer"),
     });
-    let body = html_1.normalizeHTML(res.body, transportLayerEncodingLabel).html;
+    let body = normalize_1.normalizeHTML(res.body, transportLayerEncodingLabel).html;
     if (options.minifyHTML) {
-        body = html_1.minifyHTML(body);
+        body = minify_1.minifyHTML(body);
     }
     let jsdom = new jsdom_1.JSDOM(body, options);
     jsdom[const_2.SYMBOL_RAW] = jsdom[const_2.SYMBOL_RAW] || {};

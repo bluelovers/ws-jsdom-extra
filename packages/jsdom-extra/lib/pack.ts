@@ -19,7 +19,6 @@ import {
 import { URL, URLImpl } from 'jsdom-url';
 import { IOptionsWithWindowOptionsWithResourceLoader } from './browser/resource-loader';
 import { LazyCookieJar } from './cookies';
-import { minifyHTML, normalizeHTML } from './html';
 import { IOptionsCreateQuery, createQuery } from './query';
 import { ICookieJar, IFromUrlOptions, IRequestOptions } from './from-url';
 
@@ -33,6 +32,8 @@ export * from './const';
 import { SYMBOL_RAW } from './const';
 import * as CONSTS from './const';
 import { Bluebird } from './util/bluebird';
+import { minifyHTML } from '@jsdom-extra/html-util/minify';
+import { normalizeHTML } from '@jsdom-extra/html-util/normalize';
 
 export const JSDOM_PROTOTYPE_COPY = Object.assign({}, JSDOM.prototype);
 

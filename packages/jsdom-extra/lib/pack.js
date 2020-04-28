@@ -35,7 +35,6 @@ Object.defineProperty(exports, "toughCookie", { enumerable: true, get: function 
 const jsdom_url_1 = require("jsdom-url");
 Object.defineProperty(exports, "URL", { enumerable: true, get: function () { return jsdom_url_1.URL; } });
 Object.defineProperty(exports, "URLImpl", { enumerable: true, get: function () { return jsdom_url_1.URLImpl; } });
-const html_1 = require("./html");
 const query_1 = require("./query");
 var from_url_1 = require("./from-url");
 Object.defineProperty(exports, "fromURL", { enumerable: true, get: function () { return from_url_1.fromURL; } });
@@ -44,6 +43,8 @@ __exportStar(require("./const"), exports);
 const const_1 = require("./const");
 const CONSTS = __importStar(require("./const"));
 const bluebird_1 = require("./util/bluebird");
+const minify_1 = require("@jsdom-extra/html-util/minify");
+const normalize_1 = require("@jsdom-extra/html-util/normalize");
 exports.JSDOM_PROTOTYPE_COPY = Object.assign({}, jsdom_1.JSDOM.prototype);
 function auto(JSDOM) {
     packJSDOM(JSDOM.prototype);
@@ -56,8 +57,8 @@ function createJSDOM(html, options = {}) {
         opts = options;
     });
     if (options.minifyHTML) {
-        html = html_1.normalizeHTML(html).html;
-        html = html_1.minifyHTML(html);
+        html = normalize_1.normalizeHTML(html).html;
+        html = minify_1.minifyHTML(html);
     }
     let jsdom = new jsdom_1.JSDOM(html, options);
     if (!isPackedJSDOM(jsdom)) {

@@ -26,8 +26,9 @@ export { URL, URLImpl }
 export { DEFAULT_USER_AGENT } from './const';
 import { DEFAULT_USER_AGENT, SYMBOL_RAW } from './const';
 
-import { minifyHTML, normalizeHTML } from './html';
 import { Bluebird } from './util/bluebird';
+import { minifyHTML } from '@jsdom-extra/html-util/minify';
+import { normalizeHTML } from '@jsdom-extra/html-util/normalize';
 
 export { toughCookie }
 
