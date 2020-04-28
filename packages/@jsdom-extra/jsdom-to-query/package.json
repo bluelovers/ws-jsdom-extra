@@ -1,0 +1,45 @@
+{
+  "name": "@jsdom-extra/jsdom-to-query",
+  "version": "1.0.0",
+  "description": "wrap jsdom to jquery or cheerio",
+  "homepage": "https://github.com/bluelovers/ws-jsdom-extra/tree/master/packages/@jsdom-extra/jsdom-to-query#readme",
+  "bugs": {
+    "url": "https://github.com/bluelovers/ws-jsdom-extra/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluelovers/ws-jsdom-extra.git"
+  },
+  "license": "ISC",
+  "author": "bluelovers",
+  "main": "index.js",
+  "scripts": {
+    "coverage": "npx nyc yarn run test",
+    "lint": "npx eslint **/*.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:jest": "jest --coverage",
+    "test:mocha": "npx mocha --require ts-node/register \"!(node_modules)/**/*.{test,spec}.{ts,tsx}\"",
+    "npm:publish": "npm publish",
+    "npm:publish:lerna": "lerna publish --yes",
+    "prepublish:lockfile": "npx sync-lockfile .",
+    "prepublishOnly_": "yarn run ncu && yarn run sort-package-json && yarn run test",
+    "postpublish_": "git commit -m \"chore(release): publish\" .",
+    "ncu": "npx yarn-tool ncu -u",
+    "sort-package-json": "npx yarn-tool sort",
+    "tsc:default": "tsc -p tsconfig.json",
+    "tsc:esm": "tsc -p tsconfig.esm.json"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^0.22.18",
+    "@types/jquery": "^3.3.36",
+    "cheerio": "^1.0.0-rc.3",
+    "jquery": "^3.5.0"
+  },
+  "peerDependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "jquery": "^3.5.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

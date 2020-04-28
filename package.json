@@ -2,23 +2,40 @@
   "name": "ws-jsdom-extra",
   "version": "1.0.0",
   "private": true,
+  "description": "",
+  "homepage": "https://github.com/bluelovers/ws-jsdom-extra#readme",
+  "bugs": {
+    "url": "https://github.com/bluelovers/ws-jsdom-extra/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluelovers/ws-jsdom-extra.git"
+  },
+  "license": "ISC",
+  "author": "bluelovers",
   "workspaces": [
+    "packages/@jsdom-extra/*",
     "packages/*"
   ],
   "scripts": {
+    "npm:publish": "npm publish",
+    "prepublish:lockfile": "npx sync-lockfile .",
+    "postpublish": "yarn run postpublish:subtree",
+    "postpublish:subtree": "git subtree push --prefix packages/jsdom-extra",
+    "git:push": "yarn run postpublish:subtree & git push",
     "lerna:publish": "npx lerna publish",
     "lerna:publish:yes": "npx lerna publish --yes --cd-version patch",
-    "prepublish:lockfile": "npx sync-lockfile .",
     "ncu": "npx yarn-tool ncu -u",
-    "sort-package-json": "npx yarn-tool sort",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sort-package-json": "npx yarn-tool sort"
   },
+  "resolutions": {},
   "devDependencies": {
+    "@bluelovers/tsconfig": "^1.0.19",
     "@types/node": "*",
-    "@bluelovers/tsconfig": "*"
+    "jest": "^25.4.0",
+    "ts-jest": "^25.4.0"
   },
   "peerDependencies": {
     "lerna": "^3"
-  },
-  "resolutions": {}
+  }
 }
