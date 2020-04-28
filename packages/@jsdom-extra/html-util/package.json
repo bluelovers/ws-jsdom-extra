@@ -29,17 +29,17 @@
     "tsc:default": "tsc -p tsconfig.json",
     "tsc:esm": "tsc -p tsconfig.esm.json"
   },
+  "dependencies": {
+    "@types/html-minifier": "^3.5.3",
+    "html-encoding-sniffer": "^2.0.1",
+    "html-minifier": "^4.0.0",
+    "whatwg-encoding": "^1.0.5"
+  },
   "devDependencies": {
     "@types/html-encoding-sniffer": "^2.0.0",
-    "@types/html-minifier": "^3.5.3",
     "@types/whatwg-encoding": "^1.0.0"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "html-encoding-sniffer": "^2.0.1",
-    "html-minifier": "^4.0.0",
-    "whatwg-encoding": "^1.0.5"
   }
 }
