@@ -9,11 +9,24 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
 }));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) __createBinding(exports, m, p);
+    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
 }
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.packJSDOM = exports.isPackedJSDOM = exports.packOptions = exports.fromFile = exports.asyncJSDOM = exports.createJSDOM = exports.auto = exports.JSDOM_PROTOTYPE_COPY = exports.toughCookie = exports.CookieJar = exports.VirtualConsole = exports.JSDOM = exports.URLImpl = exports.URL = void 0;
+/// <reference types="jquery" />
 const jsdom_1 = require("jsdom");
 Object.defineProperty(exports, "JSDOM", { enumerable: true, get: function () { return jsdom_1.JSDOM; } });
 Object.defineProperty(exports, "VirtualConsole", { enumerable: true, get: function () { return jsdom_1.VirtualConsole; } });
@@ -29,7 +42,7 @@ Object.defineProperty(exports, "fromURL", { enumerable: true, get: function () {
 const array_hyper_unique_1 = require("array-hyper-unique");
 __exportStar(require("./const"), exports);
 const const_1 = require("./const");
-const CONSTS = require("./const");
+const CONSTS = __importStar(require("./const"));
 const bluebird_1 = require("./util/bluebird");
 exports.JSDOM_PROTOTYPE_COPY = Object.assign({}, jsdom_1.JSDOM.prototype);
 function auto(JSDOM) {

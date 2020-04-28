@@ -2,6 +2,8 @@
  * Created by user on 2018/2/6/006.
  */
 
+/// <reference types="jquery" />
+
 import {
 	JSDOM,
 	VirtualConsole,
@@ -10,11 +12,10 @@ import {
 	ConstructorOptions,
 	BinaryData,
 	DOMWindow,
-	FromFileOptions,
-	FromUrlOptions,
+	FileOptions as FromFileOptions,
+	BaseOptions as FromUrlOptions, BaseOptions, FileOptions,
 //	Options as IOptionsJSDOMSource
 } from 'jsdom';
-import * as jQuery from 'jquery';
 import { URL, URLImpl } from 'jsdom-url';
 import { IOptionsWithWindowOptionsWithResourceLoader } from './browser/resource-loader';
 import { LazyCookieJar } from './cookies';

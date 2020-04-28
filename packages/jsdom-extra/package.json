@@ -58,8 +58,8 @@
     "prepublishOnly": "yarn run test",
     "prepublishOnly_": "yarn run ncu && yarn run sort-package-json && yarn run test",
     "sort-package-json": "npx yarn-tool sort",
-    "test": "ynpx mocha -- --require ts-node/register \"!(node_modules)/**/*.{test,spec}.{ts,tsx}\"",
-    "test:mocha": "npx mocha --require ts-node/register \"!(node_modules)/**/*.{test,spec}.{ts,tsx}\"",
+    "test": "ynpx mocha -- --require ts-node/register \"!(node_modules)/**/*.{test}.{ts,tsx}\"",
+    "test:mocha": "npx mocha --require ts-node/register \"!(node_modules)/**/*.{test}.{ts,tsx}\"",
     "tsc:default": "tsc -p tsconfig.json",
     "tsc:esm": "tsc -p tsconfig.esm.json"
   },
@@ -82,17 +82,17 @@
     "whatwg-encoding": "^1.0.5"
   },
   "devDependencies": {
-    "@bluelovers/tsconfig": "^1.0.19",
     "@types/bluebird": "^3.5.30",
     "@types/chai": "^4.2.11",
+    "@types/html-encoding-sniffer": "^2.0.0",
     "@types/html-minifier": "^3.5.3",
     "@types/jquery": "^3.3.34",
     "@types/jsdom": "^16.2.0",
     "@types/mocha": "^7.0.2",
-    "@types/node": "^13.9.5",
     "@types/request": "^2.48.4",
     "@types/request-promise": "^4.1.46",
     "@types/tough-cookie": "^2.3.6",
+    "@types/whatwg-encoding": "^1.0.0",
     "chai": "^4.2.0"
   },
   "peerDependencies": {

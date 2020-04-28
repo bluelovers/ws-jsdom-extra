@@ -4,7 +4,7 @@
 /// <reference types="jquery" />
 /// <reference types="node" />
 /// <reference types="bluebird" />
-import { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, BinaryData, DOMWindow, FromFileOptions } from 'jsdom';
+import { JSDOM, VirtualConsole, CookieJar, toughCookie, ConstructorOptions, BinaryData, DOMWindow, FileOptions as FromFileOptions } from 'jsdom';
 import { URL, URLImpl } from 'jsdom-url';
 import { IOptionsWithWindowOptionsWithResourceLoader } from './browser/resource-loader';
 import { LazyCookieJar } from './cookies';

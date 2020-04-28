@@ -1,9 +1,10 @@
 /**
  * Created by user on 2018/2/7/007.
  */
+/// <reference types="jsdom" />
 /// <reference types="moment" />
-import toughCookie = require('tough-cookie');
-import { LazyCookieJar as LazyCookieJar2, LazyCookie } from 'lazy-cookies';
+import toughCookie from 'tough-cookie';
+import { LazyCookie, LazyCookieJar as LazyCookieJar2 } from 'lazy-cookies';
 export { toughCookie };
 import { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar } from './cookies/request-jar';
 import moment from './util/moment';
@@ -49,5 +50,3 @@ export interface toughCookieProperties {
     pathIsDefault?: boolean;
     lastAccessed?: Date;
 }
-declare const _default: typeof import("./cookies");
-export default _default;

@@ -2,10 +2,13 @@
 /**
  * Created by user on 2018/3/18/018.
  */
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.minifyHTML = exports.normalizeHTML = void 0;
-const sniffHTMLEncoding = require("html-encoding-sniffer");
-const whatwgEncoding = require("whatwg-encoding");
+const html_encoding_sniffer_1 = __importDefault(require("html-encoding-sniffer"));
+const whatwg_encoding_1 = __importDefault(require("whatwg-encoding"));
 const html_minifier_1 = require("html-minifier");
 function normalizeHTML(html = '', transportLayerEncodingLabel) {
     let encoding = "UTF-8";
@@ -17,8 +20,8 @@ function normalizeHTML(html = '', transportLayerEncodingLabel) {
         html = Buffer.from(html);
     }
     if (Buffer.isBuffer(html)) {
-        encoding = sniffHTMLEncoding(html, { defaultEncoding: "windows-1252", transportLayerEncodingLabel });
-        html = whatwgEncoding.decode(html, encoding);
+        encoding = html_encoding_sniffer_1.default(html, { defaultEncoding: "windows-1252", transportLayerEncodingLabel });
+        html = whatwg_encoding_1.default.decode(html, encoding);
     }
     else {
         html = String(html);
@@ -52,5 +55,4 @@ function minifyHTML(html, options = {}, logError = true) {
     return html;
 }
 exports.minifyHTML = minifyHTML;
-exports.default = exports;
 //# sourceMappingURL=html.js.map

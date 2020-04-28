@@ -3,7 +3,7 @@
  */
 
 import { ResponseRequest } from 'request';
-import request = require('@bluelovers/request-promise');
+import request from '@bluelovers/request-promise';
 
 export { request }
 export { ResponseRequest }

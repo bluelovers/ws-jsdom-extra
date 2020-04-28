@@ -2,8 +2,8 @@
  * Created by user on 2018/2/7/007.
  */
 
-import toughCookie = require('tough-cookie');
-import { LazyCookieJar as LazyCookieJar2, LazyCookie } from 'lazy-cookies';
+import toughCookie from 'tough-cookie';
+import { LazyCookie, LazyCookieJar as LazyCookieJar2 } from 'lazy-cookies';
 
 export { toughCookie }
 
@@ -134,4 +134,4 @@ export interface toughCookieProperties
 	lastAccessed?: Date;
 }
 
-export default exports as typeof import('./cookies');
+//export default exports as typeof import('./cookies');

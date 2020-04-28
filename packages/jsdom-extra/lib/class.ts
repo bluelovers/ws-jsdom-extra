@@ -2,7 +2,7 @@
  * Created by user on 2018/2/19/019.
  */
 
-import jQuery = require('jquery');
+import jQuery from 'jquery';
 export * from '../index';
 import { ClassProxyStatic, IClassProxyHandler } from 'class-proxy';
 // @ts-ignore

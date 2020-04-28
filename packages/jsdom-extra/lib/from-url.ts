@@ -2,18 +2,19 @@
  * Created by user on 2018/2/6/006.
  */
 
-import CoreRequest = require('request');
-import { JSDOM, FromUrlOptions, toughCookie } from 'jsdom';
-import deepmerge = require('deepmerge-plus');
+import CoreRequest from 'request';
+import { JSDOM, FileOptions as FromUrlOptions, toughCookie } from 'jsdom';
+import deepmerge from 'deepmerge-plus';
 
 import { IConstructorOptions, IJSDOM, IOptions, IOptionsJSDOM, isPackedJSDOM, packJSDOM, packOptions } from './pack';
 import { URL, URLImpl } from 'jsdom-url';
 import request, { ResponseRequest } from './util/request';
-import parseContentType = require('content-type-parser');
-import isPlainObject = require('is-plain-object');
+import parseContentType from 'content-type-parser';
+import isPlainObject from 'is-plain-object';
 import { IOptionsWithWindowOptionsWithResourceLoader } from './browser/resource-loader';
 
-import { LazyCookieJar, LazyCookie, RequestCookieJar } from './cookies';
+import { LazyCookie } from 'lazy-cookies';
+import { LazyCookieJar, RequestCookieJar } from './cookies';
 export { LazyCookieJar, LazyCookie }
 
 import { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar } from './cookies';
@@ -254,4 +255,4 @@ export function normalizeFromURLOptions<T>(options: Partial<T & IFromUrlOptions>
 	// `fromURL` calls `new JSDOM(html, options)`.
 }
 
-export default exports as typeof import('./from-url');
+//export default exports as typeof import('./from-url');

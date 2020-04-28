@@ -2,22 +2,26 @@
 /**
  * Created by user on 2018/2/6/006.
  */
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.normalizeFromURLOptions = exports.normalizeRequestOptions = exports.requestToJSDOM = exports.fromURL = exports.toughCookie = exports.URLImpl = exports.URL = exports.parseContentType = exports.wrapCookieJarForRequest = exports.RequestJar = exports.CookieJar = exports.LazyCookie = exports.LazyCookieJar = void 0;
 const jsdom_1 = require("jsdom");
 Object.defineProperty(exports, "toughCookie", { enumerable: true, get: function () { return jsdom_1.toughCookie; } });
-const deepmerge = require("deepmerge-plus");
+const deepmerge_plus_1 = __importDefault(require("deepmerge-plus"));
 const pack_1 = require("./pack");
 const jsdom_url_1 = require("jsdom-url");
 Object.defineProperty(exports, "URL", { enumerable: true, get: function () { return jsdom_url_1.URL; } });
 Object.defineProperty(exports, "URLImpl", { enumerable: true, get: function () { return jsdom_url_1.URLImpl; } });
-const request_1 = require("./util/request");
-const parseContentType = require("content-type-parser");
-exports.parseContentType = parseContentType;
-const isPlainObject = require("is-plain-object");
+const request_1 = __importDefault(require("./util/request"));
+const content_type_parser_1 = __importDefault(require("content-type-parser"));
+exports.parseContentType = content_type_parser_1.default;
+const is_plain_object_1 = __importDefault(require("is-plain-object"));
+const lazy_cookies_1 = require("lazy-cookies");
+Object.defineProperty(exports, "LazyCookie", { enumerable: true, get: function () { return lazy_cookies_1.LazyCookie; } });
 const cookies_1 = require("./cookies");
 Object.defineProperty(exports, "LazyCookieJar", { enumerable: true, get: function () { return cookies_1.LazyCookieJar; } });
-Object.defineProperty(exports, "LazyCookie", { enumerable: true, get: function () { return cookies_1.LazyCookie; } });
 const cookies_2 = require("./cookies");
 Object.defineProperty(exports, "CookieJar", { enumerable: true, get: function () { return cookies_2.CookieJar; } });
 Object.defineProperty(exports, "RequestJar", { enumerable: true, get: function () { return cookies_2.RequestJar; } });
@@ -66,7 +70,7 @@ function requestToJSDOM(res, parsedURL, options, requestOptions) {
         opts = options;
     });
     options = normalizeFromURLOptions(options);
-    const parsedContentType = parseContentType(res.headers["content-type"]);
+    const parsedContentType = content_type_parser_1.default(res.headers["content-type"]);
     const transportLayerEncodingLabel = parsedContentType && parsedContentType.get("charset");
     options = Object.assign(options, {
         // @ts-ignore
@@ -109,7 +113,7 @@ function normalizeRequestOptions(options, _requestOptions) {
         jar: cookies_2.wrapCookieJarForRequest(options.cookieJar)
     };
     if (options.requestOptions || _requestOptions) {
-        requestOptions = deepmerge.all([
+        requestOptions = deepmerge_plus_1.default.all([
             requestOptions,
             options.requestOptions || {},
             _requestOptions || {},
@@ -122,7 +126,7 @@ function normalizeRequestOptions(options, _requestOptions) {
                 let bool = isMergeable(value);
                 if (bool && typeof value == 'object' && !Array.isArray(value)) {
                     // @ts-ignore
-                    bool = isPlainObject(value);
+                    bool = is_plain_object_1.default(value);
                 }
                 return bool;
             },
@@ -156,5 +160,5 @@ function normalizeFromURLOptions(options) {
     // `fromURL` calls `new JSDOM(html, options)`.
 }
 exports.normalizeFromURLOptions = normalizeFromURLOptions;
-exports.default = exports;
+//export default exports as typeof import('./from-url');
 //# sourceMappingURL=from-url.js.map

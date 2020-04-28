@@ -54,6 +54,7 @@ function globalJsdom(html, options = {}) {
     else {
         jsdom = pack_1.createJSDOM(html, options);
     }
+    // @ts-ignore
     const window = jsdom.window;
     const document = window.document;
     if (exports.KEYS.length === 0) {
@@ -87,5 +88,5 @@ function cleanup(global) {
     exports.KEYS.forEach(function (key) { delete global[key]; });
 }
 exports.cleanup = cleanup;
-exports.default = exports;
+//export default exports as typeof import('./index');
 //# sourceMappingURL=index.js.map

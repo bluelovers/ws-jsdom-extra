@@ -107,6 +107,7 @@ export function globalJsdom<T>(html?, options: Partial<T & IConstructorOptions &
 		jsdom = createJSDOM(html, options);
 	}
 
+	// @ts-ignore
 	const window: IGlobalDOMWindow = jsdom.window;
 	const document: IGlobalDocument = window.document;
 
@@ -165,4 +166,4 @@ export namespace globalJsdom
 	}
 }
 
-export default exports as typeof import('./index');
+//export default exports as typeof import('./index');

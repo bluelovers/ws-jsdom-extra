@@ -1,3 +1,3 @@
-import moment = require('moment');
+import moment from 'moment';
 export { moment };
 export default moment;

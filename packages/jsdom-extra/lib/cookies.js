@@ -2,10 +2,13 @@
 /**
  * Created by user on 2018/2/7/007.
  */
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LazyCookieJar = exports.LazyCookie = exports.wrapCookieJarForRequest = exports.RequestJar = exports.CookieJar = exports.toughCookie = void 0;
-const toughCookie = require("tough-cookie");
-exports.toughCookie = toughCookie;
+const tough_cookie_1 = __importDefault(require("tough-cookie"));
+exports.toughCookie = tough_cookie_1.default;
 const lazy_cookies_1 = require("lazy-cookies");
 Object.defineProperty(exports, "LazyCookie", { enumerable: true, get: function () { return lazy_cookies_1.LazyCookie; } });
 const request_jar_1 = require("./cookies/request-jar");
@@ -24,5 +27,5 @@ class LazyCookieJar extends lazy_cookies_1.LazyCookieJar {
     }
 }
 exports.LazyCookieJar = LazyCookieJar;
-exports.default = exports;
+//export default exports as typeof import('./cookies');
 //# sourceMappingURL=cookies.js.map

@@ -1,7 +1,7 @@
 /**
  * Created by user on 2018/2/15/015.
  */
-import toughCookie = require('tough-cookie');
+import toughCookie from 'tough-cookie';
 export { toughCookie };
 import { CookieJar } from 'jsdom';
 export { CookieJar };

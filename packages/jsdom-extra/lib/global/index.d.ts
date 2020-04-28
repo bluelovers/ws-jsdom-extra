@@ -50,5 +50,3 @@ export declare namespace globalJsdom {
         XMLHttpRequest?: XMLHttpRequest;
     }
 }
-declare const _default: typeof import(".");
-export default _default;

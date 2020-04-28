@@ -10,13 +10,14 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
     o[k2] = m[k];
 }));
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) __createBinding(exports, m, p);
+    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JSDOM = exports.requestToJSDOM = exports.wrapCookieJarForRequest = exports.RequestJar = exports.CookieJar = exports.LazyCookieJar = exports.LazyCookie = void 0;
 __exportStar(require("./lib/pack"), exports);
+const lazy_cookies_1 = require("lazy-cookies");
+Object.defineProperty(exports, "LazyCookie", { enumerable: true, get: function () { return lazy_cookies_1.LazyCookie; } });
 const cookies_1 = require("./lib/cookies");
-Object.defineProperty(exports, "LazyCookie", { enumerable: true, get: function () { return cookies_1.LazyCookie; } });
 Object.defineProperty(exports, "LazyCookieJar", { enumerable: true, get: function () { return cookies_1.LazyCookieJar; } });
 const from_url_1 = require("./lib/from-url");
 Object.defineProperty(exports, "CookieJar", { enumerable: true, get: function () { return from_url_1.CookieJar; } });

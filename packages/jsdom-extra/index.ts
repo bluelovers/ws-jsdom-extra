@@ -5,7 +5,9 @@
 export * from './lib/pack';
 import { IOptionsWithWindowOptionsWithResourceLoader, BaseResourceLoader } from './lib/browser/resource-loader';
 
-import { LazyCookie, LazyCookieJar } from './lib/cookies';
+import { LazyCookie } from 'lazy-cookies';
+import { LazyCookieJar } from './lib/cookies';
+
 export { LazyCookie, LazyCookieJar }
 
 import { CookieJar, RequestJar, wrapCookieJarForRequest, IRequestCookieJar, requestToJSDOM } from './lib/from-url';
