@@ -51,8 +51,8 @@
   "scripts": {
     "coverage": "npx nyc yarn run test",
     "lint": "npx eslint **/*.ts",
-    "test": "ynpx mocha -- --require ts-node/register \"!(node_modules)/**/*.{test}.{ts,tsx}\"",
-    "test:mocha": "npx mocha --require ts-node/register \"!(node_modules)/**/*.{test}.{ts,tsx}\"",
+    "test": "yarn run test:mocha",
+    "test:mocha": "ynpx mocha -- --require ts-node/register \"!(node_modules)/**/*.test.{ts,tsx}\"",
     "npm:publish": "npm publish",
     "prepublish:lockfile": "npx sync-lockfile .",
     "prepublishOnly": "yarn run test",
@@ -104,5 +104,6 @@
   },
   "optionalDependencies": {
     "jquery": "^3.4.1"
-  }
+  },
+  "gitHead": "4d704aa7bd7506414214a81619dc8201c5fdff4d"
 }
