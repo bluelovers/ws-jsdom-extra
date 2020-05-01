@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.4](https://github.com/bluelovers/jsdom-extra/compare/jsdom-extra@3.0.3...jsdom-extra@3.0.4) (2020-05-01)
+
+
+### Bug Fixes
+
+* update test ([947f9be](https://github.com/bluelovers/jsdom-extra/commit/947f9be893556e4615fb59286e36893d834667a3))
+
+
+
+
+
 ## 3.0.3 (2020-05-01)
 
 
