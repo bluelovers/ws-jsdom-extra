@@ -19,12 +19,12 @@
   ],
   "scripts": {
     "npm:publish": "npm publish",
+    "lerna:publish": "npx lerna publish",
+    "lerna:publish:yes": "npx lerna publish --yes --cd-version patch",
     "prepublish:lockfile": "npx sync-lockfile .",
     "postpublish": "yarn run postpublish:subtree",
     "postpublish:subtree": "git subtree push --prefix packages/jsdom-extra",
     "git:push": "yarn run postpublish:subtree & git push",
-    "lerna:publish": "npx lerna publish",
-    "lerna:publish:yes": "npx lerna publish --yes --cd-version patch",
     "ncu": "npx yarn-tool ncu -u",
     "sort-package-json": "npx yarn-tool sort"
   },
