@@ -1,6 +1,6 @@
 {
   "name": "@jsdom-extra/jsdom-to-query",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "wrap jsdom to jquery or cheerio",
   "homepage": "https://github.com/bluelovers/ws-jsdom-extra/tree/master/packages/@jsdom-extra/jsdom-to-query#readme",
   "bugs": {

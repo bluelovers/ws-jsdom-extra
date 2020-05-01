@@ -1,6 +1,6 @@
 {
   "name": "jsdom-extra",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "JSDOM with extra tweak ( jquery / cheerio / request )",
   "keywords": [
     "agent",
@@ -65,9 +65,9 @@
   },
   "dependencies": {
     "@bluelovers/request-promise": "^4.2.5",
-    "@jsdom-extra/html-util": "^1.0.0",
-    "@jsdom-extra/jsdom-to-query": "^1.0.0",
-    "@jsdom-extra/resource-loader": "^1.0.0",
+    "@jsdom-extra/html-util": "^1.0.1",
+    "@jsdom-extra/jsdom-to-query": "^1.0.1",
+    "@jsdom-extra/resource-loader": "^1.0.1",
     "array-hyper-unique": "^1.1.0",
     "bluebird": "^3.7.2",
     "class-proxy": "^1.1.2",
