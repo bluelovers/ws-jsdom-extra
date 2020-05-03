@@ -65,9 +65,11 @@
   },
   "dependencies": {
     "@bluelovers/request-promise": "^4.2.5",
+    "@jsdom-extra/cookie": "^1.0.0",
     "@jsdom-extra/html-util": "^1.0.3",
     "@jsdom-extra/jsdom-to-query": "^1.0.3",
     "@jsdom-extra/resource-loader": "^1.0.3",
+    "@jsdom-extra/virtual-console": "^1.0.0",
     "array-hyper-unique": "^1.1.0",
     "bluebird": "^3.7.2",
     "class-proxy": "^1.1.2",

@@ -3,6 +3,7 @@
  */
 
 import toughCookie from 'tough-cookie';
+import { unwrapCookieJarFromRequestJar, wrapCookieJarForRequest } from '@jsdom-extra/cookie';
 
 export { toughCookie }
 
@@ -35,34 +36,8 @@ export const RequestJar = _RequestJar as {
 	): IRequestCookieJar<T>,
 };
 
-import { LazyCookieJar } from '../cookies';
-
-// @ts-ignore
-//import { wrapCookieJarForRequest } from 'jsdom/lib/jsdom/browser/resource-loader';
-
-const wrapCookieJarForRequest = _wrapCookieJarForRequest();
-
-//export declare function wrapCookieJarForRequest(cookieJar: LazyCookieJar): IRequestCookieJar<LazyCookieJar>;
-//export declare function wrapCookieJarForRequest(cookieJar: CookieJar): IRequestCookieJar<CookieJar>;
-//export declare function wrapCookieJarForRequest<T>(cookieJar: T): IRequestCookieJar<T>;
-
-export function unwrapCookieJarFromRequest<T = CookieJar | LazyCookieJar>(requestJar: IRequestCookieJar<T>)
-{
-	return requestJar._jar;
-}
+export { unwrapCookieJarFromRequestJar as unwrapCookieJarFromRequest }
 
 export { wrapCookieJarForRequest }
 
 //export default exports as typeof import('./request-jar');
-
-function _wrapCookieJarForRequest(): typeof import("jsdom/lib/jsdom/living/helpers/wrap-cookie-jar-for-request")
-{
-	try
-	{
-		return require("jsdom/lib/jsdom/living/helpers/wrap-cookie-jar-for-request")
-	}
-	catch (e)
-	{
-		return require("jsdom/jsdom/living/helpers/wrap-cookie-jar-for-request")
-	}
-}
