@@ -6,7 +6,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.normalizeFromURLOptions = exports.normalizeRequestOptions = exports.requestToJSDOM = exports.fromURL = exports.toughCookie = exports.URLImpl = exports.URL = exports.parseContentType = exports.wrapCookieJarForRequest = exports.RequestJar = exports.CookieJar = exports.LazyCookie = exports.LazyCookieJar = void 0;
+exports.normalizeFromURLOptions = exports.normalizeRequestOptions = exports.requestToJSDOM = exports.fromURL = exports.toughCookie = exports.DEFAULT_USER_AGENT = exports.URLImpl = exports.URL = exports.parseContentType = exports.wrapCookieJarForRequest = exports.RequestJar = exports.CookieJar = exports.LazyCookie = exports.LazyCookieJar = void 0;
 const jsdom_1 = require("jsdom");
 Object.defineProperty(exports, "toughCookie", { enumerable: true, get: function () { return jsdom_1.toughCookie; } });
 const deepmerge_plus_1 = __importDefault(require("deepmerge-plus"));

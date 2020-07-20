@@ -15,12 +15,12 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
     o["default"] = v;
 });
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
-}
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -28,7 +28,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.packJSDOM = exports.isPackedJSDOM = exports.packOptions = exports.fromFile = exports.asyncJSDOM = exports.createJSDOM = exports.auto = exports.JSDOM_PROTOTYPE_COPY = exports.toughCookie = exports.CookieJar = exports.VirtualConsole = exports.JSDOM = exports.URLImpl = exports.URL = void 0;
+exports.packJSDOM = exports.isPackedJSDOM = exports.packOptions = exports.fromFile = exports.asyncJSDOM = exports.createJSDOM = exports.auto = exports.JSDOM_PROTOTYPE_COPY = exports.toughCookie = exports.CookieJar = exports.VirtualConsole = exports.JSDOM = exports.URLImpl = exports.URL = exports.fromURL = void 0;
 /// <reference types="jquery" />
 const jsdom_1 = require("jsdom");
 Object.defineProperty(exports, "JSDOM", { enumerable: true, get: function () { return jsdom_1.JSDOM; } });
