@@ -29,11 +29,8 @@
     "tsc:default": "tsc -p tsconfig.json",
     "tsc:esm": "tsc -p tsconfig.esm.json"
   },
-  "devDependencies": {
-    "@types/jsdom": "^16.2.1"
-  },
   "peerDependencies": {
-    "jsdom": "^16.2.2"
+    "jsdom": "^16.3.0"
   },
   "publishConfig": {
     "access": "public"

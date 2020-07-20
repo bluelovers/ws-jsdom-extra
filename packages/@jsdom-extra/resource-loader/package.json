@@ -29,11 +29,11 @@
     "tsc:default": "tsc -p tsconfig.json",
     "tsc:esm": "tsc -p tsconfig.esm.json"
   },
+  "peerDependencies": {
+    "jsdom": "^16.3.0"
+  },
   "publishConfig": {
     "access": "public"
-  },
-  "peerDependencies": {
-    "jsdom": "^16.2.2"
   },
   "gitHead": "863aeb0af329745ccde219f103b7ab0c70e4e272"
 }
