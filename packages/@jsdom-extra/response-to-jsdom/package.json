@@ -1,6 +1,6 @@
 {
   "name": "@jsdom-extra/response-to-jsdom",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "homepage": "https://github.com/bluelovers/ws-jsdom-extra/tree/master/packages/@jsdom-extra/response-to-jsdom#readme",
   "bugs": {
@@ -30,7 +30,7 @@
     "tsc:esm": "tsc -p tsconfig.esm.json"
   },
   "dependencies": {
-    "@jsdom-extra/virtual-console": "^1.0.1",
+    "@jsdom-extra/virtual-console": "^1.0.2",
     "dot-values2": "^2.0.3"
   },
   "devDependencies": {

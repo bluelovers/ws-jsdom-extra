@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.7](https://github.com/bluelovers/jsdom-extra/compare/jsdom-extra@3.0.6...jsdom-extra@3.0.7) (2020-07-20)
+
+
+### 🛠　Build System
+
+* update typescript ([aa607a1](https://github.com/bluelovers/jsdom-extra/commit/aa607a1a1dddeebd8bcb1b47694fac893fe225ae))
+
+
+### ♻️　Chores
+
+* **deps:** update deps ([03ebce7](https://github.com/bluelovers/jsdom-extra/commit/03ebce71f1f4ffe91a99439336762105340a32a9))
+
+
+
+
+
 ## [3.0.6](https://github.com/bluelovers/jsdom-extra/compare/jsdom-extra@3.0.5...jsdom-extra@3.0.6) (2020-05-03)
 
 **Note:** Version bump only for package jsdom-extra

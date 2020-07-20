@@ -1,6 +1,6 @@
 {
   "name": "@jsdom-extra/jsdom-to-query",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "wrap jsdom to jquery or cheerio",
   "homepage": "https://github.com/bluelovers/ws-jsdom-extra/tree/master/packages/@jsdom-extra/jsdom-to-query#readme",
   "bugs": {
@@ -29,7 +29,6 @@
     "tsc:default": "tsc -p tsconfig.json",
     "tsc:esm": "tsc -p tsconfig.esm.json"
   },
-  "devDependencies": {},
   "peerDependencies": {
     "cheerio": "^1.0.0-rc.3",
     "jquery": "^3.5.1"

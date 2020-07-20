@@ -1,6 +1,6 @@
 {
   "name": "@jsdom-extra/cookie",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "homepage": "https://github.com/bluelovers/ws-jsdom-extra/tree/master/packages/@jsdom-extra/cookie#readme",
   "bugs": {
@@ -29,7 +29,6 @@
     "tsc:default": "tsc -p tsconfig.json",
     "tsc:esm": "tsc -p tsconfig.esm.json"
   },
-  "devDependencies": {},
   "peerDependencies": {
     "jsdom": "^16.3.0"
   },

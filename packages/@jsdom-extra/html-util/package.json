@@ -1,6 +1,6 @@
 {
   "name": "@jsdom-extra/html-util",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "homepage": "https://github.com/bluelovers/ws-jsdom-extra/tree/master/packages/@jsdom-extra/html-util#readme",
   "bugs": {
@@ -35,7 +35,6 @@
     "html-minifier": "^4.0.0",
     "whatwg-encoding": "^1.0.5"
   },
-  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   },
